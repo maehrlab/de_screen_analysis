@@ -1,0 +1,151 @@
+---
+title: ""
+author: "Eric Kernfeld"
+date: "January 18, 2017"
+output: html_document
+---
+
+#### Collect data
+
+```{r}
+results_path = Sys.getenv( "FREEZR_DESTINATION" )
+sample_names = c("he_perturb_rep1", "he_perturb_rep2")
+dge_list_full = load_maehrlab_data( sample_names ) 
+dge_list_gAmp = load_maehrlab_data( paste0( sample_names, "_amp" ) )
+
+assess_guide_content = function(X){
+  not_guides = rownames(X) %>% setdiff(   GUIDES_HE )
+  yes_guides = rownames(X) %>% intersect( GUIDES_HE )
+  nUMI_guide = colSums(X[yes_guides, ]) 
+  nUMI_other = colSums(X[not_guides, ]) 
+  plot(nUMI_guide, nUMI_other)
+  print(sum(nUMI_guide))
+  print(sum(nUMI_other))
+}
+
+for(i in 1:2){ 
+  assess_guide_content(dge_list_gAmp[[i]])
+  dge_list_gAmp[[i]] = dge_list_gAmp[[i]][GUIDES_HE, ]
+  fix_colnames = function(X) {colnames(X) %<>% gsub("_amp", "", .); return(X)}
+  dge_list_gAmp[[i]] %<>% fix_colnames
+  assertthat::are_equal( dge_list_gAmp[[i]] %>% colnames, dge_list_full[[i]] %>% colnames)
+}
+
+# get guide counts from amplification run as dataframe for metadata
+dge_list_metadata = mapply( prepare_gAmp_metadata, 
+                            dge_gAMP = dge_list_gAmp, 
+                            dge_raw  = dge_list_full, 
+                            SIMPLIFY = F )
+
+```
+
+#### Save metadata table
+
+```{r}
+
+desired_names = dge_list_metadata %>% lapply(colnames) %>% Reduce(f=union) 
+zeropad = function( X ){
+  for( name in desired_names ){
+    if(is.null(X[[name]])){ X[[name]] = 0 }
+  } 
+  return(X)
+}
+guide_metadata_path = file.path(results_path, "all_gAmp_metadata.tsv")
+write.table( dge_list_metadata %>% lapply(zeropad) %>% Reduce( f=rbind ), 
+             guide_metadata_path, 
+             sep = "\t", quote = F, row.names = T, col.names = T )
+inventory_add( tag = "HE_guide_metadata", filename = guide_metadata_path, force = T,
+               extra = "Guide counts for HE reps. Includes amplified and unamplified; individual and total; and extra info (KRAB, guide assignment, double-guide modeling.) " )
+```
+
+#### Integrate with Seurat object, tag doubleguides, and save
+
+```{r}
+# dge no guides
+dge = CreateSeuratObject(dge_merge_list(dge_list_full), 
+                         min.cells = 2, 
+                         min.genes = 0,
+                         names.delim = "\\|", 
+                         names.field = 2 )
+dge@meta.data$log10_nUMI = dge@meta.data$nUMI %>% log10
+is_foxa2 = FetchData(dge, "FOXA2_gRNA2_umAmp") > FetchData(dge, "Scramble_gRNA1")
+dge@meta.data$highest_expressed_guide_unAmp = ifelse( is_foxa2, "FOXA2_gRNA2", "Scramble_gRNA1")
+
+# guides no dge
+guide_metadata = inventory_get("HE_guide_metadata") %>%
+  read.table(sep = "\t", header =T, row.names = 1, stringsAsFactors = F)
+# put'em together
+dge %<>% AddMetaData( guide_metadata )
+
+# save & inventory
+fp = file.path(results_path, "HE_plus_guide_all.Robj")
+saveRDS(dge, fp)
+inventory_add( tag = "HE_plus_guide_all", force = T, 
+               filename = fp,
+               extra = "Seurat object with HE reps and gRNA amplification metadata. No clustering or doublet removal." )
+# To retrieve:
+# dge = readRDS( inventory_get( "HE_plus_guide" ))
+```
+
+#### Plot sequencing depth
+
+```{r}
+p = dge %>% 
+  FetchData(c("nUMI", "nGene", "orig.ident")) %>% 
+  ggplot() + 
+  #geom_density2d(aes(x=nUMI, y = nGene), colour = "black") + 
+  geom_point(aes(x=nUMI, y = nGene, colour = orig.ident), size = 0) + 
+  scale_colour_manual(values = REPLICATE_COLORS ) + 
+  scale_x_log10(breaks = 4000*(2^(0:4))) + 
+  scale_y_log10(breaks = 1000*(1:8)) + 
+  ggtitle("HE cellwise sequencing depth") + 
+  theme(axis.text.x = element_text(angle = 45, vjust=0.5))
+ggsave(file.path(results_path, "library_depth.pdf"), p, height = 3, width = 5)
+
+p = dge %>% 
+  FetchData(c("gAmp_total", "highest_expressed_value", "orig.ident")) %>% 
+  ggplot() + 
+  geom_histogram(aes(x=gAmp_total, fill = orig.ident), bins = 50) + 
+  scale_fill_manual(values = REPLICATE_COLORS) + 
+  scale_x_log10(breaks = 10^(1:5)) + facet_wrap(~orig.ident, ncol = 1) + 
+  ggtitle("Sequencing depth from gRNA amplification") + 
+  ylab("Num cells") + xlab("Total UMI count") 
+ggsave(file.path(results_path, "gAmp_depth.pdf"), p, height = 3, width = 5)
+```
+
+#### Next QC step: deplete doublets and check scramble guides
+
+```{r}
+# 
+# {
+#   doublet_LR_cutoff = 0.2
+#   pdf(file.path(results_path, "LR_capped.pdf"), width = 4, height = 3)
+#   print(
+#     dge@meta.data %>% ggplot() + 
+#     geom_histogram(bins = 400, aes(x=log10_LR_capped)) + 
+#     geom_vline(xintercept=doublet_LR_cutoff, colour = "red") + 
+#     ggtitle( "Doublet removal criterion" ) + 
+#     xlab("Log10 likelihood ratio (capped at ±2)") 
+#   )
+#   dev.off()
+# }
+# 
+# dge_clean = dge
+# dge_clean %<>% SubsetDataFlex( "log10_LR_capped", "log10_LR_capped < doublet_LR_cutoff" )
+# dge_clean %<>% SubsetDataFlex( "highest_expressed_guide", "highest_expressed_guide %in% GUIDES_HE " )
+```
+
+#### Clean and save
+
+```{r}
+# # save & inventory with doublets and mutant guides removed
+# fp = file.path(results_path, "HE_plus_guide_nodub.Robj")
+# saveRDS(dge_clean, fp)
+# inventory_add( tag = "HE_plus_guide_nodub", force = T, 
+#                filename = fp,
+#                extra = "Seurat object with HE reps, including gRNA amplification metadata. Doublets and unassigned cells have been removed, but tSNE + clustering has not been done." )
+# # dge = readRDS( inventory_get( "HE_plus_guide_nodub" ))
+```
+
+
+

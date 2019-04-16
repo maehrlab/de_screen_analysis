@@ -1,0 +1,131 @@
+---
+title: ""
+author: "Eric Kernfeld"
+date: "January 18, 2017"
+output: html_document
+---
+
+Load data
+
+```{r}
+results_path = Sys.getenv()[["FREEZR_DESTINATION"]]
+dge = readRDS( inventory_get( "DE_TERA_reclustered_no_dub" ))
+TidynessChecklist( dge )
+path_effects  = inventory_get("guide_effects_various_output")
+path_effects_cluster  = inventory_get( "guide_vs_cluster_qvals" )
+path_effects_scramble = inventory_get( "scramble_effects" )
+assertthat::assert_that(dir.exists (path_effects))
+assertthat::assert_that(file.exists(path_effects_cluster))
+assertthat::assert_that(dir.exists (path_effects_scramble))
+```
+
+
+Assemble cell counts, target effect pvals and logfc's, and cluster effect q-vals. 
+
+```{r}
+cell_counts = dge %>% FetchData(c("highest_expressed_guide", "orig.ident")) %>% table %>% rbind %>% as.data.frame
+cluster_qvals = read.table(path_effects_cluster, stringsAsFactors = F)
+get_single_effect = function( guide, type, target = get_genes_from_guides(guide), subdir = "target" ){
+  if( target == "Scramble" ){
+    return(NA)
+  }
+  fp = file.path(path_effects, "effects_all", subdir, paste0(guide, ".csv")) 
+  if(file.exists(fp)){
+    X = read.csv(fp, row.names = 1) 
+  } else {
+    return(NA)
+  }
+
+  if(type=="fc"){
+    return(extract(X, target, "avg_logFC", drop = T))
+  }
+  if(type=="logp"){
+    return(extract(X, target, "p_val", drop = T) %>% log10)
+  }
+  stop("type should be 'fc' or 'logp'.")
+}
+
+
+```
+
+Retrieve gDNA read counts
+
+```{r}
+gDNA_folder = file.path(proj_dir, "tables", "count_files")
+sample_names = list.files(gDNA_folder, full.names = F) %>% gsub("_ryan.*", "", .)
+add_column = function(X, name, contents) {
+  X[[name]]=contents
+  return(X)
+}
+log2p1 = function(x) log2(1+x)
+lognorm_gDNA = function(X){
+  X$V2 %<>% div_by_sum %>% multiply_by(10000) %>% log2p1
+  X
+}
+# Load, aggregate and normalize data
+gDNA_counts = 
+  list.files( gDNA_folder, full.names = T ) %>% 
+  lapply( read.table, stringsAsFactors = F ) %>% 
+  lapply( lognorm_gDNA ) %>%
+  mapply( FUN=add_column, X=., name="sample", contents=sample_names, SIMPLIFY = F ) %>% 
+  Reduce( f=rbind )
+gDNA_counts %<>% reshape2::dcast( formula = V1~sample, value.var = "V2")
+rownames(gDNA_counts) = gDNA_counts$guide
+colnames(gDNA_counts)[1] = "guide"
+missing = setdiff(GUIDE_NAMES, gDNA_counts$guide)
+gDNA_counts[missing, ] = data.frame(missing, 0,0,0,0, stringsAsFactors = F)
+
+# Process more to get quantities of interest
+gDNA_counts$DEminusESC1 = gDNA_counts$DE1_gDNA - gDNA_counts$ES1_gDNA
+gDNA_counts$DEminusESC2 = gDNA_counts$DE2_gDNA - gDNA_counts$ES2_gDNA
+gDNA_counts$average_change = (gDNA_counts$DEminusESC1 + gDNA_counts$DEminusESC2)/2
+gDNA_counts$gene = gDNA_counts$guide %>% get_genes_from_guides
+```
+
+Put everything into the same dataframe and save it.
+
+```{r}
+guide_effects_assembled = gDNA_counts
+rownames(guide_effects_assembled) = guide_effects_assembled$guide
+guide_effects_assembled %<>% cbind(cell_counts_DE1 = cell_counts[guide_effects_assembled$guide, 1],
+                                   cell_counts_DE2 = cell_counts[guide_effects_assembled$guide, 2] )
+guide_effects_assembled$target_log10p = sapply(guide_effects_assembled$guide, get_single_effect, type = "logp")
+guide_effects_assembled$target_effect = sapply(guide_effects_assembled$guide, get_single_effect, type = "fc")
+guide_effects_assembled$KRAB_log10p = sapply(guide_effects_assembled$guide, get_single_effect, type = "logp", 
+                                               target = "dCas9_KRAB", subdir = "KRAB")
+guide_effects_assembled$KRAB_effect = sapply(guide_effects_assembled$guide, get_single_effect, type = "fc", 
+                                               target = "dCas9_KRAB", subdir = "KRAB")
+guide_effects_assembled$cluster_log10q = -1 
+cluster_qvals %<>% subset(V1 %in% guide_effects_assembled$guide)
+guide_effects_assembled[cluster_qvals$V1, "cluster_log10q"] = cluster_qvals$V2 %>% as.numeric %>% log10
+
+counts_ESC = "ESC_counts_by_guide" %>% inventory_get %>% 
+  read.table(row.names = 1, header = T, sep ="\t")
+
+guide_effects_assembled$counts_ESC = counts_ESC[guide_effects_assembled$guide,1]
+
+# Fill missing values sensibly
+replace_na = function(x, filler) {
+  x[is.na(x)] = filler
+  return(x)
+}
+guide_effects_assembled$cell_counts_DE1 %<>% replace_na(filler = 0)
+guide_effects_assembled$cell_counts_DE2 %<>% replace_na(filler = 0)
+guide_effects_assembled$target_effect %<>% replace_na(filler = 0)
+guide_effects_assembled$target_log10p %<>% replace_na(filler = 0)
+guide_effects_assembled$cluster_log10q %<>% replace_na(filler = 0)
+
+# Tidy, save
+guide_effects_assembled$target_effect %<>% round(2)
+guide_effects_assembled$target_log10p %<>% round(1)
+guide_effects_assembled$cluster_log10q %<>% as.numeric %>% round(1)
+assertthat::assert_that(!any(is.na(guide_effects_assembled$guide)))
+
+write.csv(guide_effects_assembled, file.path(results_path, "guide_effects_assembled.csv"), 
+          col.names = T, row.names = F, quote = T)
+inventory_add( tag = "guide_effects_assembled", force = T, 
+               filename = file.path(results_path, "guide_effects_assembled.csv"), 
+               extra = "Spreadsheet summarizing effects guide by guide." )
+#"guide_effects_assembled" %>% inventory_get %>% read.csv()
+```
+

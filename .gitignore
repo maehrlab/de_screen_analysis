@@ -1,0 +1,20 @@
+# ignore data and images.
+.DS_store
+.Rhistory
+*.png
+*.pdf
+*.svg
+.Rdata
+*.dge
+*.data
+*.mtx
+.Rproj.user
+*.Robj
+/html/HTML5Application/nbproject/private/
+mimosca/data/*
+mimosca/results/*
+*.tdf
+*.bam
+*.bam.bai
+alignment/2018JAN/guide_assignment_exploration_IGV/*
+michael_chromatin/*

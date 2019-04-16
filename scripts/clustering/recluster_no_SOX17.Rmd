@@ -1,0 +1,59 @@
+---
+title: "R Notebook"
+output: html_document
+---
+
+#### Set up data
+
+```{r}
+results_path = Sys.getenv()[["FREEZR_DESTINATION"]]
+dge = readRDS( inventory_get( "DE_TERA_reclustered_no_dub" ))
+TidynessChecklist( dge ) 
+```
+
+```{r}
+dge@meta.data$old_ident = dge@ident
+current_params = data.frame(  latent_dimension = 10, 
+                              clust_method = "SNN",
+                              clust_granularities_as_string = "0.075",
+                              excess_var_cutoff =  0.5,
+                              log_expr_cutoff =  0.0125, stringsAsFactors = F )
+
+dge %<>% explore_embeddings( results_path, all_params = current_params, 
+                             blacklist = GUIDE_NAMES %>% c("dCas9_KRAB", "SOX17") )
+dge %<>% CellCycleScoring(
+  g2m.genes = Seurat::cc.genes$g2m.genes,
+  s.genes   = Seurat::cc.genes$s.genes,
+) 
+dge %>% save_feature_plots(results_path, gene_list = c("ident", "res.0.0125", "orig.ident", "nUMI", "CTNNB1"))
+dge %<>% FindClusters(res = 0.075, dims.use = 1:10)
+dge %>% FetchData( c("res.0.075", "old_ident" ) ) %>% table 
+
+dge %>% FetchData( c("res.0.075", "highest_expressed_guide" ) ) %>% table %>% as.data.frame %>%
+  write.table( file.path( results_path, "with_vs_without_SOX17.tsv" ),  
+               quote = F, row.names = T, col.names = T, sep = "\t")
+
+```
+  
+```{r}
+guide_freqs_by_target = get_guides_by_cluster( dge, aggregate_by_target = T, skip = GUIDES_BLACKLIST )
+
+guide_freqs_scramble  = get_guides_by_cluster( dge, aggregate_by_target = F, skip = c(GUIDES_TRT, GUIDES_BLACKLIST ) )
+guides_by_cluster_aggr = rbind( guide_freqs_by_target, guide_freqs_scramble )
+# Wipe out duplicate row from rbind operation
+guides_by_cluster_aggr = guides_by_cluster_aggr[setdiff(rownames(guides_by_cluster_aggr), "Scramble1"), ]
+guides_by_cluster_aggr %>% heatmap_guides_by_cluster("guides_by_cluster_aggr.pdf")
+guides_by_cluster_aggr %>% calc_save_pvals("guide_vs_cluster_aggr") -> x
+
+guides_by_cluster = get_guides_by_cluster( dge, aggregate_by_target = F ) 
+guides_by_cluster %>% heatmap_guides_by_cluster("guides_by_cluster.pdf") 
+guides_by_cluster %>% calc_save_pvals("guide_vs_cluster")
+
+dge@meta.data$target = get_genes_from_guides(dge@meta.data$highest_expressed_guide)
+dge %<>% AddClusterIndicators(ident.use = "target")
+save_feature_plots( dge, results_path, gene_list_name = "guides",
+                    AvailableData(dge) %>% 
+                      grep("target", ., value = T) %>%
+                      grep("Scramble|FOXA2", ., value = T) %>% 
+                    c("Phase", "nUMI", "nUMI_pct_mt") )
+```

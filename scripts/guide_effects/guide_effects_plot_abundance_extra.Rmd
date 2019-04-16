@@ -1,0 +1,318 @@
+---
+title: ""
+author: "Eric Kernfeld"
+date: "January 18, 2017"
+output: html_document
+---
+
+Load data
+
+```{r}
+results_path = Sys.getenv()[["FREEZR_DESTINATION"]]
+dge = readRDS( inventory_get( "DE_TERA_reclustered_no_dub" ))
+TidynessChecklist( dge )
+path_effects  = inventory_get("guide_effects_various_output")
+path_effects_cluster  = inventory_get( "guide_vs_cluster_qvals" )
+path_effects_scramble = inventory_get( "scramble_effects" )
+assertthat::assert_that(dir.exists (path_effects))
+assertthat::assert_that(file.exists(path_effects_cluster))
+assertthat::assert_that(dir.exists (path_effects_scramble))
+guide_effects_assembled = "guide_effects_assembled" %>% inventory_get %>% read.csv(stringsAsFactors = F)
+guide_effects_assembled$cell_counts_DE = with( guide_effects_assembled, 
+                                               cell_counts_DE1 + cell_counts_DE2 / 2 )
+guide_effects_assembled %<>% subset( ! ( guide %in% GUIDES_BLACKLIST ) )
+```
+
+
+DE versus ESC abundance (cellcounts)
+
+```{r}
+## Test guides for abundance effects
+x = model.matrix(  ~ sqrt(counts_ESC) + sqrt(cell_counts_DE) + 0 ,
+                   data = guide_effects_assembled)
+library(mclust)
+mixmod = Mclust(x, modelNames = "VVI", G = 2)
+{
+  pdf(file.path(results_path, "mixmod.pdf"))
+  plot(mixmod, "classification")
+  dev.off()
+}
+significant_guides = guide_effects_assembled$guide[(mixmod$z[, 1] < 0.05 )]
+#significant_guides %<>% c(get_guides_from_genes("MIXL1"))
+
+## Categorize guides by abundance effects
+scramble_mins = subset( guide_effects_assembled, 
+                          guide %in% GUIDES_SCRAMBLE,
+                          select = c( "cell_counts_DE", "counts_ESC" ) ) %>% 
+  apply(2, min)
+baseline_DE = scramble_mins["cell_counts_DE"]
+baseline_ES = scramble_mins["counts_ESC"]
+
+idx_scramble = guide_effects_assembled$guide %in% GUIDES_SCRAMBLE
+idx_DE_up   = with( guide_effects_assembled, 
+                    guide %in% significant_guides &
+                      cell_counts_DE1 + cell_counts_DE2 > baseline_DE ) 
+idx_DE_down = with( guide_effects_assembled,                      
+                    guide %in% significant_guides &
+                      cell_counts_DE1 + cell_counts_DE2 < baseline_DE ) 
+idx_ES_down = with( guide_effects_assembled,  
+                    guide %in% significant_guides &
+                      counts_ESC < baseline_ES) 
+
+guide_effects_assembled$category = "other"
+guide_effects_assembled$category[idx_scramble] = "Scramble"
+guide_effects_assembled$category[idx_DE_up] = "DE_high"
+guide_effects_assembled$category[idx_DE_down] = "DE_low"
+guide_effects_assembled$category[idx_DE_down & idx_ES_down] = "both_low"
+abundance_category_colors = c( "Scramble" = "black", 
+                               "other"    = "grey", 
+                               "DE_high"  = "#FCF09A",
+                               "DE_low"   = "#FCA286", 
+                               "ES_low" = "#9CECFF", 
+                               "both_low" = "#9CECFF" )
+
+## Plot guides by abundance effects
+mymap = aes( x = counts_ESC,
+             y = cell_counts_DE,
+             colour = category, 
+             fill = category, 
+             label = guide )
+p = ggplot( guide_effects_assembled ) +
+  geom_point( mymap ) + 
+  ggrepel::geom_label_repel( mymap,
+                             data = guide_effects_assembled %>% subset(guide %in% significant_guides),
+                             colour = "black" ) +
+  scale_y_continuous(trans = "sqrt") + 
+  scale_x_continuous(trans = "sqrt") + 
+  scale_color_manual(values = abundance_category_colors) + 
+  scale_fill_manual(values = abundance_category_colors) + 
+  labs( color = "Scrambles" ) +
+  xlab("cell_counts_ESC") + 
+  ylab("cell_counts_DE")   
+ggsave(file.path( results_path, "ESC_versus_DE_cellcounts.pdf"), p, width = 7, height = 7)
+
+## Plot guides by abundance effects, but aggregating by target
+guide_effects_assembled$target = guide_effects_assembled$guide %>% get_genes_from_guides
+gene_effects_assembled = 
+   aggregate_nice( guide_effects_assembled[c( "cell_counts_DE", "counts_ESC" )], 
+                   by = guide_effects_assembled$target, 
+                   FUN = mean ) %>% as.data.frame
+gene_effects_assembled$target = rownames(gene_effects_assembled)
+gene_effects_assembled$category = "other"
+
+
+idx_scramble = gene_effects_assembled$target == "Scramble"
+idx_DE_up   = with( gene_effects_assembled, cell_counts_DE > 90 ) 
+idx_DE_down = with( gene_effects_assembled, cell_counts_DE < 15 ) 
+idx_ES_down = with( gene_effects_assembled, counts_ESC < 20) 
+
+gene_effects_assembled$category = "other"
+gene_effects_assembled$category[idx_scramble] = "Scramble"
+gene_effects_assembled$category[idx_DE_up] = "DE_high"
+gene_effects_assembled$category[idx_DE_down] = "DE_low"
+gene_effects_assembled$category[idx_ES_down] = "ES_low"
+
+mymap = aes( x = counts_ESC,
+             y = cell_counts_DE,
+             colour = category,
+             fill = category,
+             label = target )
+p = ggplot(gene_effects_assembled) +
+  geom_point( mymap ) + 
+  ggrepel::geom_label_repel( mymap,
+                             data = gene_effects_assembled %>%
+                               subset( category != "other" ),
+                             colour = "black" ) +
+  scale_y_continuous(trans = "sqrt") + 
+  scale_x_continuous(trans = "sqrt") + 
+  scale_color_manual(values = abundance_category_colors) + 
+  scale_fill_manual(values = abundance_category_colors) + 
+  labs( color = "Scrambles" ) +
+  xlab("cell_counts_ESC") + 
+  ylab("cell_counts_DE")   
+ggsave(file.path( results_path, "ESC_versus_DE_cellcounts.pdf"), p, width = 7, height = 7)
+
+
+count_cols = c("counts_ESC", "cell_counts_DE1", "cell_counts_DE2")
+count_fc_cols = count_cols %>% paste0("_over_scramble")
+scramble_counts = subset( guide_effects_assembled, guide %in% GUIDES_SCRAMBLE, select = count_cols ) %>% colMeans
+guide_effects_assembled[count_fc_cols] =
+  as.matrix( guide_effects_assembled[count_cols] ) %*% diag(1/scramble_counts) #rescale columns easily
+
+# Set up heatmap data
+abundances_long = 
+  guide_effects_assembled %>% 
+  subset(guide %in% significant_guides,
+         select = c(count_fc_cols, "guide") ) %>% 
+  reshape::melt(id.vars = "guide", variable_name = "replicate")
+# Set up colorbar data
+labels_by_category = guide_effects_assembled %>% 
+  subset( guide %in% significant_guides ) %>%
+  subset( select = c("guide", "category") )
+# Order guides
+guide_order = guide_effects_assembled %>% dplyr::arrange(category, get_genes_from_guides(guide)) %>% extract2("guide")
+abundances_long$guide %<>% factor( ordered = T, levels = guide_order)
+labels_by_category$guide %<>% factor( ordered = T, levels = guide_order) 
+abundances_long %<>% dplyr::arrange(guide)
+labels_by_category %<>% dplyr::arrange(guide)
+
+# dooooo iiiiiit
+p = ggplot(abundances_long) + 
+  geom_tile(aes(y = guide, x = replicate, fill = log2(value) )) + 
+  theme(axis.text.x = element_text(angle = 90)) + 
+  scale_fill_gradient2(low = "blue", high = "red", mid = "white", na.value = "navy")
+p = gg_colourbar( p, 
+              thickness = 1, 
+              labels_by_category = labels_by_category,
+              labelname = "guide", 
+              category_colours = abundance_category_colors )
+ggsave(file.path( results_path, "DE_versus_ESC_cellcounts_heatmap.pdf"), p, width = 7, height = 7)
+```
+
+Genomic DNA results
+
+```{r}
+# Remove blank, scr5, and mutants
+gDNA_counts_to_plot = guide_effects_assembled %>% subset(!(guide %in% c("blank_gRNA1", "Scramble_gRNA5", GUIDES_MUTATED)))
+
+# Scatterplot replicates -- change over differentiation
+x = gDNA_counts_to_plot[c("DEminusESC1", "DEminusESC2")] %>% abs
+gDNA_counts_to_plot$idr = idr::est.IDR( x, mu = 2, rho = 0.9, sigma = 1.3, p = 0.05 )$idr
+p = ggplot(gDNA_counts_to_plot) +
+  geom_point(aes(x=DEminusESC1,
+                 y=DEminusESC2, 
+                 colour = idr < 0.1 & (sign(DEminusESC1) == sign(DEminusESC2)) )) + 
+  scale_color_manual(values = c("black", "red")) + 
+  # ggrepel::geom_label_repel(data = subset(gDNA_counts_to_plot, idr < 0.1 ), 
+  #                           aes_string(x="DEminusESC1", 
+  #                                      y="DEminusESC2", 
+  #                                      label = "guide")) + 
+  xlab("DE minus ESC rep1 (reads per 10k)")  + 
+  ylab("DE minus ESC rep2 (reads per 10k)") +
+  expand_limits(list(x=c(-1.5, 3),
+                     y=c(-1.5, 3))) +
+  geom_hline(yintercept = 0) +
+  geom_vline(xintercept = 0)  
+ggsave(file.path(results_path, "gDNA_amp_by_rep.pdf"), p, width = 15, height = 10)
+
+# Scatterplot DE and ES values
+gDNA_counts_to_plot$DE_gDNA = with(gDNA_counts_to_plot, (DE1_gDNA + DE2_gDNA)/2 )
+gDNA_counts_to_plot$ES_gDNA = with(gDNA_counts_to_plot, (ES1_gDNA + ES2_gDNA)/2 )
+gDNA_counts_to_plot$average_change = with(gDNA_counts_to_plot, DE_gDNA - ES_gDNA )
+gDNA_counts_to_plot$scramble = gDNA_counts_to_plot$guide %in% GUIDES_SCRAMBLE
+gDNA_counts_to_plot$significant = with(gDNA_counts_to_plot, idr < 0.1 & (sign(DEminusESC1) == sign(DEminusESC2)) )
+same_sign = function(x) mean(sign(x)==sign(x[1])) > 0.5
+aggregated_positions =
+  with(gDNA_counts_to_plot, 
+       data.frame(
+         gene = aggregate_nice(x = gene, by = gene, FUN = unique),
+         ES_gDNA = aggregate_nice(x = ES_gDNA, by = gene, FUN = mean), 
+         DE_gDNA = aggregate_nice(x = DE_gDNA, by = gene, FUN = mean), 
+         most_significant = aggregate_nice(x = significant, by = gene, FUN = function(x) mean(x) > 0.5 ),
+         most_consistent = aggregate_nice(x = average_change, by = gene, FUN = same_sign)
+       )
+  )
+colnames(aggregated_positions) = c("gene", "ES_gDNA", "DE_gDNA", "most_significant", "most_consistent")
+  
+p = ggplot() +
+  ggtitle("Abundance at day 0 versus day 4") +
+  xlab("Guide genomic DNA (Day 0)") +
+  ylab("Guide genomic DNA (Day 4)") +
+  geom_point(data = gDNA_counts_to_plot, 
+             aes(y = DE_gDNA, x = ES_gDNA,                  
+                 colour = gene=="Scramble", 
+                 shape = significant )) + 
+  ggrepel::geom_label_repel(data = gDNA_counts_to_plot %>% subset( DE_gDNA < 2 & ES_gDNA < 2 ),
+             aes(y = DE_gDNA, x = ES_gDNA, label = guide ) ) + 
+  ggrepel::geom_label_repel(data = aggregated_positions %>% subset(most_significant & most_consistent ),
+             aes(y = DE_gDNA, x = ES_gDNA, label = gene ) ) + 
+  scale_color_manual(values = c("black", "red")) 
+  
+ggsave(file.path(results_path, "gDNA_amp_ES_DE.pdf"), p, width = 15, height = 10)
+
+
+# Set order for barplot
+gene_effects = aggregate_nice(gDNA_counts_to_plot[["average_change"]], 
+                              gDNA_counts_to_plot[["gene"]], FUN = mean)
+desired_gene_order = rownames(gene_effects)[order(gene_effects)]  
+desired_guide_order = get_guides_from_genes(desired_gene_order)
+desired_guide_order %<>% intersect(gDNA_counts_to_plot$guide)
+
+# Set up annotations: colorbar and scramble average ± 2 sd for hline.
+scramble_changes =  subset(gDNA_counts_to_plot, gene == "Scramble", drop = T)
+scramble_changes = c( scramble_changes$DEminusESC1, scramble_changes$DEminusESC2 )
+scramble_change_mean = scramble_changes %>% mean
+scramble_change_2sd = scramble_changes %>% sd %>% multiply_by(2)
+gDNA_counts_to_plot$colorbar_parity = gDNA_counts_to_plot$gene %>% sapply(grep, desired_gene_order) %>% mod(2) %>% paste0("regular", .)
+gDNA_counts_to_plot$colorbar_parity [gDNA_counts_to_plot$gene=="Scramble" ] = "Scramble"
+# barplot change over differentiation
+p = ggplot(gDNA_counts_to_plot) +
+  ggtitle("Change in guide abundance during differentiation") + 
+  geom_hline(yintercept = 0) +
+  geom_bar(stat = "identity", 
+           aes(x = factor(guide, ordered = T, levels = desired_guide_order), 
+               y = average_change,
+                fill = colorbar_parity) ) + 
+  geom_point(aes(x = factor(guide, ordered = T, levels = desired_guide_order), 
+                 y = DEminusESC1), color = "black", fill = "white", stroke = 0.5, size = 1, shape = 21 )+ 
+  geom_point(aes(x = factor(guide, ordered = T, levels = desired_guide_order), 
+                 y = DEminusESC2), color = "black", fill = "white", stroke = 0.5, size = 1, shape = 21 ) + 
+  ylab("DE minus ESC (log2 fold change)")+ 
+  xlab("guide") + 
+  scale_x_discrete( labels = prettify_guide_labels(desired_guide_order) ) + 
+  theme(axis.text.x = element_text(angle = 90, hjust = 0.95), 
+        axis.ticks.x = element_blank(), 
+        plot.title = element_text(hjust = 0.5, vjust = 0.7)) + 
+  geom_hline(yintercept = scramble_change_mean                      , colour = "red") + 
+  # geom_hline(yintercept = scramble_change_mean + scramble_change_2sd, colour = "red", linetype = 2) + 
+  # geom_hline(yintercept = scramble_change_mean - scramble_change_2sd, colour = "red", linetype = 2) + 
+  geom_rect(stat = "identity", 
+            aes(xmin = rank(factor(guide, ordered = T, levels = desired_guide_order)) - 0.5,
+                xmax = rank(factor(guide, ordered = T, levels = desired_guide_order)) + 0.5,
+                ymin = -6.5,# + as.numeric(gsub("^.*_gRNA", "", guide)),
+                ymax = -6,  # + as.numeric(gsub("^.*_gRNA", "", guide)), #0.2,
+                fill = colorbar_parity)) + 
+  scale_fill_manual(values = c("grey80", "grey40", "red"))
+  
+ggsave(file.path(results_path, "gDNA_amp_barplot.pdf"), p, width = 12, height = 7)
+
+
+```
+
+Cross-reference different measurements of guide abundance
+
+```{r}
+
+# genomic DNA diff versus ESC abundance
+p = ggplot( guide_effects_assembled %>% subset(!is.element(guide, GUIDES_BLACKLIST)) ) +
+  geom_point( aes( x = counts_ESC, y = DEminusESC1 + DEminusESC1) )  +
+  ggrepel::geom_label_repel( aes( x = counts_ESC, 
+                                  y = DEminusESC1 + DEminusESC1,
+                                  label = guide), 
+                             data = guide_effects_assembled %>%
+                               subset( counts_ESC <= 10 & 
+                                         !is.element(guide, GUIDES_BLACKLIST) ))  +
+  xlab("cell_counts_ESC") + 
+  ylab("Genomic DNA logFC")  +
+  ggtitle("Guide abundance in ESC and DE")
+
+ggsave(file.path( results_path, "gDNA_amp_versus_ESC_cellcounts.pdf"), p, width = 7, height = 7)
+
+# genomic DNA normalized counts versus DE abundance
+p = ggplot(guide_effects_assembled) +
+  geom_point(aes(y=DE1_gDNA, x=cell_counts_DE1), colour = REPLICATE_COLORS[[1]]) + 
+  geom_point(aes(y=DE2_gDNA, x=cell_counts_DE2), colour = REPLICATE_COLORS[[2]]) +
+  ggrepel::geom_label_repel(aes(y=0.5*(DE1_gDNA + DE2_gDNA), 
+                                x=0.5*(cell_counts_DE1 + cell_counts_DE2), 
+                                label = guide),
+                            data = subset( guide_effects_assembled,
+                                           cell_counts_DE1 + cell_counts_DE2 > 50 &
+                                             DE1_gDNA + DE2_gDNA < 4 ),
+                            colour = "black") +
+  xlab("cell_counts_DE") + 
+  ylab("gDNA_amp_DE")  + 
+  expand_limits(list(y=-1)) 
+
+ggsave(file.path( results_path, "gDNA_amp_versus_DE_cellcounts.pdf"), p, width = 7, height = 7)
+
+```

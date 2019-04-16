@@ -1,0 +1,2298 @@
+species	HGNC	UniProtKB	gene	ID
+HUMAN	14106	Q9HCU8	DNA polymerase delta subunit 4	POLD4
+HUMAN	17351	Q99633	Pre-mRNA-splicing factor 18	PRPF18
+HUMAN	13917	Q13838	Spliceosome RNA helicase DDX39B	DDX39B
+HUMAN	18559	Q9H5Q4	"Dimethyladenosine transferase 2, mitochondrial"	TFB2M
+HUMAN	7136	P42568	Protein AF-9	MLLT3
+HUMAN	9956	Q01201	Transcription factor RelB	RELB
+HUMAN	4071	Q06546	GA-binding protein alpha chain	GABPA
+HUMAN	24704	Q659C4	La-related protein 1B	LARP1B
+HUMAN	12978	Q16670	Zinc finger and SCAN domain-containing protein 26	ZSCAN26
+HUMAN	29683	Q9H2D1	Mitochondrial folate transporter/carrier	SLC25A32
+HUMAN	2361	P52943	Cysteine-rich protein 2	CRIP2
+HUMAN	9820	O43502	DNA repair protein RAD51 homolog 3	RAD51C
+HUMAN	18334	Q6B0B8	Tigger transposable element-derived protein 3	TIGD3
+HUMAN	11869	Q9UHN6	Transmembrane protein 2	TMEM2
+HUMAN	6990	P51608	Methyl-CpG-binding protein 2	MECP2
+HUMAN	23463	Q5VTM2	"Arf-GAP with GTPase, ANK repeat and PH domain-containing protein 9"	AGAP9
+HUMAN	9969	P35251	Replication factor C subunit 1	RFC1
+HUMAN	23020	Q8WU68	Splicing factor U2AF 26 kDa subunit	U2AF1L4
+HUMAN	9173	P09884	DNA polymerase alpha catalytic subunit	POLA1
+HUMAN	1553	Q13185	Chromobox protein homolog 3	CBX3
+HUMAN	24273	Q96FB5	Protein RRNAD1	RRNAD1
+HUMAN	14495	Q9Y399	"28S ribosomal protein S2, mitochondrial"	MRPS2
+HUMAN	16705	Q5XG87	Non-canonical poly(A) RNA polymerase PAPD7	PAPD7
+HUMAN	20327	Q5T8P6	RNA-binding protein 26	RBM26
+HUMAN	11598	Q9UMR3	T-box transcription factor TBX20	TBX20
+HUMAN	11242	Q01892	Transcription factor Spi-B	SPIB
+HUMAN	21746	Q8NE35	Cytoplasmic polyadenylation element-binding protein 3	CPEB3
+HUMAN	10409	P63220	40S ribosomal protein S21	RPS21
+HUMAN	21051	Q9UGC7	"Peptide chain release factor 1-like, mitochondrial"	MTRF1L
+HUMAN	29537	Q99687	Homeobox protein Meis3	MEIS3
+HUMAN	30778	Q8WXI9	Transcriptional repressor p66-beta	GATAD2B
+HUMAN	23191	Q8NA92	THAP domain-containing protein 8	THAP8
+HUMAN	28990	Q92618	Zinc finger protein 516	ZNF516
+HUMAN	5041	P31943	Heterogeneous nuclear ribonucleoprotein H	HNRNPH1
+HUMAN	5175	P52594	Arf-GAP domain and FG repeat-containing protein 1	AGFG1
+HUMAN	23762	Q8WXT5	Forkhead box protein D4-like 4	FOXD4L4
+HUMAN	962	Q9UIF9	Bromodomain adjacent to zinc finger domain protein 2A	BAZ2A
+HUMAN	20837	Q6QHF9	Peroxisomal N(1)-acetyl-spermine/spermidine oxidase	PAOX
+HUMAN	28417	Q9BTE6	Alanyl-tRNA editing protein Aarsd1	AARSD1
+HUMAN	11633	P15923	Transcription factor E2-alpha	TCF3
+HUMAN	33519	P0C7M4	Rhox homeobox family member 2B	RHOXF2B
+HUMAN	4877	Q9UBX0	Homeobox expressed in ES cells 1	HESX1
+HUMAN	5130	P31274	Homeobox protein Hox-C9	HOXC9
+HUMAN	3803	O60548	Forkhead box protein D2	FOXD2
+HUMAN	6106	Q9BZS1	Forkhead box protein P3	FOXP3
+HUMAN	18684	Q9Y6V7	Probable ATP-dependent RNA helicase DDX49	DDX49
+HUMAN	2685	Q92904	Deleted in azoospermia-like	DAZL
+HUMAN	9138	Q01780	Exosome component 10	EXOSC10
+HUMAN	31953	A8MZ59	Leucine-twenty homeobox	LEUTX
+HUMAN	31839	A8MTQ0	Homeobox protein notochord	NOTO
+HUMAN	17062	Q5JVS0	Intracellular hyaluronan-binding protein 4	HABP4
+HUMAN	12420	P49411	"Elongation factor Tu, mitochondrial"	TUFM
+HUMAN	5107	P31267	Homeobox protein Hox-A6	HOXA6
+HUMAN	9142	P54821	Paired mesoderm homeobox protein 1	PRRX1
+HUMAN	19072	Q96J01	THO complex subunit 3	THOC3
+HUMAN	24726	Q8N3J2	Methyltransferase-like protein 4	METTL4
+HUMAN	16672	P50579	Methionine aminopeptidase 2	METAP2
+HUMAN	11208	Q02447	Transcription factor Sp3	SP3
+HUMAN	1317	P16383	GC-rich sequence DNA-binding factor 2	GCFC2
+HUMAN	10260	P51449	Nuclear receptor ROR-gamma	RORC
+HUMAN	8090	Q15646	2'-5'-oligoadenylate synthase-like protein	OASL
+HUMAN	7556	P12525	Putative myc-like protein MYCLP1	MYCLP1
+HUMAN	29271	Q9P2E3	NFX1-type zinc finger-containing protein 1	ZNFX1
+HUMAN	15905	Q9Y468	Lethal(3)malignant brain tumor-like protein 1	L3MBTL1
+HUMAN	12767	Q9BZ95	Histone-lysine N-methyltransferase NSD3	WHSC1L1
+HUMAN	11728	P54274	Telomeric repeat-binding factor 1	TERF1
+HUMAN	11776	Q15583	Homeobox protein TGIF1	TGIF1
+HUMAN	2915	Q07687	Homeobox protein DLX-2	DLX2
+HUMAN	24311	Q6XD76	Achaete-scute homolog 4	ASCL4
+HUMAN	1911	Q13112	Chromatin assembly factor 1 subunit B	CHAF1B
+HUMAN	16715	Q9H8H2	Probable ATP-dependent RNA helicase DDX31	DDX31
+HUMAN	17697	Q9NP81	"Serine--tRNA ligase, mitochondrial"	SARS2
+HUMAN	7329	P52701	DNA mismatch repair protein Msh6	MSH6
+HUMAN	24582	Q5VXD3	Sterile alpha motif domain-containing protein 13	SAMD13
+HUMAN	26556	Q8N4P6	Leucine-rich repeat-containing protein 71	LRRC71
+HUMAN	14378	Q9NPE3	H/ACA ribonucleoprotein complex subunit 3	NOP10
+HUMAN	17024	Q9UIL8	PHD finger protein 11	PHF11
+HUMAN	11299	P37108	Signal recognition particle 14 kDa protein	SRP14
+HUMAN	10360	P46777	60S ribosomal protein L5	RPL5
+HUMAN	14052	P49406	"39S ribosomal protein L19, mitochondrial"	MRPL19
+HUMAN	ENSG00000178636	H0Y8J9	Protein LOC101929762 (Fragment)	LOC101929762
+HUMAN	4910	Q16665	Hypoxia-inducible factor 1-alpha	HIF1A
+HUMAN	8910	P06401	Progesterone receptor	PGR
+HUMAN	13013	Q92794	Histone acetyltransferase KAT6A	KAT6A
+HUMAN	5109	P31269	Homeobox protein Hox-A9	HOXA9
+HUMAN	3259	Q9NR50	Translation initiation factor eIF-2B subunit gamma	EIF2B3
+HUMAN	10384	P62280	40S ribosomal protein S11	RPS11
+HUMAN	30943	O00488	Zinc finger protein 593	ZNF593
+HUMAN	17906	Q9BQ39	ATP-dependent RNA helicase DDX50	DDX50
+HUMAN	29178	Q9UPW0	Forkhead box protein J3	FOXJ3
+HUMAN	13913	Q96MA1	Doublesex- and mab-3-related transcription factor B1	DMRTB1
+HUMAN	11730	O14746	Telomerase reverse transcriptase	TERT
+HUMAN	11478	O75683	Surfeit locus protein 6	SURF6
+HUMAN	24814	A8MYZ6	Forkhead box protein O6	FOXO6
+HUMAN	11366	P42229	Signal transducer and activator of transcription 5A	STAT5A
+HUMAN	19826	Q86U38	Nucleolar protein 9	NOP9
+HUMAN	22203	O94880	PHD finger protein 14	PHF14
+HUMAN	16945	Q9H074	Polyadenylate-binding protein-interacting protein 1	PAIP1
+HUMAN	6833	P21397	Amine oxidase [flavin-containing] A	MAOA
+HUMAN	30856	Q96G21	U3 small nucleolar ribonucleoprotein protein IMP4	IMP4
+HUMAN	1058	P54132	Bloom syndrome protein	BLM
+HUMAN	29038	Q5T2D3	OTU domain-containing protein 3	OTUD3
+HUMAN	ENSG00000268461	M0R2T9	Uncharacterized protein	unassigned
+HUMAN	26494	Q96MN5	Transcription elongation factor A N-terminal and central domain-containing protein 2	TCEANC2
+HUMAN	16462	Q96SI9	Spermatid perinuclear RNA-binding protein	STRBP
+HUMAN	29207	Q8N1G4	Leucine-rich repeat-containing protein 47	LRRC47
+HUMAN	3189	P68104	Elongation factor 1-alpha 1	EEF1A1
+HUMAN	17037	Q8WVM0	"Dimethyladenosine transferase 1, mitochondrial"	TFB1M
+HUMAN	2327	O95639	Cleavage and polyadenylation specificity factor subunit 4	CPSF4
+HUMAN	13940	Q9Y333	U6 snRNA-associated Sm-like protein LSm2	LSM2
+HUMAN	7325	P43246	DNA mismatch repair protein Msh2	MSH2
+HUMAN	25787	Q96BT3	Centromere protein T	CENPT
+HUMAN	886	P46100	Transcriptional regulator ATRX	ATRX
+HUMAN	33284	Q5JQC4	Cancer/testis antigen 47A	CT47A1
+HUMAN	11200	Q06945	Transcription factor SOX-4	SOX4
+HUMAN	ENSG00000272647	F8WEM9	Uncharacterized protein	unassigned
+HUMAN	26478	Q5T0U0	Coiled-coil domain-containing protein 122	CCDC122
+HUMAN	17356	Q8IUX4	DNA dC-dU-editing enzyme APOBEC-3F	APOBEC3F
+HUMAN	10479	P48443	Retinoic acid receptor RXR-gamma	RXRG
+HUMAN	13871	Q16630	Cleavage and polyadenylation specificity factor subunit 6	CPSF6
+HUMAN	24279	Q9BZJ4	Solute carrier family 25 member 39	SLC25A39
+HUMAN	20255	Q9UHJ3	Scm-like with four MBT domains protein 1	SFMBT1
+HUMAN	9178	P56282	DNA polymerase epsilon subunit 2	POLE2
+HUMAN	18698	Q9UHL0	ATP-dependent RNA helicase DDX25	DDX25
+HUMAN	5046	P52272	Heterogeneous nuclear ribonucleoprotein M	HNRNPM
+HUMAN	11596	O60806	T-box transcription factor TBX19	TBX19
+HUMAN	16925	Q96P48	"Arf-GAP with Rho-GAP domain, ANK repeat and PH domain-containing protein 1"	ARAP1
+HUMAN	24502	O43379	WD repeat-containing protein 62	WDR62
+HUMAN	9888	Q15291	Retinoblastoma-binding protein 5	RBBP5
+HUMAN	15573	Q9Y6X0	SET-binding protein	SETBP1
+HUMAN	18597	P59817	Zinc finger protein 280A	ZNF280A
+HUMAN	10302	P30050	60S ribosomal protein L12	RPL12
+HUMAN	17350	O60508	Pre-mRNA-processing factor 17	CDC40
+HUMAN	13200	Q15942	Zyxin	ZYX
+HUMAN	31894	Q5H9E4	Solute carrier family 25 member 53	SLC25A53
+HUMAN	3494	P41161	ETS translocation variant 5	ETV5
+HUMAN	11111	Q14683	Structural maintenance of chromosomes protein 1A	SMC1A
+HUMAN	7132	Q03164	Histone-lysine N-methyltransferase 2A	KMT2A
+HUMAN	10385	P25398	40S ribosomal protein S12	RPS12
+HUMAN	16930	Q8IWX8	Calcium homeostasis endoplasmic reticulum protein	CHERP
+HUMAN	5104	O43365	Homeobox protein Hox-A3	HOXA3
+HUMAN	14359	Q9BZI1	Iroquois-class homeodomain protein IRX-2	IRX2
+HUMAN	3212	O43324	Eukaryotic translation elongation factor 1 epsilon-1	EEF1E1
+HUMAN	2917	Q92988	Homeobox protein DLX-4	DLX4
+HUMAN	1851	P49450	Histone H3-like centromeric protein A	CENPA
+HUMAN	30758	Q8NDF8	Non-canonical poly(A) RNA polymerase PAPD5	PAPD5
+HUMAN	21220	Q8WXF0	Serine/arginine-rich splicing factor 12	SRSF12
+HUMAN	14489	Q9NZE8	"39S ribosomal protein L35, mitochondrial"	MRPL35
+HUMAN	10313	P46778	60S ribosomal protein L21	RPL21
+HUMAN	777	Q15911	Zinc finger homeobox protein 3	ZFHX3
+HUMAN	7835	O95096	Homeobox protein Nkx-2.2	NKX2-2
+HUMAN	30164	Q6FIF0	AN1-type zinc finger protein 6	ZFAND6
+HUMAN	20122	Q8NDG6	Putative ATP-dependent RNA helicase TDRD9	TDRD9
+HUMAN	18242	Q8NEU8	DCC-interacting protein 13-beta	APPL2
+HUMAN	27373	P0C7Q3	Putative cyclin-related protein FAM58B	FAM58BP
+HUMAN	6917	Q9UBB5	Methyl-CpG-binding domain protein 2	MBD2
+HUMAN	7548	P10244	Myb-related protein B	MYBL2
+HUMAN	12517	P25874	Mitochondrial brown fat uncoupling protein 1	UCP1
+HUMAN	882	Q13535	Serine/threonine-protein kinase ATR	ATR
+HUMAN	32175	F5GXB4	Protein TPRX2P	TPRX2P
+HUMAN	30348	Q9NW08	DNA-directed RNA polymerase III subunit RPC2	POLR3B
+HUMAN	15802	Q9BWX5	Transcription factor GATA-5	GATA5
+HUMAN	11957	Q93074	Mediator of RNA polymerase II transcription subunit 12	MED12
+HUMAN	12836	Q9H0D6	5'-3' exoribonuclease 2	XRN2
+HUMAN	29079	O60341	Lysine-specific histone demethylase 1A	KDM1A
+HUMAN	7553	P01106	Myc proto-oncogene protein	MYC
+HUMAN	270	P09874	Poly [ADP-ribose] polymerase 1	PARP1
+HUMAN	29549	Q8N5J4	Transcription factor Spi-C	SPIC
+HUMAN	30457	A6NED2	RCC1 domain-containing protein 1	RCCD1
+HUMAN	13244	Q5C9Z4	Nucleolar MIF4G domain-containing protein 1	NOM1
+HUMAN	3279	Q99613	Eukaryotic translation initiation factor 3 subunit C	EIF3C
+HUMAN	16469	Q15057	"Arf-GAP with coiled-coil, ANK repeat and PH domain-containing protein 2"	ACAP2
+HUMAN	19003	Q96GD3	Polycomb protein SCMH1	SCMH1
+HUMAN	ENSG00000180574	F8W810	Uncharacterized protein	unassigned
+HUMAN	30349	Q9Y535	DNA-directed RNA polymerase III subunit RPC8	POLR3H
+HUMAN	4977	Q16534	Hepatic leukemia factor	HLF
+HUMAN	20718	Q8TE49	OTU domain-containing protein 7A	OTUD7A
+HUMAN	14493	Q9Y6G3	"39S ribosomal protein L42, mitochondrial"	MRPL42
+HUMAN	10405	P60866	40S ribosomal protein S20	RPS20
+HUMAN	5099	P49639	Homeobox protein Hox-A1	HOXA1
+HUMAN	29503	Q96JN0	Ligand-dependent corepressor	LCOR
+HUMAN	4979	P50219	Motor neuron and pancreas homeobox protein 1	MNX1
+HUMAN	14048	Q9Y3D3	"28S ribosomal protein S16, mitochondrial"	MRPS16
+HUMAN	4929	P10073	Zinc finger and SCAN domain-containing protein 22	ZSCAN22
+HUMAN	19961	Q9UNK9	Protein angel homolog 1	ANGEL1
+HUMAN	10410	P62266	40S ribosomal protein S23	RPS23
+HUMAN	11623	Q99081	Transcription factor 12	TCF12
+HUMAN	29642	A6NFN9	Protein ANKUB1	ANKUB1
+HUMAN	10416	P42677	40S ribosomal protein S27	RPS27
+HUMAN	1092	P58012	Forkhead box protein L2	FOXL2
+HUMAN	17151	Q9Y5N6	Origin recognition complex subunit 6	ORC6
+HUMAN	18668	O15156	Zinc finger and BTB domain-containing protein 7B	ZBTB7B
+HUMAN	30988	Q6ZN30	Zinc finger protein basonuclin-2	BNC2
+HUMAN	17066	Q9UKV3	Apoptotic chromatin condensation inducer in the nucleus	ACIN1
+HUMAN	3280	P55884	Eukaryotic translation initiation factor 3 subunit B	EIF3B
+HUMAN	3818	Q08050	Forkhead box protein M1	FOXM1
+HUMAN	22921	Q9BXI2	Mitochondrial ornithine transporter 2	SLC25A2
+HUMAN	1556	O95503	Chromobox protein homolog 6	CBX6
+HUMAN	10046	P12724	Eosinophil cationic protein	RNASE3
+HUMAN	3340	Q04741	Homeobox protein EMX1	EMX1
+HUMAN	5003	Q9UGU5	HMG domain-containing protein 4	HMGXB4
+HUMAN	26328	A6NJ46	Homeobox protein Nkx-6.3	NKX6-3
+HUMAN	8489	Q9UBD5	Origin recognition complex subunit 3	ORC3
+HUMAN	3341	Q04743	Homeobox protein EMX2	EMX2
+HUMAN	10471	Q01196	Runt-related transcription factor 1	RUNX1
+HUMAN	12456	Q15695	U2 small nuclear ribonucleoprotein auxiliary factor 35 kDa subunit-related protein 1	ZRSR1
+HUMAN	18333	Q4W5G0	Tigger transposable element-derived protein 2	TIGD2
+HUMAN	11615	O75764	Transcription elongation factor A protein 3	TCEA3
+HUMAN	27036	Q86SE5	RNA-binding Raly-like protein	RALYL
+HUMAN	5172	O43593	Protein hairless	HR
+HUMAN	792	P17544	Cyclic AMP-dependent transcription factor ATF-7	ATF7
+HUMAN	30451	Q6ZT89	Solute carrier family 25 member 48	SLC25A48
+HUMAN	7974	Q9Y5X4	Photoreceptor-specific nuclear receptor	NR2E3
+HUMAN	12453	Q01081	Splicing factor U2AF 35 kDa subunit	U2AF1
+HUMAN	7067	P33076	MHC class II transactivator	CIITA
+HUMAN	5004	O15347	High mobility group protein B3	HMGB3
+HUMAN	7804	P23511	Nuclear transcription factor Y subunit alpha	NFYA
+HUMAN	450	Q9H161	Homeobox protein aristaless-like 4	ALX4
+HUMAN	10477	P19793	Retinoic acid receptor RXR-alpha	RXRA
+HUMAN	963	Q9UIF8	Bromodomain adjacent to zinc finger domain protein 2B	BAZ2B
+HUMAN	8619	Q02548	Paired box protein Pax-5	PAX5
+HUMAN	15935	Q9H4I2	Zinc fingers and homeoboxes protein 3	ZHX3
+HUMAN	16918	O60506	Heterogeneous nuclear ribonucleoprotein Q	SYNCRIP
+HUMAN	30796	Q9Y3F4	Serine-threonine kinase receptor-associated protein	STRAP
+HUMAN	9806	O60671	Cell cycle checkpoint protein RAD1	RAD1
+HUMAN	11195	P48431	Transcription factor SOX-2	SOX2
+HUMAN	4755	Q93079	Histone H2B type 1-H	HIST1H2BH
+HUMAN	25311	Q71DI3	Histone H3.2	HIST2H3A
+HUMAN	10527	Q9BXA9	Sal-like protein 3	SALL3
+HUMAN	17097	Q13868	Exosome complex component RRP4	EXOSC2
+HUMAN	11340	Q15532	Protein SSXT	SS18
+HUMAN	8550	Q9UQ80	Proliferation-associated protein 2G4	PA2G4
+HUMAN	3317	Q15723	ETS-related transcription factor Elf-2	ELF2
+HUMAN	29243	Q9P2N5	RNA-binding protein 27	RBM27
+HUMAN	3490	P50549	ETS translocation variant 1	ETV1
+HUMAN	4170	P15976	Erythroid transcription factor	GATA1
+HUMAN	14879	Q9UL03	Integrator complex subunit 6	INTS6
+HUMAN	14981	P51003	Poly(A) polymerase alpha	PAPOLA
+HUMAN	11612	P23193	Transcription elongation factor A protein 1	TCEA1
+HUMAN	20473	Q9BX63	Fanconi anemia group J protein	BRIP1
+HUMAN	14533	P0CB47	Putative upstream-binding factor 1-like protein 1	UBTFL1
+HUMAN	6770	Q13485	Mothers against decapentaplegic homolog 4	SMAD4
+HUMAN	3278	O15371	Eukaryotic translation initiation factor 3 subunit D	EIF3D
+HUMAN	5112	Q92826	Homeobox protein Hox-B13	HOXB13
+HUMAN	13172	O43309	Zinc finger and SCAN domain-containing protein 12	ZSCAN12
+HUMAN	11645	Q9UH92	Max-like protein X	MLX
+HUMAN	30833	O75956	Cyclin-dependent kinase 2-associated protein 2	CDK2AP2
+HUMAN	14010	Q8IWI9	MAX gene-associated protein	MGA
+HUMAN	28945	Q15061	WD repeat-containing protein 43	WDR43
+HUMAN	10299	P62906	60S ribosomal protein L10a	RPL10A
+HUMAN	24286	Q9Y3A4	Ribosomal RNA-processing protein 7 homolog A	RRP7A
+HUMAN	19423	Q9UNL4	Inhibitor of growth protein 4	ING4
+HUMAN	11155	P08579	U2 small nuclear ribonucleoprotein B''	SNRPB2
+HUMAN	11465	Q9Y5B9	FACT complex subunit SPT16	SUPT16H
+HUMAN	1105	Q58F21	Bromodomain testis-specific protein	BRDT
+HUMAN	12312	Q15651	High mobility group nucleosome-binding domain-containing protein 3	HMGN3
+HUMAN	11557	Q16559	T-cell acute lymphocytic leukemia protein 2	TAL2
+HUMAN	17162	Q9Y4Y9	U6 snRNA-associated Sm-like protein LSm5	LSM5
+HUMAN	3436	Q92889	DNA repair endonuclease XPF	ERCC4
+HUMAN	8609	O95453	Poly(A)-specific ribonuclease PARN	PARN
+HUMAN	5043	P31942	Heterogeneous nuclear ribonucleoprotein H3	HNRNPH3
+HUMAN	13875	O15409	Forkhead box protein P2	FOXP2
+HUMAN	11241	P17947	Transcription factor PU.1	SPI1
+HUMAN	8521	P32242	Homeobox protein OTX1	OTX1
+HUMAN	5139	P13378	Homeobox protein Hox-D8	HOXD8
+HUMAN	25701	Q3L8U1	Chromodomain-helicase-DNA-binding protein 9	CHD9
+HUMAN	5017	Q9NP08	Homeobox protein HMX1	HMX1
+HUMAN	25424	Q8N567	Zinc finger CCHC domain-containing protein 9	ZCCHC9
+HUMAN	26152	Q9H6T0	Epithelial splicing regulatory protein 2	ESRP2
+HUMAN	30297	Q9P258	Protein RCC2	RCC2
+HUMAN	13403	Q9BYU1	Pre-B-cell leukemia transcription factor 4	PBX4
+HUMAN	19071	Q86V81	THO complex subunit 4	ALYREF
+HUMAN	32942	Q9HB31	Homeobox protein SEBOX	SEBOX
+HUMAN	29010	O15047	Histone-lysine N-methyltransferase SETD1A	SETD1A
+HUMAN	18662	Q9Y2V3	Retinal homeobox protein Rx	RAX
+HUMAN	7000	O00470	Homeobox protein Meis1	MEIS1
+HUMAN	17286	Q9Y3B2	Exosome complex component CSL4	EXOSC1
+HUMAN	4733	Q93077	Histone H2A type 1-C	HIST1H2AC
+HUMAN	21175	A2A288	Probable ribonuclease ZC3H12D	ZC3H12D
+HUMAN	3821	O43524	Forkhead box protein O3	FOXO3
+HUMAN	15840	Q9UMN6	Histone-lysine N-methyltransferase 2B	KMT2B
+HUMAN	18286	Q96IS3	Retina and anterior neural fold homeobox protein 2	RAX2
+HUMAN	9823	O75771	DNA repair protein RAD51 homolog 4	RAD51D
+HUMAN	11644	Q15906	Vacuolar protein sorting-associated protein 72 homolog	VPS72
+HUMAN	11603	P57082	T-box transcription factor TBX4	TBX4
+HUMAN	10981	Q02978	Mitochondrial 2-oxoglutarate/malate carrier protein	SLC25A11
+HUMAN	6919	O95243	Methyl-CpG-binding domain protein 4	MBD4
+HUMAN	24867	Q9NZD2	Glycolipid transfer protein	GLTP
+HUMAN	10473	Q13761	Runt-related transcription factor 3	RUNX3
+HUMAN	10369	P32969	60S ribosomal protein L9	RPL9
+HUMAN	13918	P48634	Protein PRRC2A	PRRC2A
+HUMAN	7978	P04150	Glucocorticoid receptor	NR3C1
+HUMAN	2745	O00571	ATP-dependent RNA helicase DDX3X	DDX3X
+HUMAN	16960	P52954	Transcription factor LBX1	LBX1
+HUMAN	19652	Q7RTT6	Putative protein SSX6	SSX6
+HUMAN	4867	Q15751	Probable E3 ubiquitin-protein ligase HERC1	HERC1
+HUMAN	7531	Q14764	Major vault protein	MVP
+HUMAN	6781	O15525	Transcription factor MafG	MAFG
+HUMAN	2744	Q9NR30	Nucleolar RNA helicase 2	DDX21
+HUMAN	28963	Q15006	ER membrane protein complex subunit 2	EMC2
+HUMAN	14948	Q96I51	Williams-Beuren syndrome chromosomal region 16 protein	WBSCR16
+HUMAN	11729	Q15554	Telomeric repeat-binding factor 2	TERF2
+HUMAN	18128	Q969S8	Histone deacetylase 10	HDAC10
+HUMAN	9455	O75360	Homeobox protein prophet of Pit-1	PROP1
+HUMAN	10882	P81133	Single-minded homolog 1	SIM1
+HUMAN	7817	Q02575	Helix-loop-helix protein 1	NHLH1
+HUMAN	10388	P62841	40S ribosomal protein S15	RPS15
+HUMAN	12340	Q9UHF7	Zinc finger transcription factor Trps1	TRPS1
+HUMAN	2184	P38432	Coilin	COIL
+HUMAN	19094	Q96RQ9	L-amino-acid oxidase	IL4I1
+HUMAN	25654	Q86YA3	Uncharacterized protein C4orf21	C4orf21
+HUMAN	44672	P0DMB2	Uncharacterized protein C8orf88	C8orf88
+HUMAN	2738	O43143	Putative pre-mRNA-splicing factor ATP-dependent RNA helicase DHX15	DHX15
+HUMAN	18138	Q9Y262	Eukaryotic translation initiation factor 3 subunit L	EIF3L
+HUMAN	21193	Q3MJ62	Zinc finger and SCAN domain-containing protein 23	ZSCAN23
+HUMAN	11209	Q02446	Transcription factor Sp4	SP4
+HUMAN	7127	P40692	DNA mismatch repair protein Mlh1	MLH1
+HUMAN	16716	Q7L2E3	Putative ATP-dependent RNA helicase DHX30	DHX30
+HUMAN	2385	Q49AN0	Cryptochrome-2	CRY2
+HUMAN	21536	A6NNA5	Dorsal root ganglia homeobox protein	DRGX
+HUMAN	21575	Q8N157	Jouberin	AHI1
+HUMAN	9004	P78337	Pituitary homeobox 1	PITX1
+HUMAN	ENSG00000269237	M0R3E3	Uncharacterized protein (Fragment)	unassigned
+HUMAN	644	P10275	Androgen receptor	AR
+HUMAN	23170	O75717	WD repeat and HMG-box DNA-binding protein 1	WDHD1
+HUMAN	9189	P19387	DNA-directed RNA polymerase II subunit RPB3	POLR2C
+HUMAN	20161	O94842	TOX high mobility group box family member 4	TOX4
+HUMAN	16734	Q86XN8	RNA-binding protein MEX3D	MEX3D
+HUMAN	13853	Q9BRR0	Zinc finger protein with KRAB and SCAN domains 3	ZKSCAN3
+HUMAN	16050	Q86YW9	Mediator of RNA polymerase II transcription subunit 12-like protein	MED12L
+HUMAN	7643	O43776	"Asparagine--tRNA ligase, cytoplasmic"	NARS
+HUMAN	18222	Q9NWB1	RNA binding protein fox-1 homolog 1	RBFOX1
+HUMAN	7392	P35548	Homeobox protein MSX-2	MSX2
+HUMAN	14498	P82675	"28S ribosomal protein S5, mitochondrial"	MRPS5
+HUMAN	7139	P98177	Forkhead box protein O4	FOXO4
+HUMAN	3182	P78364	Polyhomeotic-like protein 1	PHC1
+HUMAN	18682	Q9H0S4	Probable ATP-dependent RNA helicase DDX47	DDX47
+HUMAN	3296	Q04637	Eukaryotic translation initiation factor 4 gamma 1	EIF4G1
+HUMAN	8488	Q13416	Origin recognition complex subunit 2	ORC2
+HUMAN	25082	Q8WU79	Stromal membrane-associated protein 2	SMAP2
+HUMAN	14477	Q9H0U6	"39S ribosomal protein L18, mitochondrial"	MRPL18
+HUMAN	10766	Q15428	Splicing factor 3A subunit 2	SF3A2
+HUMAN	14013	Q9NTJ3	Structural maintenance of chromosomes protein 4	SMC4
+HUMAN	4237	Q99684	Zinc finger protein Gfi-1	GFI1
+HUMAN	10333	P62888	60S ribosomal protein L30	RPL30
+HUMAN	32309	Q8N7F7	Ubiquitin-like protein 4B	UBL4B
+HUMAN	16094	Q86UZ6	Zinc finger and BTB domain-containing protein 46	ZBTB46
+HUMAN	24859	O95619	YEATS domain-containing protein 4	YEATS4
+HUMAN	24969	Q8WTW4	Nitrogen permease regulator 2-like protein	NPRL2
+HUMAN	25692	Q9HA90	EF-hand and coiled-coil domain-containing protein 1	EFCC1
+HUMAN	30081	O95707	Ribonuclease P protein subunit p29	POP4
+HUMAN	6642	P25791	Rhombotin-2	LMO2
+HUMAN	3435	P19447	TFIIH basal transcription factor complex helicase XPB subunit	ERCC3
+HUMAN	13083	Q9ULJ3	Zinc finger and BTB domain-containing protein 21	ZBTB21
+HUMAN	3284	Q14240	Eukaryotic initiation factor 4A-II	EIF4A2
+HUMAN	11161	P62304	Small nuclear ribonucleoprotein E	SNRPE
+HUMAN	17287	Q9H5I1	Histone-lysine N-methyltransferase SUV39H2	SUV39H2
+HUMAN	33886	P0CL84	Putative STAG3-like protein 2	STAG3L2
+HUMAN	3192	Q05639	Elongation factor 1-alpha 2	EEF1A2
+HUMAN	34047	A6NEJ1	Putative protein SSX10	SSX10
+HUMAN	12505	P11441	Ubiquitin-like protein 4A	UBL4A
+HUMAN	9970	P35250	Replication factor C subunit 2	RFC2
+HUMAN	17894	Q14966	Zinc finger protein 638	ZNF638
+HUMAN	70	Q8NE71	ATP-binding cassette sub-family F member 1	ABCF1
+HUMAN	12468	P0CG48	Polyubiquitin-C	UBC
+HUMAN	23721	Q7Z2W4	Zinc finger CCCH-type antiviral protein 1	ZC3HAV1
+HUMAN	10316	P62829	60S ribosomal protein L23	RPL23
+HUMAN	7818	Q02577	Helix-loop-helix protein 2	NHLH2
+HUMAN	1744	Q99741	Cell division control protein 6 homolog	CDC6
+HUMAN	7469	O75570	"Peptide chain release factor 1, mitochondrial"	MTRF1
+HUMAN	20670	Q8WVJ9	Twist-related protein 2	TWIST2
+HUMAN	14982	Q9BWT3	Poly(A) polymerase gamma	PAPOLG
+HUMAN	17133	Q13342	Nuclear body protein SP140	SP140
+HUMAN	9884	P06400	Retinoblastoma-associated protein	RB1
+HUMAN	21019	Q5XKL5	BTB/POZ domain-containing protein 8	BTBD8
+HUMAN	22048	P60323	Nanos homolog 3	NANOS3
+HUMAN	975	O75934	Pre-mRNA-splicing factor SPF27	BCAS2
+HUMAN	9702	Q96QR8	Transcriptional activator protein Pur-beta	PURB
+HUMAN	20626	Q9P2D1	Chromodomain-helicase-DNA-binding protein 7	CHD7
+HUMAN	6130	Q96AZ6	Interferon-stimulated gene 20 kDa protein	ISG20
+HUMAN	8840	P12955	Xaa-Pro dipeptidase	PEPD
+HUMAN	28862	Q6KC79	Nipped-B-like protein	NIPBL
+HUMAN	1840	Q9BXF3	Cat eye syndrome critical region protein 2	CECR2
+HUMAN	25503	Q9NW64	Pre-mRNA-splicing factor RBM22	RBM22
+HUMAN	16821	P78316	Nucleolar protein 14	NOP14
+HUMAN	10774	P23246	"Splicing factor, proline- and glutamine-rich"	SFPQ
+HUMAN	24954	Q8WW32	High mobility group protein B4	HMGB4
+HUMAN	2939	P51530	DNA replication ATP-dependent helicase/nuclease DNA2	DNA2
+HUMAN	ENSG00000272762	C9JSA6	Uncharacterized protein (Fragment)	unassigned
+HUMAN	6199	O75564	Jerky protein homolog	JRK
+HUMAN	23019	Q15696	U2 small nuclear ribonucleoprotein auxiliary factor 35 kDa subunit-related protein 2	ZRSR2
+HUMAN	11354	Q8WVM7	Cohesin subunit SA-1	STAG1
+HUMAN	8139	O95948	One cut domain family member 2	ONECUT2
+HUMAN	10044	P07998	Ribonuclease pancreatic	RNASE1
+HUMAN	8618	O43316	Paired box protein Pax-4	PAX4
+HUMAN	5176	Q13601	KRR1 small subunit processome component homolog	KRR1
+HUMAN	3298	O43432	Eukaryotic translation initiation factor 4 gamma 3	EIF4G3
+HUMAN	28040	Q5U5Q3	RNA-binding E3 ubiquitin-protein ligase MEX3C	MEX3C
+HUMAN	24012	Q9BRS8	La-related protein 6	LARP6
+HUMAN	1917	O14647	Chromodomain-helicase-DNA-binding protein 2	CHD2
+HUMAN	19909	Q8N5L8	Ribonuclease P protein subunit p25-like protein	RPP25L
+HUMAN	24170	Q8TDN6	Ribosome biogenesis protein BRX1 homolog	BRIX1
+HUMAN	11204	P48436	Transcription factor SOX-9	SOX9
+HUMAN	25325	Q6ZU64	Coiled-coil domain-containing protein 108	CCDC108
+HUMAN	3474	P62508	Estrogen-related receptor gamma	ESRRG
+HUMAN	21338	Q99811	Paired mesoderm homeobox protein 2	PRRX2
+HUMAN	21577	Q8NB78	Lysine-specific histone demethylase 1B	KDM1B
+HUMAN	35458	A6NHQ2	rRNA/tRNA 2'-O-methyltransferase fibrillarin-like protein 1	FBLL1
+HUMAN	28648	Q8IYB7	DIS3-like exonuclease 2	DIS3L2
+HUMAN	17277	Q96KR1	Zinc finger RNA-binding protein	ZFR
+HUMAN	6594	P50458	LIM/homeobox protein Lhx2	LHX2
+HUMAN	25408	Q9BQI6	Ankyrin repeat domain-containing protein 32	ANKRD32
+HUMAN	14515	Q9NVS2	"28S ribosomal protein S18a, mitochondrial"	MRPS18A
+HUMAN	15594	Q9UK59	Lariat debranching enzyme	DBR1
+HUMAN	14063	P56524	Histone deacetylase 4	HDAC4
+HUMAN	30447	Q8N2A8	Mitochondrial cardiolipin hydrolase	PLD6
+HUMAN	27346	Q5VV17	OTU domain-containing protein 1	OTUD1
+HUMAN	33517	Q86W11	Zinc finger and SCAN domain-containing protein 30	ZSCAN30
+HUMAN	20422	Q9Y2S0	DNA-directed RNA polymerases I and III subunit RPAC2	POLR1D
+HUMAN	23466	Q5VW22	"Arf-GAP with GTPase, ANK repeat and PH domain-containing protein 6"	AGAP6
+HUMAN	5018	A2RU54	Homeobox protein HMX2	HMX2
+HUMAN	1910	Q13111	Chromatin assembly factor 1 subunit A	CHAF1A
+HUMAN	17731	Q8N2M8	CLK4-associating serine/arginine rich protein	CLASRP
+HUMAN	18676	Q86XP3	ATP-dependent RNA helicase DDX42	DDX42
+HUMAN	20164	Q8IX15	Homeobox and leucine zipper protein Homez	HOMEZ
+HUMAN	7979	P08235	Mineralocorticoid receptor	NR3C2
+HUMAN	30781	Q86TJ2	Transcriptional adapter 2-beta	TADA2B
+HUMAN	16991	Q07065	Cytoskeleton-associated protein 4	CKAP4
+HUMAN	1913	P18754	Regulator of chromosome condensation	RCC1
+HUMAN	28706	Q96NU1	Sterile alpha motif domain-containing protein 11	SAMD11
+HUMAN	1557	O95931	Chromobox protein homolog 7	CBX7
+HUMAN	6551	Q9UJU2	Lymphoid enhancer-binding factor 1	LEF1
+HUMAN	11192	Q9UN79	Transcription factor SOX-13	SOX13
+HUMAN	4853	Q92769	Histone deacetylase 2	HDAC2
+HUMAN	10440	P62081	40S ribosomal protein S7	RPS7
+HUMAN	30073	Q14181	DNA polymerase alpha subunit B	POLA2
+HUMAN	3285	P23588	Eukaryotic translation initiation factor 4B	EIF4B
+HUMAN	17575	Q96T58	Msx2-interacting protein	SPEN
+HUMAN	12661	Q9UIW0	Ventral anterior homeobox 2	VAX2
+HUMAN	20256	Q5VUG0	Scm-like with four MBT domains protein 2	SFMBT2
+HUMAN	13973	Q96KW2	POM121-like protein 2	POM121L2
+HUMAN	30217	Q9UNQ2	Probable dimethyladenosine transferase	DIMT1
+HUMAN	7527	Q9UIF7	A/G-specific adenine DNA glycosylase	MUTYH
+HUMAN	11190	P56693	Transcription factor SOX-10	SOX10
+HUMAN	3164	O60869	Endothelial differentiation-related factor 1	EDF1
+HUMAN	10350	P62891	60S ribosomal protein L39	RPL39
+HUMAN	17083	Q15050	Ribosome biogenesis regulatory protein homolog	RRS1
+HUMAN	12744	Q9NP71	Carbohydrate-responsive element-binding protein	MLXIPL
+HUMAN	3811	P55316	Forkhead box protein G1	FOXG1
+HUMAN	955	Q9HBU1	Homeobox protein BarH-like 1	BARX1
+HUMAN	7546	Q9BQG0	Myb-binding protein 1A	MYBBP1A
+HUMAN	6644	P61968	LIM domain transcription factor LMO4	LMO4
+HUMAN	29889	Q7RTR2	Protein NLRC3	NLRC3
+HUMAN	6780	Q9ULX9	Transcription factor MafF	MAFF
+HUMAN	11364	P40763	Signal transducer and activator of transcription 3	STAT3
+HUMAN	4669	O00178	GTP-binding protein 1	GTPBP1
+HUMAN	8086	P00973	2'-5'-oligoadenylate synthase 1	OAS1
+HUMAN	12830	O43542	DNA repair protein XRCC3	XRCC3
+HUMAN	16860	Q15020	Squamous cell carcinoma antigen recognized by T-cells 3	SART3
+HUMAN	3319	Q99607	ETS-related transcription factor Elf-4	ELF4
+HUMAN	26433	Q96NC0	Zinc finger matrin-type protein 2	ZMAT2
+HUMAN	7675	Q99608	Necdin	NDN
+HUMAN	23044	Q8WY41	Nanos homolog 1	NANOS1
+HUMAN	3527	Q15910	Histone-lysine N-methyltransferase EZH2	EZH2
+HUMAN	11589	P62380	TATA box-binding protein-like protein 1	TBPL1
+HUMAN	13579	Q9Y5B6	PAX3- and PAX7-binding protein 1	PAXBP1
+HUMAN	7059	P16455	Methylated-DNA--protein-cysteine methyltransferase	MGMT
+HUMAN	367	Q92667	"A-kinase anchor protein 1, mitochondrial"	AKAP1
+HUMAN	1919	Q14839	Chromodomain-helicase-DNA-binding protein 4	CHD4
+HUMAN	16063	P55197	Protein AF-10	MLLT10
+HUMAN	11367	P51692	Signal transducer and activator of transcription 5B	STAT5B
+HUMAN	31749	Q8WW36	Zinc finger CCHC domain-containing protein 13	ZCCHC13
+HUMAN	15911	O00567	Nucleolar protein 56	NOP56
+HUMAN	14480	Q9NWU5	"39S ribosomal protein L22, mitochondrial"	MRPL22
+HUMAN	3433	P07992	DNA excision repair protein ERCC-1	ERCC1
+HUMAN	22932	Q9Y5P6	Mannose-1-phosphate guanyltransferase beta	GMPPB
+HUMAN	20465	Q8IY18	Structural maintenance of chromosomes protein 5	SMC5
+HUMAN	4714	P07305	Histone H1.0	H1F0
+HUMAN	11590	Q16650	T-box brain protein 1	TBR1
+HUMAN	13315	Q9BY41	Histone deacetylase 8	HDAC8
+HUMAN	26678	Q7Z3K6	Mesoderm induction early response protein 3	MIER3
+HUMAN	20	P49588	"Alanine--tRNA ligase, cytoplasmic"	AARS
+HUMAN	19066	Q9Y330	Zinc finger and BTB domain-containing protein 12	ZBTB12
+HUMAN	13518	Q9Y696	Chloride intracellular channel protein 4	CLIC4
+HUMAN	7976	P24468	COUP transcription factor 2	NR2F2
+HUMAN	17330	Q9NUL7	Probable ATP-dependent RNA helicase DDX28	DDX28
+HUMAN	21747	Q17RY0	Cytoplasmic polyadenylation element-binding protein 4	CPEB4
+HUMAN	20263	Q96T68	Histone-lysine N-methyltransferase SETDB2	SETDB2
+HUMAN	5125	P31276	Homeobox protein Hox-C13	HOXC13
+HUMAN	29088	Q29RF7	Sister chromatid cohesion protein PDS5 homolog A	PDS5A
+HUMAN	20661	Q70HW3	S-adenosylmethionine mitochondrial carrier protein	SLC25A26
+HUMAN	30713	Q96M93	Adenosine deaminase domain-containing protein 1	ADAD1
+HUMAN	18468	Q9NQE9	Histidine triad nucleotide-binding protein 3	HINT3
+HUMAN	11604	Q99593	T-box transcription factor TBX5	TBX5
+HUMAN	6641	P25800	Rhombotin-1	LMO1
+HUMAN	10048	Q93091	Ribonuclease K6	RNASE6
+HUMAN	16167	Q5JPB2	Zinc finger protein 831	ZNF831
+HUMAN	3805	Q12950	Forkhead box protein D4	FOXD4
+HUMAN	23064	Q9H4Y5	Glutathione S-transferase omega-2	GSTO2
+HUMAN	10344	P42766	60S ribosomal protein L35	RPL35
+HUMAN	9022	P55347	Homeobox protein PKNOX1	PKNOX1
+HUMAN	23323	Q9H1U9	Solute carrier family 25 member 51	SLC25A51
+HUMAN	11722	Q10587	Thyrotroph embryonic factor	TEF
+HUMAN	16922	Q9UPQ3	"Arf-GAP with GTPase, ANK repeat and PH domain-containing protein 1"	AGAP1
+HUMAN	29681	Q9BSK2	Solute carrier family 25 member 33	SLC25A33
+HUMAN	20470	Q9UK45	U6 snRNA-associated Sm-like protein LSm7	LSM7
+HUMAN	27442	Q8N413	Solute carrier family 25 member 45	SLC25A45
+HUMAN	22940	Q86W28	"NACHT, LRR and PYD domains-containing protein 8"	NLRP8
+HUMAN	4719	P16401	Histone H1.5	HIST1H1B
+HUMAN	24818	Q9P0K8	Forkhead box protein J2	FOXJ2
+HUMAN	10581	Q9UQR0	Sex comb on midleg-like protein 2	SCML2
+HUMAN	11407	Q9BXU1	Serine/threonine-protein kinase 31	STK31
+HUMAN	3250	P47813	"Eukaryotic translation initiation factor 1A, X-chromosomal"	EIF1AX
+HUMAN	18417	O75409	Huntingtin-interacting protein M	CXorf27
+HUMAN	11102	Q9NZC9	SWI/SNF-related matrix-associated actin-dependent regulator of chromatin subfamily A-like protein 1	SMARCAL1
+HUMAN	10404	P15880	40S ribosomal protein S2	RPS2
+HUMAN	9005	Q99697	Pituitary homeobox 2	PITX2
+HUMAN	28507	Q8NHP7	Exonuclease 3'-5' domain-containing protein 1	EXD1
+HUMAN	7802	Q6P4R8	Nuclear factor related to kappa-B-binding protein	NFRKB
+HUMAN	15986	Q9H9Z2	Protein lin-28 homolog A	LIN28A
+HUMAN	4024	P51116	Fragile X mental retardation syndrome-related protein 2	FXR2
+HUMAN	3258	P49770	Translation initiation factor eIF-2B subunit beta	EIF2B2
+HUMAN	31986	Q3SYB3	Forkhead box protein D4-like 6	FOXD4L6
+HUMAN	16390	Q9Y239	Nucleotide-binding oligomerization domain-containing protein 1	NOD1
+HUMAN	19275	Q5GAN6	Inactive ribonuclease-like protein 10	RNASE10
+HUMAN	ENSG00000173727	I3L084	Protein LOC101927789	LOC101927789
+HUMAN	7965	P55055	Oxysterols receptor LXR-beta	NR1H2
+HUMAN	7977	P10588	Nuclear receptor subfamily 2 group F member 6	NR2F6
+HUMAN	4716	P16403	Histone H1.2	HIST1H1C
+HUMAN	16989	Q9UBU8	Mortality factor 4-like protein 1	MORF4L1
+HUMAN	28277	Q8N8B7	Transcription elongation factor A N-terminal and central domain-containing protein	TCEANC
+HUMAN	23820	Q96AV8	Transcription factor E2F7	E2F7
+HUMAN	2557	P39880	Homeobox protein cut-like 1	CUX1
+HUMAN	3318	P78545	ETS-related transcription factor Elf-3	ELF3
+HUMAN	17211	Q92620	Pre-mRNA-splicing factor ATP-dependent RNA helicase PRP16	DHX38
+HUMAN	14044	Q4U2R6	"39S ribosomal protein L51, mitochondrial"	MRPL51
+HUMAN	28350	Q9BV97	KRAB domain-containing protein ZNF747	ZNF747
+HUMAN	33630	C9JE40	Protein PAT1 homolog 2	PATL2
+HUMAN	19086	Q96DB2	Histone deacetylase 11	HDAC11
+HUMAN	3118	Q16254	Transcription factor E2F4	E2F4
+HUMAN	2717	Q16531	DNA damage-binding protein 1	DDB1
+HUMAN	797	Q92858	Protein atonal homolog 1	ATOH1
+HUMAN	2735	Q13206	Probable ATP-dependent RNA helicase DDX10	DDX10
+HUMAN	6948	P33992	DNA replication licensing factor MCM5	MCM5
+HUMAN	11593	O75333	T-box transcription factor TBX10	TBX10
+HUMAN	10315	P35268	60S ribosomal protein L22	RPL22
+HUMAN	7673	Q9Y618	Nuclear receptor corepressor 2	NCOR2
+HUMAN	3300	P63241	Eukaryotic translation initiation factor 5A-1	EIF5A
+HUMAN	379	Q99996	A-kinase anchor protein 9	AKAP9
+HUMAN	17981	O00442	RNA 3'-terminal phosphate cyclase	RTCA
+HUMAN	17440	Q8NHY2	E3 ubiquitin-protein ligase RFWD2	RFWD2
+HUMAN	10449	Q92766	Ras-responsive element-binding protein 1	RREB1
+HUMAN	25474	Q8TC92	Ecto-NOX disulfide-thiol exchanger 1	ENOX1
+HUMAN	29535	Q9Y483	Metal-response element-binding transcription factor 2	MTF2
+HUMAN	3942	P42345	Serine/threonine-protein kinase mTOR	MTOR
+HUMAN	25285	Q5GAN3	Probable inactive ribonuclease-like protein 13	RNASE13
+HUMAN	13780	Q96RP9	"Elongation factor G, mitochondrial"	GFM1
+HUMAN	11099	Q14527	Helicase-like transcription factor	HLTF
+HUMAN	14410	Q9H2U1	Probable ATP-dependent RNA helicase DHX36	DHX36
+HUMAN	10421	P61247	40S ribosomal protein S3a	RPS3A
+HUMAN	11972	O15405	TOX high mobility group box family member 3	TOX3
+HUMAN	6654	O60663	LIM homeobox transcription factor 1-beta	LMX1B
+HUMAN	24813	Q6VB85	Forkhead box protein D4-like 2	FOXD4L2
+HUMAN	22918	Q9H5J0	Zinc finger and BTB domain-containing protein 3	ZBTB3
+HUMAN	22982	Q92613	Protein Jade-3	JADE3
+HUMAN	8621	P23759	Paired box protein Pax-7	PAX7
+HUMAN	11963	Q8NFJ8	Class E basic helix-loop-helix protein 22	BHLHE22
+HUMAN	3275	O00303	Eukaryotic translation initiation factor 3 subunit F	EIF3F
+HUMAN	2347	O43889	Cyclic AMP-responsive element-binding protein 3	CREB3
+HUMAN	7611	P15172	Myoblast determination protein 1	MYOD1
+HUMAN	1799	Q01850	Cerebellar degeneration-related protein 2	CDR2
+HUMAN	29377	Q5H9K5	Zinc finger matrin-type protein 1	ZMAT1
+HUMAN	20663	Q6KCM7	Calcium-binding mitochondrial carrier protein SCaMC-2	SLC25A25
+HUMAN	15860	O94906	Pre-mRNA-processing factor 6	PRPF6
+HUMAN	30857	Q96DI7	U5 small nuclear ribonucleoprotein 40 kDa protein	SNRNP40
+HUMAN	25612	Q8IZM8	Zinc finger protein 654	ZNF654
+HUMAN	12756	P57081	tRNA (guanine-N(7)-)-methyltransferase non-catalytic subunit WDR4	WDR4
+HUMAN	32179	A6NLW8	Double homeobox protein A	DUXA
+HUMAN	13824	Q96T76	MMS19 nucleotide excision repair protein homolog	MMS19
+HUMAN	5103	O43364	Homeobox protein Hox-A2	HOXA2
+HUMAN	11199	P41225	Transcription factor SOX-3	SOX3
+HUMAN	17688	P78346	Ribonuclease P protein subunit p30	RPP30
+HUMAN	14497	Q9NV31	U3 small nucleolar ribonucleoprotein protein IMP3	IMP3
+HUMAN	2673	P51398	"28S ribosomal protein S29, mitochondrial"	DAP3
+HUMAN	25553	Q9NVN8	Guanine nucleotide-binding protein-like 3-like protein	GNL3L
+HUMAN	24281	Q8N6M0	OTU domain-containing protein 6B	OTUD6B
+HUMAN	4748	Q99880	Histone H2B type 1-L	HIST1H2BL
+HUMAN	7013	P50221	Homeobox protein MOX-1	MEOX1
+HUMAN	6954	Q8NEM0	Microcephalin	MCPH1
+HUMAN	22923	Q96IJ6	Mannose-1-phosphate guanyltransferase alpha	GMPPA
+HUMAN	ENSG00000257411	H0YIN7	Uncharacterized protein (Fragment)	unassigned
+HUMAN	17798	P49750	YLP motif-containing protein 1	YLPM1
+HUMAN	11112	Q8NDV3	Structural maintenance of chromosomes protein 1B	SMC1B
+HUMAN	13631	Q9Y3U8	60S ribosomal protein L36	RPL36
+HUMAN	4753	P62807	Histone H2B type 1-C/E/F/G/I	HIST1H2BC
+HUMAN	4173	P43694	Transcription factor GATA-4	GATA4
+HUMAN	26054	Q96DW6	Solute carrier family 25 member 38	SLC25A38
+HUMAN	14957	Q14671	Pumilio homolog 1	PUM1
+HUMAN	4670	Q9BX10	GTP-binding protein 2	GTPBP2
+HUMAN	25360	Q5T1V6	Probable ATP-dependent RNA helicase DDX59	DDX59
+HUMAN	12974	O15541	RING finger protein 113A	RNF113A
+HUMAN	27607	O75864	Protein phosphatase 1 regulatory subunit 37	PPP1R37
+HUMAN	8574	P43034	Platelet-activating factor acetylhydrolase IB subunit alpha	PAFAH1B1
+HUMAN	7894	Q99742	Neuronal PAS domain-containing protein 1	NPAS1
+HUMAN	23660	A8MT82	Putative centaurin-gamma-like family member 11P	CTGLF11P
+HUMAN	32312	Q7L8S5	OTU domain-containing protein 6A	OTUD6A
+HUMAN	10985	Q9Y619	Mitochondrial ornithine transporter 1	SLC25A15
+HUMAN	15936	Q14686	Nuclear receptor coactivator 6	NCOA6
+HUMAN	10472	Q13950	Runt-related transcription factor 2	RUNX2
+HUMAN	24126	Q96SQ7	Protein atonal homolog 8	ATOH8
+HUMAN	20225	Q92782	Zinc finger protein neuro-d4	DPF1
+HUMAN	9950	O94762	ATP-dependent DNA helicase Q5	RECQL5
+HUMAN	27371	Q5SVS4	Kidney mitochondrial carrier protein 1	SLC25A30
+HUMAN	3809	Q12946	Forkhead box protein F1	FOXF1
+HUMAN	23324	Q3SY17	Solute carrier family 25 member 52	SLC25A52
+HUMAN	6062	Q9UK53	Inhibitor of growth protein 1	ING1
+HUMAN	30723	Q6P9F0	Coiled-coil domain-containing protein 62	CCDC62
+HUMAN	6912	P43243	Matrin-3	MATR3
+HUMAN	11712	Q9BXT4	Tudor domain-containing protein 1	TDRD1
+HUMAN	ENSG00000258064	F8VRH5	Uncharacterized protein (Fragment)	unassigned
+HUMAN	6205	P17275	Transcription factor jun-B	JUNB
+HUMAN	30696	Q8NI36	WD repeat-containing protein 36	WDR36
+HUMAN	7200	Q9HCE1	Putative helicase MOV-10	MOV10
+HUMAN	14504	P82914	"28S ribosomal protein S15, mitochondrial"	MRPS15
+HUMAN	28461	Q9BVI4	Nucleolar complex protein 4 homolog	NOC4L
+HUMAN	24727	A0AVK6	Transcription factor E2F8	E2F8
+HUMAN	3260	Q9UI10	Translation initiation factor eIF-2B subunit delta	EIF2B4
+HUMAN	25663	Q9HAJ7	Histone deacetylase complex subunit SAP30L	SAP30L
+HUMAN	5542	P38935	DNA-binding protein SMUBP-2	IGHMBP2
+HUMAN	30292	Q13283	Ras GTPase-activating protein-binding protein 1	G3BP1
+HUMAN	11307	P08240	Signal recognition particle receptor subunit alpha	SRPR
+HUMAN	9865	P10826	Retinoic acid receptor beta	RARB
+HUMAN	3265	P05198	Eukaryotic translation initiation factor 2 subunit 1	EIF2S1
+HUMAN	29401	Q5VVJ2	Histone H2A deubiquitinase MYSM1	MYSM1
+HUMAN	25513	Q9H9Y4	GPN-loop GTPase 2	GPN2
+HUMAN	18279	Q9NYH9	U3 small nucleolar RNA-associated protein 6 homolog	UTP6
+HUMAN	17928	Q9P2W1	Homologous-pairing protein 2 homolog	PSMC3IP
+HUMAN	11641	Q9NQB0	Transcription factor 7-like 2	TCF7L2
+HUMAN	10025	Q13129	Zinc finger protein Rlf	RLF
+HUMAN	18248	Q6IA86	Elongator complex protein 2	ELP2
+HUMAN	6782	O60675	Transcription factor MafK	MAFK
+HUMAN	16746	Q5VZF2	Muscleblind-like protein 2	MBNL2
+HUMAN	5019	A6NHT5	Homeobox protein HMX3	HMX3
+HUMAN	10524	Q9NSC2	Sal-like protein 1	SALL1
+HUMAN	19057	Q8TD26	Chromodomain-helicase-DNA-binding protein 6	CHD6
+HUMAN	5177	O95081	Arf-GAP domain and FG repeat-containing protein 2	AGFG2
+HUMAN	4730	P0C0S8	Histone H2A type 1	HIST1H2AG
+HUMAN	9130	A8MQ11	Postmeiotic segregation increased 2-like protein 5	PMS2P5
+HUMAN	3508	Q01844	RNA-binding protein EWS	EWSR1
+HUMAN	10327	P61254	60S ribosomal protein L26	RPL26
+HUMAN	11640	Q9HCS4	Transcription factor 7-like 1	TCF7L1
+HUMAN	16764	Q15916	Zinc finger and BTB domain-containing protein 6	ZBTB6
+HUMAN	3493	P43268	ETS translocation variant 4	ETV4
+HUMAN	19954	Q9H936	Mitochondrial glutamate carrier 1	SLC25A22
+HUMAN	26047	Q8WUE5	Cancer/testis antigen 55	CT55
+HUMAN	23504	Q86XD8	AN1-type zinc finger protein 4	ZFAND4
+HUMAN	28400	Q5DJT8	Cancer/testis antigen family 45 member A2	CT45A2
+HUMAN	14456	Q9BTM1	Histone H2A.J	H2AFJ
+HUMAN	24902	Q8WUY9	DEP domain-containing protein 1B	DEPDC1B
+HUMAN	11311	Q05066	Sex-determining region Y protein	SRY
+HUMAN	20359	Q6ZU80	Centrosomal protein of 128 kDa	CEP128
+HUMAN	2324	Q10570	Cleavage and polyadenylation specificity factor subunit 1	CPSF1
+HUMAN	3797	P53539	Protein fosB	FOSB
+HUMAN	13203	Q9GZX7	Single-stranded DNA cytosine deaminase	AICDA
+HUMAN	29890	Q86UT6	NLR family member X1	NLRX1
+HUMAN	26232	Q96AH0	SOSS complex subunit B2	NABP1
+HUMAN	18042	Q96LI5	CCR4-NOT transcription complex subunit 6-like	CNOT6L
+HUMAN	19347	O14529	Homeobox protein cut-like 2	CUX2
+HUMAN	24543	Q52LR7	Enhancer of polycomb homolog 2	EPC2
+HUMAN	17257	O95238	SAM pointed domain-containing Ets transcription factor	SPDEF
+HUMAN	19278	Q9H1E1	Ribonuclease 7	RNASE7
+HUMAN	12829	O43543	DNA repair protein XRCC2	XRCC2
+HUMAN	8616	Q02962	Paired box protein Pax-2	PAX2
+HUMAN	6944	P49736	DNA replication licensing factor MCM2	MCM2
+HUMAN	3477	P62495	Eukaryotic peptide chain release factor subunit 1	ETF1
+HUMAN	21339	O60522	Tudor domain-containing protein 6	TDRD6
+HUMAN	14675	P78412	Iroquois-class homeodomain protein IRX-6	IRX6
+HUMAN	30469	Q6PJQ5	Forkhead box protein R2	FOXR2
+HUMAN	23383	Q9HCK0	Zinc finger and BTB domain-containing protein 26	ZBTB26
+HUMAN	14216	Q9H2C1	LIM/homeobox protein Lhx5	LHX5
+HUMAN	25577	Q9HCJ3	Ribonucleoprotein PTB-binding 2	RAVER2
+HUMAN	1101	P51587	Breast cancer type 2 susceptibility protein	BRCA2
+HUMAN	25789	Q7Z2Z2	Elongation factor Tu GTP-binding domain-containing protein 1	EFTUD1
+HUMAN	18380	Q7L1Q6	Basic leucine zipper and W2 domain-containing protein 1	BZW1
+HUMAN	12950	Q15637	Splicing factor 1	SF1
+HUMAN	4738	Q16777	Histone H2A type 2-C	HIST2H2AC
+HUMAN	3804	Q9UJU5	Forkhead box protein D3	FOXD3
+HUMAN	4720	P22492	Histone H1t	HIST1H1T
+HUMAN	28079	Q86UK7	Zinc finger protein 598	ZNF598
+HUMAN	29187	Q9UPS6	Histone-lysine N-methyltransferase SETD1B	SETD1B
+HUMAN	6200	Q9Y4A0	Jerky protein homolog-like	JRKL
+HUMAN	23784	Q9BTC8	Metastasis-associated protein MTA3	MTA3
+HUMAN	24477	Q9NQZ2	Something about silencing protein 10	UTP3
+HUMAN	23472	Q96A46	Mitoferrin-2	SLC25A28
+HUMAN	16421	P35712	Transcription factor SOX-6	SOX6
+HUMAN	7786	P08651	Nuclear factor 1 C-type	NFIC
+HUMAN	25982	Q5T3I0	G patch domain-containing protein 4	GPATCH4
+HUMAN	2721	O43150	"Arf-GAP with SH3 domain, ANK repeat and PH domain-containing protein 2"	ASAP2
+HUMAN	16652	Q9HD33	"39S ribosomal protein L47, mitochondrial"	MRPL47
+HUMAN	17210	Q8IY37	Probable ATP-dependent RNA helicase DHX37	DHX37
+HUMAN	7975	P10589	COUP transcription factor 1	NR2F1
+HUMAN	5724	Q06330	Recombining binding protein suppressor of hairless	RBPJ
+HUMAN	28272	B2RD01	CENPB DNA-binding domain-containing protein 1	CENPBD1
+HUMAN	7555	P12524	Protein L-Myc	MYCL
+HUMAN	25725	Q8IWA0	WD repeat-containing protein 75	WDR75
+HUMAN	28466	Q9BT43	DNA-directed RNA polymerase III subunit RPC7-like	POLR3GL
+HUMAN	19910	Q9H6R4	Nucleolar protein 6	NOL6
+HUMAN	18410	O60281	Zinc finger protein 292	ZNF292
+HUMAN	21919	Q9H0J9	Poly [ADP-ribose] polymerase 12	PARP12
+HUMAN	15861	Q9H5Z1	Probable ATP-dependent RNA helicase DHX35	DHX35
+HUMAN	9006	O75364	Pituitary homeobox 3	PITX3
+HUMAN	227	Q9NS39	Double-stranded RNA-specific editase B2	ADARB2
+HUMAN	9897	P57052	Splicing regulator RBM11	RBM11
+HUMAN	273	Q9Y6F1	Poly [ADP-ribose] polymerase 3	PARP3
+HUMAN	3325	P41970	ETS domain-containing protein Elk-3	ELK3
+HUMAN	18018	Q8IX18	Probable ATP-dependent RNA helicase DHX40	DHX40
+HUMAN	4983	P09429	High mobility group protein B1	HMGB1
+HUMAN	9174	P06746	DNA polymerase beta	POLB
+HUMAN	3254	Q9BY44	Eukaryotic translation initiation factor 2A	EIF2A
+HUMAN	19866	Q05BQ5	MBT domain-containing protein 1	MBTD1
+HUMAN	9413	P78527	DNA-dependent protein kinase catalytic subunit	PRKDC
+HUMAN	15984	Q7Z2E3	Aprataxin	APTX
+HUMAN	2890	O60832	H/ACA ribonucleoprotein complex subunit 4	DKC1
+HUMAN	17165	Q9UBB9	Tuftelin-interacting protein 11	TFIP11
+HUMAN	25745	Q9H9L3	Interferon-stimulated 20 kDa exonuclease-like 2	ISG20L2
+HUMAN	10401	P62269	40S ribosomal protein S18	RPS18
+HUMAN	1551	P83916	Chromobox protein homolog 1	CBX1
+HUMAN	29786	Q9NYZ2	Mitoferrin-1	SLC25A37
+HUMAN	10783	Q01130	Serine/arginine-rich splicing factor 2	SRSF2
+HUMAN	25651	Q9C0J8	pre-mRNA 3' end processing protein WDR33	WDR33
+HUMAN	10986	P16260	Graves disease carrier protein	SLC25A16
+HUMAN	25403	Q6UVJ0	Spindle assembly abnormal protein 6 homolog	SASS6
+HUMAN	13802	Q9HD90	Neurogenic differentiation factor 4	NEUROD4
+HUMAN	11194	P35713	Transcription factor SOX-18	SOX18
+HUMAN	17057	Q9Y2G2	Caspase recruitment domain-containing protein 8	CARD8
+HUMAN	28666	Q9BQ75	Protein CMSS1	CMSS1
+HUMAN	3115	O00716	Transcription factor E2F3	E2F3
+HUMAN	951	P78367	Homeobox protein Nkx-3.2	NKX3-2
+HUMAN	7128	Q9UHC1	DNA mismatch repair protein Mlh3	MLH3
+HUMAN	13806	Q9Y4Z2	Neurogenin-3	NEUROG3
+HUMAN	10334	P62899	60S ribosomal protein L31	RPL31
+HUMAN	26259	Q5D1E8	Ribonuclease ZC3H12A	ZC3H12A
+HUMAN	ENSG00000214325	H0YFN1	Uncharacterized protein	unassigned
+HUMAN	28495	Q8IZ20	Zinc finger protein 683	ZNF683
+HUMAN	3083	Q96PT3	Double homeobox protein 5	DUX5
+HUMAN	11745	Q01664	Transcription factor AP-4	TFAP4
+HUMAN	20082	Q8N8A6	ATP-dependent RNA helicase DDX51	DDX51
+HUMAN	9184	Q9UGP5	DNA polymerase lambda	POLL
+HUMAN	3599	P22087	rRNA 2'-O-methyltransferase fibrillarin	FBL
+HUMAN	18458	Q9BWX1	PHD finger protein 7	PHF7
+HUMAN	7328	O43196	MutS protein homolog 5	MSH5
+HUMAN	13104	Q9Y5A6	Zinc finger and SCAN domain-containing protein 21	ZSCAN21
+HUMAN	23035	Q96JM7	Lethal(3)malignant brain tumor-like protein 3	L3MBTL3
+HUMAN	24763	Q6ZVT6	Uncharacterized protein C3orf67	C3orf67
+HUMAN	20194	O15160	DNA-directed RNA polymerases I and III subunit RPAC1	POLR1C
+HUMAN	4055	P12956	X-ray repair cross-complementing protein 6	XRCC6
+HUMAN	4186	P52951	Homeobox protein GBX-2	GBX2
+HUMAN	28868	O00425	Insulin-like growth factor 2 mRNA-binding protein 3	IGF2BP3
+HUMAN	830	P06576	"ATP synthase subunit beta, mitochondrial"	ATP5B
+HUMAN	20908	Q86YF9	Zinc finger protein DZIP1	DZIP1
+HUMAN	19653	Q7RTT5	Protein SSX7	SSX7
+HUMAN	33783	A6NFD8	Hairy and enhancer of split-related protein HELT	HELT
+HUMAN	10992	P12236	ADP/ATP translocase 3	SLC25A6
+HUMAN	3246	Q9NZC4	ETS homologous factor	EHF
+HUMAN	2063	O15247	Chloride intracellular channel protein 2	CLIC2
+HUMAN	8647	Q15365	Poly(rC)-binding protein 1	PCBP1
+HUMAN	23846	Q96BF6	Nucleus accumbens-associated protein 2	NACC2
+HUMAN	1836	Q15744	CCAAT/enhancer-binding protein epsilon	CEBPE
+HUMAN	15924	Q9UJQ4	Sal-like protein 4	SALL4
+HUMAN	29787	Q969P6	"DNA topoisomerase I, mitochondrial"	TOP1MT
+HUMAN	30096	Q9Y3B4	Pre-mRNA branch site protein p14	SF3B14
+HUMAN	22939	Q86W24	"NACHT, LRR and PYD domains-containing protein 14"	NLRP14
+HUMAN	29213	Q8WUJ3	Cell migration-inducing and hyaluronan-binding protein	CEMIP
+HUMAN	3267	P41091	Eukaryotic translation initiation factor 2 subunit 3	EIF2S3
+HUMAN	10980	Q9UBX3	Mitochondrial dicarboxylate carrier	SLC25A10
+HUMAN	11542	Q16594	Transcription initiation factor TFIID subunit 9	TAF9
+HUMAN	7782	Q16236	Nuclear factor erythroid 2-related factor 2	NFE2L2
+HUMAN	21185	Q8NA58	Poly(A)-specific ribonuclease PARN-like domain-containing protein 1	PNLDC1
+HUMAN	11621	P20823	Hepatocyte nuclear factor 1-alpha	HNF1A
+HUMAN	10359	P83881	60S ribosomal protein L36a	RPL36A
+HUMAN	17267	Q8IZP6	RING finger protein 113B	RNF113B
+HUMAN	30045	Q96Q15	Serine/threonine-protein kinase SMG1	SMG1
+HUMAN	16939	O95391	Pre-mRNA-splicing factor SLU7	SLU7
+HUMAN	7410	Q13330	Metastasis-associated protein MTA1	MTA1
+HUMAN	3119	Q15329	Transcription factor E2F5	E2F5
+HUMAN	7201	Q9BXT6	Putative helicase Mov10l1	MOV10L1
+HUMAN	17303	Q5VWG9	Transcription initiation factor TFIID subunit 3	TAF3
+HUMAN	17976	Q96L21	60S ribosomal protein L10-like	RPL10L
+HUMAN	10387	P62263	40S ribosomal protein S14	RPS14
+HUMAN	20471	O95777	U6 snRNA-associated Sm-like protein LSm8	LSM8
+HUMAN	5116	P09067	Homeobox protein Hox-B5	HOXB5
+HUMAN	16700	Q8WW38	Zinc finger protein ZFPM2	ZFPM2
+HUMAN	2488	P52952	Homeobox protein Nkx-2.5	NKX2-5
+HUMAN	25163	Q8N1L9	Basic leucine zipper transcriptional factor ATF-like 2	BATF2
+HUMAN	17546	Q8WYK2	Jun dimerization protein 2	JDP2
+HUMAN	26007	Q5JUW0	KRAB domain-containing protein 4	KRBOX4
+HUMAN	9822	O15315	DNA repair protein RAD51 homolog 2	RAD51B
+HUMAN	13805	Q9H2A3	Neurogenin-2	NEUROG2
+HUMAN	17347	Q9BUQ8	Probable ATP-dependent RNA helicase DDX23	DDX23
+HUMAN	24325	Q9NXV6	CDKN2A-interacting protein	CDKN2AIP
+HUMAN	23529	Q8TEA1	Putative methyltransferase NSUN6	NSUN6
+HUMAN	1103	P25440	Bromodomain-containing protein 2	BRD2
+HUMAN	3211	P29692	Elongation factor 1-delta	EEF1D
+HUMAN	3299	P55010	Eukaryotic translation initiation factor 5	EIF5
+HUMAN	7138	P55198	Protein AF-17	MLLT6
+HUMAN	24669	Q6QHK4	Factor in the germline alpha	FIGLA
+HUMAN	3491	O00321	ETS translocation variant 2	ETV2
+HUMAN	16974	Q6ZRS2	Helicase SRCAP	SRCAP
+HUMAN	14958	Q8TB72	Pumilio homolog 2	PUM2
+HUMAN	28380	Q86VD7	Mitochondrial coenzyme A transporter SLC25A42	SLC25A42
+HUMAN	13112	P24278	Zinc finger and BTB domain-containing protein 25	ZBTB25
+HUMAN	15764	Q9GZN2	Homeobox protein TGIF2	TGIF2
+HUMAN	14931	Q9NTG7	"NAD-dependent protein deacetylase sirtuin-3, mitochondrial"	SIRT3
+HUMAN	9889	Q7Z6E9	E3 ubiquitin-protein ligase RBBP6	RBBP6
+HUMAN	1102	O95696	Bromodomain-containing protein 1	BRD1
+HUMAN	18056	Q8IZX4	Transcription initiation factor TFIID subunit 1-like	TAF1L
+HUMAN	3968	Q92674	Centromere protein I	CENPI
+HUMAN	8763	Q53EL6	Programmed cell death protein 4	PDCD4
+HUMAN	8651	P57721	Poly(rC)-binding protein 3	PCBP3
+HUMAN	26551	Q8IYY4	Zinc finger protein DZIP1L	DZIP1L
+HUMAN	30831	Q8NHU6	Tudor domain-containing protein 7	TDRD7
+HUMAN	1120	Q9H0C5	BTB/POZ domain-containing protein 1	BTBD1
+HUMAN	5275	Q92993	Histone acetyltransferase KAT5	KAT5
+HUMAN	1002	Q8N143	B-cell CLL/lymphoma 6 member B protein	BCL6B
+HUMAN	12367	P43897	"Elongation factor Ts, mitochondrial"	TSFM
+HUMAN	15519	Q14137	Ribosome biogenesis protein BOP1	BOP1
+HUMAN	18243	Q8NDN9	RCC1 and BTB domain-containing protein 1	RCBTB1
+HUMAN	16999	Q92989	Polyribonucleotide 5'-hydroxyl-kinase Clp1	CLP1
+HUMAN	12398	Q9UNY4	Transcription termination factor 2	TTF2
+HUMAN	3257	Q14232	Translation initiation factor eIF-2B subunit alpha	EIF2B1
+HUMAN	2919	P56179	Homeobox protein DLX-6	DLX6
+HUMAN	3954	Q14331	Protein FRG1	FRG1
+HUMAN	16147	Q9UJA3	DNA helicase MCM8	MCM8
+HUMAN	31010	Q2TAM9	Tumor suppressor candidate gene 1 protein	TUSC1
+HUMAN	20083	Q86TM3	Probable ATP-dependent RNA helicase DDX53	DDX53
+HUMAN	20374	Q9H4S2	GS homeobox 1	GSX1
+HUMAN	20995	Q9Y294	Histone chaperone ASF1A	ASF1A
+HUMAN	18832	Q53GI3	Zinc finger protein 394	ZNF394
+HUMAN	2749	Q14562	ATP-dependent RNA helicase DHX8	DHX8
+HUMAN	1915	O14646	Chromodomain-helicase-DNA-binding protein 1	CHD1
+HUMAN	14097	Q96LW9	Zinc finger and SCAN domain-containing protein 31	ZSCAN31
+HUMAN	16633	Q9Y3D5	"28S ribosomal protein S18c, mitochondrial"	MRPS18C
+HUMAN	11568	Q13395	Probable methyltransferase TARBP1	TARBP1
+HUMAN	4646	P52655	Transcription initiation factor IIA subunit 1	GTF2A1
+HUMAN	ENSG00000142539	M0R3H8	Uncharacterized protein (Fragment)	unassigned
+HUMAN	18060	Q96QS3	Homeobox protein ARX	ARX
+HUMAN	9179	P54098	DNA polymerase subunit gamma-1	POLG
+HUMAN	11726	Q99973	Telomerase protein component 1	TEP1
+HUMAN	12953	P49910	Zinc finger protein 165	ZNF165
+HUMAN	13026	Q9UNY5	Zinc finger protein 232	ZNF232
+HUMAN	25934	Q8N594	MPN domain-containing protein	MPND
+HUMAN	20314	Q86UA1	Pre-mRNA-processing factor 39	PRPF39
+HUMAN	11356	Q9UJ98	Cohesin subunit SA-3	STAG3
+HUMAN	10420	P23396	40S ribosomal protein S3	RPS3
+HUMAN	12397	Q15361	Transcription termination factor 1	TTF1
+HUMAN	18122	Q9H6I2	Transcription factor SOX-17	SOX17
+HUMAN	25265	Q6NZY4	Zinc finger CCHC domain-containing protein 8	ZCCHC8
+HUMAN	23244	P49756	RNA-binding protein 25	RBM25
+HUMAN	33194	A6NJT0	Homeobox protein unc-4 homolog	UNCX
+HUMAN	17306	Q9HBM6	Transcription initiation factor TFIID subunit 9B	TAF9B
+HUMAN	17837	P0C860	Putative male-specific lethal-3 protein-like 2	MSL3P1
+HUMAN	12741	Q15056	Eukaryotic translation initiation factor 4H	EIF4H
+HUMAN	15714	P42704	"Leucine-rich PPR motif-containing protein, mitochondrial"	LRPPRC
+HUMAN	5022	Q9Y261	Hepatocyte nuclear factor 3-beta	FOXA2
+HUMAN	14411	Q9BQT8	Mitochondrial 2-oxodicarboxylate carrier	SLC25A21
+HUMAN	851	P38606	V-type proton ATPase catalytic subunit A	ATP6V1A
+HUMAN	5120	P17482	Homeobox protein Hox-B9	HOXB9
+HUMAN	37205	A6NE82	Putative methyl-CpG-binding domain protein 3-like 3	MBD3L3
+HUMAN	7658	Q09161	Nuclear cap-binding protein subunit 1	NCBP1
+HUMAN	12816	Q01831	DNA repair protein complementing XP-C cells	XPC
+HUMAN	23397	Q5T1M5	FK506-binding protein 15	FKBP15
+HUMAN	24343	Q9P0U4	CXXC-type zinc finger protein 1	CXXC1
+HUMAN	19762	Q8IX07	Zinc finger protein ZFPM1	ZFPM1
+HUMAN	25044	Q587J7	Putative ATP-dependent RNA helicase TDRD12	TDRD12
+HUMAN	2960	O00115	Deoxyribonuclease-2-alpha	DNASE2
+HUMAN	3373	Q09472	Histone acetyltransferase p300	EP300
+HUMAN	1600	O60583	Cyclin-T2	CCNT2
+HUMAN	28787	Q969X0	RILP-like protein 2	RILPL2
+HUMAN	11993	O95985	DNA topoisomerase 3-beta-1	TOP3B
+HUMAN	2737	Q92771	Putative ATP-dependent RNA helicase DDX12	DDX12P
+HUMAN	4817	P49590	"Probable histidine--tRNA ligase, mitochondrial"	HARS2
+HUMAN	20217	Q9NVH0	Exonuclease 3'-5' domain-containing protein 2	EXD2
+HUMAN	19651	Q8IYB5	Stromal membrane-associated protein 1	SMAP1
+HUMAN	11205	P08047	Transcription factor Sp1	SP1
+HUMAN	26895	Q3KP31	Zinc finger protein 791	ZNF791
+HUMAN	8623	P55771	Paired box protein Pax-9	PAX9
+HUMAN	26987	Q7Z2F6	Putative protein ZNF720	ZNF720
+HUMAN	8138	Q9UBC0	Hepatocyte nuclear factor 6	ONECUT1
+HUMAN	1554	O00257	E3 SUMO-protein ligase CBX4	CBX4
+HUMAN	18824	Q96N95	Zinc finger protein 396	ZNF396
+HUMAN	33271	Q8N7B7	Cancer/testis antigen family 45 member A4/A6	CT45A4
+HUMAN	12820	Q9GZR2	RNA exonuclease 4	REXO4
+HUMAN	18423	O75140	DEP domain-containing protein 5	DEPDC5
+HUMAN	17821	O00148	ATP-dependent RNA helicase DDX39A	DDX39A
+HUMAN	3800	Q12948	Forkhead box protein C1	FOXC1
+HUMAN	ENSG00000248713	D6RIA3	Protein LOC285556	LOC285556
+HUMAN	28867	Q9Y6M1	Insulin-like growth factor 2 mRNA-binding protein 2	IGF2BP2
+HUMAN	16816	Q8TDI0	Chromodomain-helicase-DNA-binding protein 5	CHD5
+HUMAN	18518	O75792	Ribonuclease H2 subunit A	RNASEH2A
+HUMAN	11713	Q9Y2W6	Tudor and KH domain-containing protein	TDRKH
+HUMAN	19764	Q5TA89	Transcription factor HES-5	HES5
+HUMAN	23022	Q86YH2	Zinc finger protein 280B	ZNF280B
+HUMAN	2383	O43186	Cone-rod homeobox protein	CRX
+HUMAN	33482	A1L020	RNA-binding protein MEX3A	MEX3A
+HUMAN	18983	Q8IUM7	Neuronal PAS domain-containing protein 4	NPAS4
+HUMAN	20996	Q9NVP2	Histone chaperone ASF1B	ASF1B
+HUMAN	5115	P17483	Homeobox protein Hox-B4	HOXB4
+HUMAN	23156	P26368	Splicing factor U2AF 65 kDa subunit	U2AF2
+HUMAN	6974	O15151	Protein Mdm4	MDM4
+HUMAN	3444	P50548	ETS domain-containing transcription factor ERF	ERF
+HUMAN	11990	Q02880	DNA topoisomerase 2-beta	TOP2B
+HUMAN	16487	Q9NPF8	Arf-GAP with dual PH domain-containing protein 2	ADAP2
+HUMAN	18856	Q96BA8	Cyclic AMP-responsive element-binding protein 3-like protein 1	CREB3L1
+HUMAN	10532	O75446	Histone deacetylase complex subunit SAP30	SAP30
+HUMAN	13561	Q5T1R4	Transcription factor HIVEP3	HIVEP3
+HUMAN	20321	Q5TAP6	U3 small nucleolar RNA-associated protein 14 homolog C	UTP14C
+HUMAN	8648	Q15366	Poly(rC)-binding protein 2	PCBP2
+HUMAN	9192	P19388	"DNA-directed RNA polymerases I, II, and III subunit RPABC1"	POLR2E
+HUMAN	6601	P49917	DNA ligase 4	LIG4
+HUMAN	13908	Q96SC8	Doublesex- and mab-3-related transcription factor A2	DMRTA2
+HUMAN	25518	Q9BW85	Coiled-coil domain-containing protein 94	CCDC94
+HUMAN	9972	P35249	Replication factor C subunit 4	RFC4
+HUMAN	26959	A6NE52	WD repeat-containing protein KIAA1875	KIAA1875
+HUMAN	18800	Q9P215	Pogo transposable element with KRAB domain	POGK
+HUMAN	12822	Q9NQW7	Xaa-Pro aminopeptidase 1	XPNPEP1
+HUMAN	29531	Q6PKG0	La-related protein 1	LARP1
+HUMAN	8087	P29728	2'-5'-oligoadenylate synthase 2	OAS2
+HUMAN	483	P03950	Angiogenin	ANG
+HUMAN	15792	Q9BZ01	Protein FRG1B	FRG1B
+HUMAN	3200	Q5VTE0	Putative elongation factor 1-alpha-like 3	EEF1A1P5
+HUMAN	20517	Q6DRA6	Putative histone H2B type 2-D	HIST2H2BD
+HUMAN	32310	Q8IXT5	RNA-binding protein 12B	RBM12B
+HUMAN	4921	P31629	Transcription factor HIVEP2	HIVEP2
+HUMAN	16714	Q96KN3	Homeobox protein PKNOX2	PKNOX2
+HUMAN	24030	A9UHW6	MIF4G domain-containing protein	MIF4GD
+HUMAN	11201	P35711	Transcription factor SOX-5	SOX5
+HUMAN	29362	Q9C0D7	Probable ribonuclease ZC3H12C	ZC3H12C
+HUMAN	7783	Q9Y4A8	Nuclear factor erythroid 2-related factor 3	NFE2L3
+HUMAN	29980	Q6PIV2	Forkhead box protein R1	FOXR1
+HUMAN	20614	Q8NAT2	Tudor domain-containing protein 5	TDRD5
+HUMAN	2914	P56177	Homeobox protein DLX-1	DLX1
+HUMAN	3374	Q99814	Endothelial PAS domain-containing protein 1	EPAS1
+HUMAN	2325	Q9P2I0	Cleavage and polyadenylation specificity factor subunit 2	CPSF2
+HUMAN	5102	P31271	Homeobox protein Hox-A13	HOXA13
+HUMAN	1594	P51946	Cyclin-H	CCNH
+HUMAN	1046	O14503	Class E basic helix-loop-helix protein 40	BHLHE40
+HUMAN	16635	P82673	"28S ribosomal protein S35, mitochondrial"	MRPS35
+HUMAN	ENSG00000257184	D6RAR5	Uncharacterized protein	unassigned
+HUMAN	14065	Q9UKV0	Histone deacetylase 9	HDAC9
+HUMAN	16609	Q63ZY6	Putative methyltransferase NSUN5C	NSUN5P2
+HUMAN	26817	Q86SG4	Putative Dresden prostate carcinoma protein 2	HMGN2P46
+HUMAN	20153	Q9HCK8	Chromodomain-helicase-DNA-binding protein 8	CHD8
+HUMAN	9137	Q06265	Exosome complex component RRP45	EXOSC9
+HUMAN	30635	O94993	Transcription factor SOX-30	SOX30
+HUMAN	25748	Q96GJ1	tRNA (uracil(54)-C(5))-methyltransferase homolog	TRMT2B
+HUMAN	4005	Q96I24	Far upstream element-binding protein 3	FUBP3
+HUMAN	14409	Q9HC21	Mitochondrial thiamine pyrophosphate carrier	SLC25A19
+HUMAN	2935	Q9Y5R5	Doublesex- and mab-3-related transcription factor 2	DMRT2
+HUMAN	28629	Q5BKY9	Protein FAM133B	FAM133B
+HUMAN	9866	P13631	Retinoic acid receptor gamma	RARG
+HUMAN	29926	Q9Y2X3	Nucleolar protein 58	NOP58
+HUMAN	3288	Q13541	Eukaryotic translation initiation factor 4E-binding protein 1	EIF4EBP1
+HUMAN	3120	O75461	Transcription factor E2F6	E2F6
+HUMAN	7370	Q8N5Y2	Male-specific lethal 3 homolog	MSL3
+HUMAN	10386	P62277	40S ribosomal protein S13	RPS13
+HUMAN	20085	Q8NHQ9	ATP-dependent RNA helicase DDX55	DDX55
+HUMAN	20466	Q96SB8	Structural maintenance of chromosomes protein 6	SMC6
+HUMAN	14455	P0C5Z0	Histone H2A-Bbd type 2/3	H2AFB2
+HUMAN	6776	O75444	Transcription factor Maf	MAF
+HUMAN	25176	Q96MX6	WD repeat-containing protein 92	WDR92
+HUMAN	6063	Q9H160	Inhibitor of growth protein 2	ING2
+HUMAN	14523	Q96MW7	Tigger transposable element-derived protein 1	TIGD1
+HUMAN	18485	Q9HC36	RNA methyltransferase-like protein 1	RNMTL1
+HUMAN	22263	Q16385	Protein SSX2	SSX2
+HUMAN	5105	Q00056	Homeobox protein Hox-A4	HOXA4
+HUMAN	9973	P40937	Replication factor C subunit 5	RFC5
+HUMAN	30727	Q9UNN4	TFIIA-alpha and beta-like factor	GTF2A1L
+HUMAN	30677	Q92917	G patch domain and KOW motifs-containing protein	GPKOW
+HUMAN	15962	Q9HC52	Chromobox protein homolog 8	CBX8
+HUMAN	9143	Q99453	Paired mesoderm homeobox protein 2B	PHOX2B
+HUMAN	7612	P15173	Myogenin	MYOG
+HUMAN	7326	P20585	DNA mismatch repair protein Msh3	MSH3
+HUMAN	14050	P82912	"28S ribosomal protein S11, mitochondrial"	MRPS11
+HUMAN	17098	Q9UPY3	Endoribonuclease Dicer	DICER1
+HUMAN	20514	Q8N257	Histone H2B type 3-B	HIST3H2BB
+HUMAN	10322	Q16540	"39S ribosomal protein L23, mitochondrial"	MRPL23
+HUMAN	23106	Q6NSW7	Putative homeobox protein NANOGP8	NANOGP8
+HUMAN	11470	Q7KZ85	Transcription elongation factor SPT6	SUPT6H
+HUMAN	24453	Q9BVC3	Sister chromatid cohesion protein DCC1	DSCC1
+HUMAN	16844	Q02930	Cyclic AMP-responsive element-binding protein 5	CREB5
+HUMAN	25402	Q96G74	OTU domain-containing protein 5	OTUD5
+HUMAN	18652	Q9P1Q0	Vacuolar protein sorting-associated protein 54	VPS54
+HUMAN	2916	O60479	Homeobox protein DLX-3	DLX3
+HUMAN	16856	Q14674	Separin	ESPL1
+HUMAN	6923	Q9NR56	Muscleblind-like protein 1	MBNL1
+HUMAN	10580	Q9UN30	Sex comb on midleg-like protein 1	SCML1
+HUMAN	45037	B5MCY1	Tudor domain-containing protein 15	TDRD15
+HUMAN	3208	P24534	Elongation factor 1-beta	EEF1B2
+HUMAN	10298	P27635	60S ribosomal protein L10	RPL10
+HUMAN	3488	P14921	Protein C-ets-1	ETS1
+HUMAN	18118	Q96T23	Remodeling and spacing factor 1	RSF1
+HUMAN	5128	P09630	Homeobox protein Hox-C6	HOXC6
+HUMAN	11103	Q12824	SWI/SNF-related matrix-associated actin-dependent regulator of chromatin subfamily B member 1	SMARCB1
+HUMAN	12766	O96028	Histone-lysine N-methyltransferase NSD2	WHSC1
+HUMAN	10330	P46779	60S ribosomal protein L28	RPL28
+HUMAN	4854	O15379	Histone deacetylase 3	HDAC3
+HUMAN	14256	Q9ULD4	Bromodomain and PHD finger-containing protein 3	BRPF3
+HUMAN	2927	Q14565	Meiotic recombination protein DMC1/LIM15 homolog	DMC1
+HUMAN	7886	P51513	RNA-binding protein Nova-1	NOVA1
+HUMAN	22948	Q9NX02	"NACHT, LRR and PYD domains-containing protein 2"	NLRP2
+HUMAN	21734	Q969G2	LIM/homeobox protein Lhx4	LHX4
+HUMAN	7780	Q16621	Transcription factor NF-E2 45 kDa subunit	NFE2
+HUMAN	20570	Q96S94	Cyclin-L2	CCNL2
+HUMAN	11109	Q969G3	SWI/SNF-related matrix-associated actin-dependent regulator of chromatin subfamily E member 1	SMARCE1
+HUMAN	11825	P43699	Homeobox protein Nkx-2.1	NKX2-1
+HUMAN	28915	Q9NR55	Basic leucine zipper transcriptional factor ATF-like 3	BATF3
+HUMAN	8919	O43189	PHD finger protein 1	PHF1
+HUMAN	7014	P50222	Homeobox protein MOX-2	MEOX2
+HUMAN	24282	Q9Y388	"RNA-binding motif protein, X-linked 2"	RBMX2
+HUMAN	14865	Q8N693	Homeobox protein ESX1	ESX1
+HUMAN	33185	A6NMT0	Homeobox protein DBX1	DBX1
+HUMAN	10368	P62917	60S ribosomal protein L8	RPL8
+HUMAN	26274	Q96I59	"Probable asparagine--tRNA ligase, mitochondrial"	NARS2
+HUMAN	19055	Q5RKV6	Exosome complex component MTR3	EXOSC6
+HUMAN	443	Q96Q42	Alsin	ALS2
+HUMAN	19883	Q6ZSB9	Zinc finger and BTB domain-containing protein 49	ZBTB49
+HUMAN	29911	Q13901	Nuclear nucleic acid-binding protein C1D	C1D
+HUMAN	13096	Q06730	Zinc finger protein 33A	ZNF33A
+HUMAN	10289	P27694	Replication protein A 70 kDa DNA-binding subunit	RPA1
+HUMAN	20418	Q9NTI5	Sister chromatid cohesion protein PDS5 homolog B	PDS5B
+HUMAN	17352	Q9UH17	DNA dC-dU-editing enzyme APOBEC-3B	APOBEC3B
+HUMAN	17340	Q6P2Q9	Pre-mRNA-processing-splicing factor 8	PRPF8
+HUMAN	11207	Q02086	Transcription factor Sp2	SP2
+HUMAN	17904	Q9NRR4	Ribonuclease 3	DROSHA
+HUMAN	18956	Q969S2	Endonuclease 8-like 2	NEIL2
+HUMAN	5126	P09017	Homeobox protein Hox-C4	HOXC4
+HUMAN	6918	O95983	Methyl-CpG-binding domain protein 3	MBD3
+HUMAN	48349	H7BZ11	Protein RPL36A-HNRNPH2 (Fragment)	RPL36A-HNRNPH2
+HUMAN	14064	Q9UBN7	Histone deacetylase 6	HDAC6
+HUMAN	20604	Q9Y2L1	Exosome complex exonuclease RRP44	DIS3
+HUMAN	24100	Q6NTF7	DNA dC-dU-editing enzyme APOBEC-3H	APOBEC3H
+HUMAN	2348	Q92793	CREB-binding protein	CREBBP
+HUMAN	3810	Q12947	Forkhead box protein F2	FOXF2
+HUMAN	7788	Q14938	Nuclear factor 1 X-type	NFIX
+HUMAN	11363	P52630	Signal transducer and activator of transcription 2	STAT2
+HUMAN	18145	Q8IWS0	PHD finger protein 6	PHF6
+HUMAN	30027	Q6IE81	Protein Jade-1	JADE1
+HUMAN	25489	Q9ULM3	YEATS domain-containing protein 2	YEATS2
+HUMAN	14046	P82921	"28S ribosomal protein S21, mitochondrial"	MRPS21
+HUMAN	22944	P59044	"NACHT, LRR and PYD domains-containing protein 6"	NLRP6
+HUMAN	5135	P35452	Homeobox protein Hox-D12	HOXD12
+HUMAN	27653	Q6PIV7	Solute carrier family 25 member 34	SLC25A34
+HUMAN	11189	O00570	Transcription factor SOX-1	SOX1
+HUMAN	14255	P55201	Peregrin	BRPF1
+HUMAN	960	Q9NRL2	Bromodomain adjacent to zinc finger domain protein 1A	BAZ1A
+HUMAN	5117	P17509	Homeobox protein Hox-B6	HOXB6
+HUMAN	16912	Q92979	Ribosomal RNA small subunit methyltransferase NEP1	EMG1
+HUMAN	9123	A4D2B8	Putative postmeiotic segregation increased 2-like protein 1	PMS2P1
+HUMAN	13506	Q8TBJ5	Fez family zinc finger protein 2	FEZF2
+HUMAN	23709	Q8NAM6	Zinc finger and SCAN domain-containing protein 4	ZSCAN4
+HUMAN	23166	Q8TCS8	"Polyribonucleotide nucleotidyltransferase 1, mitochondrial"	PNPT1
+HUMAN	2468	Q9UQE7	Structural maintenance of chromosomes protein 3	SMC3
+HUMAN	7966	Q13133	Oxysterols receptor LXR-alpha	NR1H3
+HUMAN	29147	Q9Y2D9	Zinc finger protein 652	ZNF652
+HUMAN	10389	P62244	40S ribosomal protein S15a	RPS15A
+HUMAN	9832	P55895	V(D)J recombination-activating protein 2	RAG2
+HUMAN	3735	O43638	Forkhead box protein S1	FOXS1
+HUMAN	7968	O75469	Nuclear receptor subfamily 1 group I member 2	NR1I2
+HUMAN	9903	P78332	RNA-binding protein 6	RBM6
+HUMAN	30793	O60841	Eukaryotic translation initiation factor 5B	EIF5B
+HUMAN	26208	Q9H649	Putative methyltransferase NSUN3	NSUN3
+HUMAN	10984	O95258	Brain mitochondrial carrier protein 1	SLC25A14
+HUMAN	15506	Q9BSV6	tRNA-splicing endonuclease subunit Sen34	TSEN34
+HUMAN	14264	Q9NY12	H/ACA ribonucleoprotein complex subunit 1	GAR1
+HUMAN	19876	Q9H2F5	Enhancer of polycomb homolog 1	EPC1
+HUMAN	7784	Q12857	Nuclear factor 1 A-type	NFIA
+HUMAN	21745	Q7Z5Q1	Cytoplasmic polyadenylation element-binding protein 2	CPEB2
+HUMAN	24260	Q9Y3C7	Mediator of RNA polymerase II transcription subunit 31	MED31
+HUMAN	24097	Q8WWN8	"Arf-GAP with Rho-GAP domain, ANK repeat and PH domain-containing protein 3"	ARAP3
+HUMAN	17940	Q9P2K5	Myelin expression factor 2	MYEF2
+HUMAN	29433	Q5QGS0	Protein KIAA2022	KIAA2022
+HUMAN	29850	O75113	NEDD4-binding protein 1	N4BP1
+HUMAN	18250	Q8WUB8	PHD finger protein 10	PHF10
+HUMAN	10767	Q12874	Splicing factor 3A subunit 3	SF3A3
+HUMAN	5047	O43390	Heterogeneous nuclear ribonucleoprotein R	HNRNPR
+HUMAN	3271	Q14152	Eukaryotic translation initiation factor 3 subunit A	EIF3A
+HUMAN	10258	P35398	Nuclear receptor ROR-alpha	RORA
+HUMAN	8617	P23760	Paired box protein Pax-3	PAX3
+HUMAN	16638	Q8IYB3	Serine/arginine repetitive matrix protein 1	SRRM1
+HUMAN	1001	P41182	B-cell lymphoma 6 protein	BCL6
+HUMAN	4986	P05204	Non-histone chromosomal protein HMG-17	HMGN2
+HUMAN	24220	Q6P1N9	Putative deoxyribonuclease TATDN1	TATDN1
+HUMAN	17687	Q9Y2P8	RNA 3'-terminal phosphate cyclase-like protein	RCL1
+HUMAN	7972	P49116	Nuclear receptor subfamily 2 group C member 2	NR2C2
+HUMAN	30852	Q16560	U11/U12 small nuclear ribonucleoprotein 35 kDa protein	SNRNP35
+HUMAN	22947	Q8WX94	"NACHT, LRR and PYD domains-containing protein 7"	NLRP7
+HUMAN	18513	Q9Y6X8	Zinc fingers and homeoboxes protein 2	ZHX2
+HUMAN	18019	Q9H8U3	AN1-type zinc finger protein 3	ZFAND3
+HUMAN	11362	P42224	Signal transducer and activator of transcription 1-alpha/beta	STAT1
+HUMAN	44201	P0DKL9	ARL14 effector protein-like	ARL14EPL
+HUMAN	11896	P21580	Tumor necrosis factor alpha-induced protein 3	TNFAIP3
+HUMAN	2484	P33240	Cleavage stimulation factor subunit 2	CSTF2
+HUMAN	4727	Q99878	Histone H2A type 1-J	HIST1H2AJ
+HUMAN	12826	O43592	Exportin-T	XPOT
+HUMAN	30098	Q8N684	Cleavage and polyadenylation specificity factor subunit 7	CPSF7
+HUMAN	7838	Q99801	Homeobox protein Nkx-3.1	NKX3-1
+HUMAN	2760	Q9H4E7	Differentially expressed in FDCP 6 homolog	DEF6
+HUMAN	4760	Q16778	Histone H2B type 2-E	HIST2H2BE
+HUMAN	13504	Q8N6H7	ADP-ribosylation factor GTPase-activating protein 2	ARFGAP2
+HUMAN	30454	Q9NSQ0	Putative ribosomal RNA-processing protein 7 homolog B	RRP7B
+HUMAN	28403	Q8TBZ6	tRNA methyltransferase 10 homolog A	TRMT10A
+HUMAN	18562	Q99581	Protein FEV	FEV
+HUMAN	2326	Q9UKF6	Cleavage and polyadenylation specificity factor subunit 3	CPSF3
+HUMAN	29093	O75152	Zinc finger CCCH domain-containing protein 11A	ZC3H11A
+HUMAN	4722	Q92522	Histone H1x	H1FX
+HUMAN	2360	P50238	Cysteine-rich protein 1	CRIP1
+HUMAN	5134	P31277	Homeobox protein Hox-D11	HOXD11
+HUMAN	11741	Q00059	"Transcription factor A, mitochondrial"	TFAM
+HUMAN	6118	Q14653	Interferon regulatory factor 3	IRF3
+HUMAN	20166	O15037	Protein KHNYN	KHNYN
+HUMAN	12428	Q15672	Twist-related protein 1	TWIST1
+HUMAN	14512	Q92552	"28S ribosomal protein S27, mitochondrial"	MRPS27
+HUMAN	5276	O43719	HIV Tat-specific factor 1	HTATSF1
+HUMAN	5111	P14653	Homeobox protein Hox-B1	HOXB1
+HUMAN	25953	Q6N043	Zinc finger protein 280D	ZNF280D
+HUMAN	30830	Q5TKA1	Protein lin-9 homolog	LIN9
+HUMAN	16713	O75494	Serine/arginine-rich splicing factor 10	SRSF10
+HUMAN	28112	Q15024	Exosome complex component RRP42	EXOSC7
+HUMAN	24721	Q9H6S0	Probable ATP-dependent RNA helicase YTHDC2	YTHDC2
+HUMAN	28838	Q68G74	LIM/homeobox protein Lhx8	LHX8
+HUMAN	12660	Q5SQQ9	Ventral anterior homeobox 1	VAX1
+HUMAN	21064	Q64LD2	WD repeat-containing protein 25	WDR25
+HUMAN	10349	P63173	60S ribosomal protein L38	RPL38
+HUMAN	11639	P36402	Transcription factor 7	TCF7
+HUMAN	28980	Q14691	DNA replication complex GINS protein PSF1	GINS1
+HUMAN	17016	O95251	Histone acetyltransferase KAT7	KAT7
+HUMAN	5359	Q14197	"Peptidyl-tRNA hydrolase ICT1, mitochondrial"	ICT1
+HUMAN	18463	Q8IZA3	Histone H1oo	H1FOO
+HUMAN	28434	Q8N1B3	Cyclin-related protein FAM58A	FAM58A
+HUMAN	20410	Q8TE96	ATP-dependent RNA helicase DQX1	DQX1
+HUMAN	4023	P51114	Fragile X mental retardation syndrome-related protein 1	FXR1
+HUMAN	26600	Q562E7	WD repeat-containing protein 81	WDR81
+HUMAN	29189	Q9UPR6	Zinc finger RNA-binding protein 2	ZFR2
+HUMAN	5114	P14651	Homeobox protein Hox-B3	HOXB3
+HUMAN	2742	Q9UMR2	ATP-dependent RNA helicase DDX19B	DDX19B
+HUMAN	9831	P15918	V(D)J recombination-activating protein 1	RAG1
+HUMAN	3213	P26641	Elongation factor 1-gamma	EEF1G
+HUMAN	18641	Q8IX01	SURP and G-patch domain-containing protein 2	SUGP2
+HUMAN	21484	Q9NXL9	DNA helicase MCM9	MCM9
+HUMAN	6950	P33993	DNA replication licensing factor MCM7	MCM7
+HUMAN	33852	P0CL83	Putative STAG3-like protein 1	STAG3L1
+HUMAN	29158	Q9Y2G9	Protein strawberry notch homolog 2	SBNO2
+HUMAN	10790	Q12872	"Splicing factor, suppressor of white-apricot homolog"	SFSWAP
+HUMAN	26715	Q3B8N5	Prospero homeobox protein 2	PROX2
+HUMAN	34343	Q6ZV65	Protein FAM47E	FAM47E
+HUMAN	35406	P0CB48	Putative upstream-binding factor 1-like protein 6	UBTFL6
+HUMAN	6129	P78413	Iroquois-class homeodomain protein IRX-4	IRX4
+HUMAN	28052	Q9NQH7	Probable Xaa-Pro aminopeptidase 3	XPNPEP3
+HUMAN	33887	Q8TBR4	Putative STAG3-like protein 4	STAG3L4
+HUMAN	4613	O15499	Homeobox protein goosecoid-2	GSC2
+HUMAN	1494	Q15699	ALX homeobox protein 1	ALX1
+HUMAN	2769	O43583	Density-regulated protein	DENR
+HUMAN	25752	Q96QE3	ATPase family AAA domain-containing protein 5	ATAD5
+HUMAN	10883	Q14190	Single-minded homolog 2	SIM2
+HUMAN	24249	Q9Y2Z4	"Tyrosine--tRNA ligase, mitochondrial"	YARS2
+HUMAN	ENSG00000229729	C9JYP6	Uncharacterized protein	unassigned
+HUMAN	24511	Q9Y3Y2	Chromatin target of PRMT1 protein	CHTOP
+HUMAN	10424	P62701	"40S ribosomal protein S4, X isoform"	RPS4X
+HUMAN	4010	P35637	RNA-binding protein FUS	FUS
+HUMAN	1493	P49589	"Cysteine--tRNA ligase, cytoplasmic"	CARS
+HUMAN	18730	Q96A08	Histone H2B type 1-A	HIST1H2BA
+HUMAN	13761	Q9UBG7	Recombining binding protein suppressor of hairless-like protein	RBPJL
+HUMAN	15774	Q8WWY6	Methyl-CpG-binding domain protein 3-like 1	MBD3L1
+HUMAN	3823	Q9H334	Forkhead box protein P1	FOXP1
+HUMAN	5119	P17481	Homeobox protein Hox-B8	HOXB8
+HUMAN	1739	O75419	Cell division control protein 45 homolog	CDC45
+HUMAN	9968	O60673	DNA polymerase zeta catalytic subunit	REV3L
+HUMAN	10567	Q9GZW5	Putative SCAN domain-containing protein SCAND2P	SCAND2P
+HUMAN	958	Q16520	Basic leucine zipper transcriptional factor ATF-like	BATF
+HUMAN	33855	Q6RFH8	Double homeobox protein 4C	DUX4L9
+HUMAN	1833	P49715	CCAAT/enhancer-binding protein alpha	CEBPA
+HUMAN	24035	Q9UKG1	DCC-interacting protein 13-alpha	APPL1
+HUMAN	18683	P38919	Eukaryotic initiation factor 4A-III	EIF4A3
+HUMAN	23847	Q9P1Z0	Zinc finger and BTB domain-containing protein 4	ZBTB4
+HUMAN	13906	Q14582	Max dimerization protein 4	MXD4
+HUMAN	26999	Q6ZMY6	WD repeat-containing protein 88	WDR88
+HUMAN	16617	Q9C0J9	Class E basic helix-loop-helix protein 41	BHLHE41
+HUMAN	24912	Q4G0J3	La-related protein 7	LARP7
+HUMAN	13909	Q9NQL9	Doublesex- and mab-3-related transcription factor 3	DMRT3
+HUMAN	22198	O75127	"Pentatricopeptide repeat-containing protein 1, mitochondrial"	PTCD1
+HUMAN	ENSG00000260836	H3BNC9	Uncharacterized protein (Fragment)	unassigned
+HUMAN	25777	Q2KHR2	DNA-binding protein RFX7	RFX7
+HUMAN	7441	P46199	"Translation initiation factor IF-2, mitochondrial"	MTIF2
+HUMAN	3214	P13639	Elongation factor 2	EEF2
+HUMAN	11313	P10155	60 kDa SS-A/Ro ribonucleoprotein	TROVE2
+HUMAN	28739	Q8IXQ9	Methyltransferase-like protein 20	METTL20
+HUMAN	4739	P16104	Histone H2AX	H2AFX
+HUMAN	28046	Q9UDW3	Zinc finger matrin-type protein 5	ZMAT5
+HUMAN	17582	Q8WYB5	Histone acetyltransferase KAT6B	KAT6B
+HUMAN	2384	Q16526	Cryptochrome-1	CRY1
+HUMAN	14278	Q9BYD1	"39S ribosomal protein L13, mitochondrial"	MRPL13
+HUMAN	20210	Q9NWQ4	G patch domain-containing protein 2-like	GPATCH2L
+HUMAN	23190	Q9BT49	THAP domain-containing protein 7	THAP7
+HUMAN	26748	Q8N9E0	Protein FAM133A	FAM133A
+HUMAN	6120	Q13568	Interferon regulatory factor 5	IRF5
+HUMAN	8620	P26367	Paired box protein Pax-6	PAX6
+HUMAN	3274	O75821	Eukaryotic translation initiation factor 3 subunit G	EIF3G
+HUMAN	18988	O94900	Thymocyte selection-associated high mobility group box protein TOX	TOX
+HUMAN	30076	Q9BUI4	DNA-directed RNA polymerase III subunit RPC3	POLR3C
+HUMAN	3434	P18074	TFIIH basal transcription factor complex helicase XPD subunit	ERCC2
+HUMAN	9369	P49642	DNA primase small subunit	PRIM1
+HUMAN	7133	O14686	Histone-lysine N-methyltransferase 2D	KMT2D
+HUMAN	17930	Q9UJV8	Purine-rich element-binding protein gamma	PURG
+HUMAN	17407	Q5HYM0	Probable ribonuclease ZC3H12B	ZC3H12B
+HUMAN	11751	Q14188	Transcription factor Dp-2	TFDP2
+HUMAN	29122	Q8N3P4	Vacuolar protein sorting-associated protein 8 homolog	VPS8
+HUMAN	29210	Q8N344	Mesoderm induction early response protein 2	MIER2
+HUMAN	8622	Q06710	Paired box protein Pax-8	PAX8
+HUMAN	24118	Q8IXQ6	Poly [ADP-ribose] polymerase 9	PARP9
+HUMAN	16661	Q8IZU2	WD repeat-containing protein 17	WDR17
+HUMAN	6159	P56537	Eukaryotic translation initiation factor 6	EIF6
+HUMAN	30545	Q96HQ2	CDKN2AIP N-terminal-like protein	CDKN2AIPNL
+HUMAN	7001	O14770	Homeobox protein Meis2	MEIS2
+HUMAN	1808	O14627	Homeobox protein CDX-4	CDX4
+HUMAN	16878	P42694	Probable helicase with zinc finger domain	HELZ
+HUMAN	20855	Q8WTV1	THAP domain-containing protein 3	THAP3
+HUMAN	3507	Q03828	Homeobox even-skipped homolog protein 2	EVX2
+HUMAN	4174	Q92908	Transcription factor GATA-6	GATA6
+HUMAN	29562	Q9Y4F3	Meiosis arrest female protein 1	KIAA0430
+HUMAN	24303	Q8NDT2	Putative RNA-binding protein 15B	RBM15B
+HUMAN	8829	Q9BRX2	Protein pelota homolog	PELO
+HUMAN	5140	P28356	Homeobox protein Hox-D9	HOXD9
+HUMAN	22788	A0PJY2	Fez family zinc finger protein 1	FEZF1
+HUMAN	20229	Q8WV16	DDB1- and CUL4-associated factor 4	DCAF4
+HUMAN	25799	Q8N442	"Translation factor GUF1, mitochondrial"	GUF1
+HUMAN	4201	Q92830	Histone acetyltransferase KAT2A	KAT2A
+HUMAN	33267	Q5HYN5	Cancer/testis antigen family 45 member A1	CT45A1
+HUMAN	2934	Q9Y5R6	Doublesex- and mab-3-related transcription factor 1	DMRT1
+HUMAN	10364	P62424	60S ribosomal protein L7a	RPL7A
+HUMAN	3277	P60228	Eukaryotic translation initiation factor 3 subunit E	EIF3E
+HUMAN	11198	O15370	Transcription factor SOX-12	SOX12
+HUMAN	23459	Q96P64	"Arf-GAP with GTPase, ANK repeat and PH domain-containing protein 4"	AGAP4
+HUMAN	21057	Q9H1X1	Radial spoke head protein 9 homolog	RSPH9
+HUMAN	5124	P31275	Homeobox protein Hox-C12	HOXC12
+HUMAN	17751	Q6Q6R5	Cysteine-rich protein 3	CRIP3
+HUMAN	5009	P52926	High mobility group protein HMGI-C	HMGA2
+HUMAN	30266	Q96NA2	Rab-interacting lysosomal protein	RILP
+HUMAN	21463	Q99551	"Transcription termination factor, mitochondrial"	MTERF
+HUMAN	21091	Q9Y4E5	Zinc finger protein 451	ZNF451
+HUMAN	25966	Q6NXG1	Epithelial splicing regulatory protein 1	ESRP1
+HUMAN	21065	O95847	Mitochondrial uncoupling protein 4	SLC25A27
+HUMAN	10304	P40429	60S ribosomal protein L13a	RPL13A
+HUMAN	25695	Q9HA77	"Probable cysteine--tRNA ligase, mitochondrial"	CARS2
+HUMAN	16486	O75689	Arf-GAP with dual PH domain-containing protein 1	ADAP1
+HUMAN	2983	P04053	DNA nucleotidylexotransferase	DNTT
+HUMAN	28988	Q93075	Putative deoxyribonuclease TATDN2	TATDN2
+HUMAN	3815	Q12951	Forkhead box protein I1	FOXI1
+HUMAN	3817	Q12952	Forkhead box protein L1	FOXL1
+HUMAN	9817	Q06609	DNA repair protein RAD51 homolog 1	RAD51
+HUMAN	14011	O95347	Structural maintenance of chromosomes protein 2	SMC2
+HUMAN	3799	Q99853	Forkhead box protein B1	FOXB1
+HUMAN	18569	Q8IUE0	Homeobox protein TGIF2LY	TGIF2LY
+HUMAN	10080	Q15287	RNA-binding protein with serine-rich domain 1	RNPS1
+HUMAN	14129	Q96KQ7	Histone-lysine N-methyltransferase EHMT2	EHMT2
+HUMAN	10306	P61313	60S ribosomal protein L15	RPL15
+HUMAN	28748	Q9BQ83	Structure-specific endonuclease subunit SLX1	SLX1A
+HUMAN	15977	Q9BYE0	Transcription factor HES-7	HES7
+HUMAN	EIF2S3L	Q2VIR3	Putative eukaryotic translation initiation factor 2 subunit 3-like protein	EIF2S3L
+HUMAN	12765	O15353	Forkhead box protein N1	FOXN1
+HUMAN	26368	Q4G0Z9	MCM domain-containing protein 2	MCMDC2
+HUMAN	20165	Q9P2P1	Protein NYNRIN	NYNRIN
+HUMAN	26721	Q86TB9	Protein PAT1 homolog 1	PATL1
+HUMAN	11368	P42226	Signal transducer and activator of transcription 6	STAT6
+HUMAN	18027	Q3B726	DNA-directed RNA polymerase I subunit RPA43	TWISTNB
+HUMAN	12983	Q15776	Zinc finger protein with KRAB and SCAN domains 8	ZKSCAN8
+HUMAN	23315	Q5VYV0	Forkhead box protein B2	FOXB2
+HUMAN	10295	Q92834	X-linked retinitis pigmentosa GTPase regulator	RPGR
+HUMAN	10372	P05386	60S acidic ribosomal protein P1	RPLP1
+HUMAN	7836	Q8TAU0	Homeobox protein Nkx-2.3	NKX2-3
+HUMAN	4657	Q13889	General transcription factor IIH subunit 3	GTF2H3
+HUMAN	10397	P08708	40S ribosomal protein S17	RPS17
+HUMAN	34004	A6NF01	Putative nuclear envelope pore membrane protein POM 121B	POM121B
+HUMAN	11302	Q9UHB9	Signal recognition particle subunit SRP68	SRP68
+HUMAN	ENSG00000204775	Q96Q25	Ribosome biogenesis protein BOP1	KM-PA-2
+HUMAN	13363	Q9H2W2	Homeobox protein MIXL1	MIXL1
+HUMAN	12347	Q9Y4A5	Transformation/transcription domain-associated protein	TRRAP
+HUMAN	11614	Q15560	Transcription elongation factor A protein 2	TCEA2
+HUMAN	16921	Q99490	"Arf-GAP with GTPase, ANK repeat and PH domain-containing protein 2"	AGAP2
+HUMAN	18521	Q9NU39	Forkhead box protein D4-like 1	FOXD4L1
+HUMAN	11592	O43435	T-box transcription factor TBX1	TBX1
+HUMAN	5192	Q14469	Transcription factor HES-1	HES1
+HUMAN	605	Q9Y235	Probable C-U-editing enzyme APOBEC-2	APOBEC2
+HUMAN	10417	P62979	Ubiquitin-40S ribosomal protein S27a	RPS27A
+HUMAN	2485	Q12996	Cleavage stimulation factor subunit 3	CSTF3
+HUMAN	4993	B2RPK0	Putative high mobility group protein B1-like 1	HMGB1P1
+HUMAN	10347	P61927	60S ribosomal protein L37	RPL37
+HUMAN	9955	Q04206	Transcription factor p65	RELA
+HUMAN	31326	Q8WWM7	Ataxin-2-like protein	ATXN2L
+HUMAN	6834	P27338	Amine oxidase [flavin-containing] B	MAOB
+HUMAN	7566	P23409	Myogenic factor 6	MYF6
+HUMAN	1743	Q99459	Cell division cycle 5-like protein	CDC5L
+HUMAN	4610	Q12849	G-rich sequence factor 1	GRSF1
+HUMAN	11338	O60224	Protein SSX4	SSX4
+HUMAN	2483	Q05048	Cleavage stimulation factor subunit 1	CSTF1
+HUMAN	13164	P62633	Cellular nucleic acid-binding protein	CNBP
+HUMAN	30075	O15318	DNA-directed RNA polymerase III subunit RPC7	POLR3G
+HUMAN	7211	P29372	DNA-3-methyladenine glycosylase	MPG
+HUMAN	20842	Q8IVH2	Forkhead box protein P4	FOXP4
+HUMAN	9893	P28749	Retinoblastoma-like protein 1	RBL1
+HUMAN	28440	Q68CQ4	Digestive organ expansion factor homolog	DIEXF
+HUMAN	13954	O60814	Histone H2B type 1-K	HIST1H2BK
+HUMAN	17638	A8K0S8	Putative homeobox protein Meis3-like 2	MEIS3P2
+HUMAN	11317	Q04837	"Single-stranded DNA-binding protein, mitochondrial"	SSBP1
+HUMAN	16021	Q9Y5N5	HemK methyltransferase family member 2	N6AMT1
+HUMAN	10346	Q969Q0	60S ribosomal protein L36a-like	RPL36AL
+HUMAN	16650	Q9H9J2	"39S ribosomal protein L44, mitochondrial"	MRPL44
+HUMAN	2734	Q92499	ATP-dependent RNA helicase DDX1	DDX1
+HUMAN	2747	P26196	Probable ATP-dependent RNA helicase DDX6	DDX6
+HUMAN	12998	O43670	BUB3-interacting and GLEBS motif-containing protein ZNF207	ZNF207
+HUMAN	4834	Q9Y450	HBS1-like protein	HBS1L
+HUMAN	13652	A6H8Y1	Transcription factor TFIIIB component B'' homolog	BDP1
+HUMAN	7962	P20393	Nuclear receptor subfamily 1 group D member 1	NR1D1
+HUMAN	1805	P47902	Homeobox protein CDX-1	CDX1
+HUMAN	23464	Q5SRD3	"Arf-GAP with GTPase, ANK repeat and PH domain-containing protein 8"	AGAP8
+HUMAN	18435	Q8WVB6	Chromosome transmission fidelity protein 18 homolog	CHTF18
+HUMAN	29682	Q969S9	"Ribosome-releasing factor 2, mitochondrial"	GFM2
+HUMAN	4717	P16402	Histone H1.3	HIST1H1D
+HUMAN	18336	Q53EQ6	Tigger transposable element-derived protein 5	TIGD5
+HUMAN	22516	P0C5Y9	Histone H2A-Bbd type 1	H2AFB1
+HUMAN	4004	Q96AE4	Far upstream element-binding protein 1	FUBP1
+HUMAN	8652	P57723	Poly(rC)-binding protein 4	PCBP4
+HUMAN	8491	O43913	Origin recognition complex subunit 5	ORC5
+HUMAN	661	Q9NP61	ADP-ribosylation factor GTPase-activating protein 3	ARFGAP3
+HUMAN	27610	Q6P5R6	60S ribosomal protein L22-like 1	RPL22L1
+HUMAN	ENSG00000267281	K7ELQ4	Uncharacterized protein	unassigned
+HUMAN	4852	Q13547	Histone deacetylase 1	HDAC1
+HUMAN	7837	Q9H2Z4	Homeobox protein Nkx-2.4	NKX2-4
+HUMAN	3526	Q92800	Histone-lysine N-methyltransferase EZH1	EZH1
+HUMAN	7971	P13056	Nuclear receptor subfamily 2 group C member 1	NR2C1
+HUMAN	15525	Q6XYB7	Transcription factor LBX2	LBX2
+HUMAN	17070	Q9UH65	Switch-associated protein 70	SWAP70
+HUMAN	19421	Q8WYH8	Inhibitor of growth protein 5	ING5
+HUMAN	6036	Q01167	Forkhead box protein K2	FOXK2
+HUMAN	29993	Q8NHV9	Rhox homeobox family member 1	RHOXF1
+HUMAN	14002	O14519	Cyclin-dependent kinase 2-associated protein 1	CDK2AP1
+HUMAN	26383	Q8N136	Dynein assembly factor with WDR repeat domains 1	DAW1
+HUMAN	11469	O00267	Transcription elongation factor SPT5	SUPT5H
+HUMAN	4715	Q02539	Histone H1.1	HIST1H1A
+HUMAN	29814	Q96NY9	Crossover junction endonuclease MUS81	MUS81
+HUMAN	16068	O95613	Pericentrin	PCNT
+HUMAN	17348	O43395	U4/U6 small nuclear ribonucleoprotein Prp3	PRPF3
+HUMAN	956	Q9UMQ3	Homeobox protein BarH-like 2	BARX2
+HUMAN	9188	P30876	DNA-directed RNA polymerase II subunit RPB2	POLR2B
+HUMAN	20607	Q8N6R1	Stress-associated endoplasmic reticulum protein 2	SERP2
+HUMAN	18643	Q8IWZ8	SURP and G-patch domain-containing protein 1	SUGP1
+HUMAN	19277	Q8TDE3	Ribonuclease 8	RNASE8
+HUMAN	20662	Q6NUK1	Calcium-binding mitochondrial carrier protein SCaMC-1	SLC25A24
+HUMAN	20450	Q3C1V8	Brain-specific homeobox protein homolog	BSX
+HUMAN	24662	Q9NQT4	Exosome complex component RRP46	EXOSC5
+HUMAN	30646	Q7KZF4	Staphylococcal nuclease domain-containing protein 1	SND1
+HUMAN	28698	Q8TF46	DIS3-like exonuclease 1	DIS3L
+HUMAN	11250	Q9Y5K1	Meiotic recombination protein SPO11	SPO11
+HUMAN	3287	P06730	Eukaryotic translation initiation factor 4E	EIF4E
+HUMAN	9904	Q9Y580	RNA-binding protein 7	RBM7
+HUMAN	8088	Q9Y6K5	2'-5'-oligoadenylate synthase 3	OAS3
+HUMAN	10332	P39023	60S ribosomal protein L3	RPL3
+HUMAN	30401	Q8WVC0	RNA polymerase-associated protein LEO1	LEO1
+HUMAN	32448	Q6ZQN5	Forkhead box protein I2	FOXI2
+HUMAN	5133	P28358	Homeobox protein Hox-D10	HOXD10
+HUMAN	272	Q9UGN5	Poly [ADP-ribose] polymerase 2	PARP2
+HUMAN	3796	P01100	Proto-oncogene c-Fos	FOS
+HUMAN	27010	Q17R31	Putative deoxyribonuclease TATDN3	TATDN3
+HUMAN	5100	P31260	Homeobox protein Hox-A10	HOXA10
+HUMAN	24534	O76021	Ribosomal L1 domain-containing protein 1	RSL1D1
+HUMAN	18576	P22674	Cyclin-O	CCNO
+HUMAN	10429	P62753	40S ribosomal protein S6	RPS6
+HUMAN	15965	Q9NR90	Deleted in azoospermia protein 3	DAZ3
+HUMAN	24573	Q8TAT5	Endonuclease 8-like 3	NEIL3
+HUMAN	8125	O15527	N-glycosylase/DNA lyase	OGG1
+HUMAN	23994	Q8IV48	3'-5' exoribonuclease 1	ERI1
+HUMAN	19354	O75182	Paired amphipathic helix protein Sin3b	SIN3B
+HUMAN	14934	Q8N6T7	NAD-dependent protein deacetylase sirtuin-6	SIRT6
+HUMAN	26911	Q8N2G6	Zinc finger CCHC domain-containing protein 24	ZCCHC24
+HUMAN	19321	Q9C056	Homeobox protein Nkx-6.2	NKX6-2
+HUMAN	10537	P49591	"Serine--tRNA ligase, cytoplasmic"	SARS
+HUMAN	17851	Q9Y3B8	"Oligoribonuclease, mitochondrial"	REXO2
+HUMAN	20856	Q9NVV9	THAP domain-containing protein 1	THAP1
+HUMAN	29668	Q6FI13	Histone H2A type 2-A	HIST2H2AA3
+HUMAN	4791	P62805	Histone H4	HIST1H4A
+HUMAN	29680	Q8TBP6	Solute carrier family 25 member 40	SLC25A40
+HUMAN	33722	Q66K41	Zinc finger protein 385C	ZNF385C
+HUMAN	6702	Q32MZ4	Leucine-rich repeat flightless-interacting protein 1	LRRFIP1
+HUMAN	72	Q9NUQ8	ATP-binding cassette sub-family F member 3	ABCF3
+HUMAN	2682	Q9NQZ3	Deleted in azoospermia protein 1	DAZ1
+HUMAN	13854	Q969J2	Zinc finger protein with KRAB and SCAN domains 4	ZKSCAN4
+HUMAN	29232	Q460N5	Poly [ADP-ribose] polymerase 14	PARP14
+HUMAN	19088	Q9NR48	Histone-lysine N-methyltransferase ASH1L	ASH1L
+HUMAN	9902	P52756	RNA-binding protein 5	RBM5
+HUMAN	28422	Q8NCE0	tRNA-splicing endonuclease subunit Sen2	TSEN2
+HUMAN	9813	P54727	UV excision repair protein RAD23 homolog B	RAD23B
+HUMAN	20152	Q9C0A1	Zinc finger homeobox protein 2	ZFHX2
+HUMAN	3819	Q12778	Forkhead box protein O1	FOXO1
+HUMAN	738	P50553	Achaete-scute homolog 1	ASCL1
+HUMAN	12679	P11473	Vitamin D3 receptor	VDR
+HUMAN	9195	P52434	"DNA-directed RNA polymerases I, II, and III subunit RPABC3"	POLR2H
+HUMAN	20115	Q6Q0C1	Solute carrier family 25 member 47	SLC25A47
+HUMAN	18854	Q8TEY5	Cyclic AMP-responsive element-binding protein 3-like protein 4	CREB3L4
+HUMAN	9824	P43351	DNA repair protein RAD52 homolog	RAD52
+HUMAN	10665	Q9BVJ6	U3 small nucleolar RNA-associated protein 14 homolog A	UTP14A
+HUMAN	5023	P55318	Hepatocyte nuclear factor 3-gamma	FOXA3
+HUMAN	17300	Q7Z7C8	Transcription initiation factor TFIID subunit 8	TAF8
+HUMAN	6949	Q14566	DNA replication licensing factor MCM6	MCM6
+HUMAN	13008	O76080	AN1-type zinc finger protein 5	ZFAND5
+HUMAN	10312	P84098	60S ribosomal protein L19	RPL19
+HUMAN	35123	A8MTJ6	Forkhead box protein I3	FOXI3
+HUMAN	6206	P17535	Transcription factor jun-D	JUND
+HUMAN	14933	Q9NXA8	"NAD-dependent protein deacylase sirtuin-5, mitochondrial"	SIRT5
+HUMAN	5035	P07910	Heterogeneous nuclear ribonucleoproteins C1/C2	HNRNPC
+HUMAN	19311	Q8IXF0	Neuronal PAS domain-containing protein 3	NPAS3
+HUMAN	17150	Q9Y2V2	Calcium-regulated heat stable protein 1	CARHSP1
+HUMAN	37206	A6NDZ8	Putative methyl-CpG-binding domain protein 3-like 4	MBD3L4
+HUMAN	9398	Q13516	Oligodendrocyte transcription factor 2	OLIG2
+HUMAN	24329	Q9Y3A2	Probable U3 small nucleolar RNA-associated protein 11	UTP11L
+HUMAN	14374	Q9C000	"NACHT, LRR and PYD domains-containing protein 1"	NLRP1
+HUMAN	20086	Q6P158	Putative ATP-dependent RNA helicase DHX57	DHX57
+HUMAN	5101	P31270	Homeobox protein Hox-A11	HOXA11
+HUMAN	30129	Q99575	Ribonucleases P/MRP protein subunit POP1	POP1
+HUMAN	24432	P82979	SAP domain-containing ribonucleoprotein	SARNP
+HUMAN	21370	Q6DKI1	60S ribosomal protein L7-like 1	RPL7L1
+HUMAN	24305	Q15021	Condensin complex subunit 1	NCAPD2
+HUMAN	4747	P58876	Histone H2B type 1-D	HIST1H2BD
+HUMAN	19353	Q96ST3	Paired amphipathic helix protein Sin3a	SIN3A
+HUMAN	22943	Q96MN2	"NACHT, LRR and PYD domains-containing protein 4"	NLRP4
+HUMAN	4751	P33778	Histone H2B type 1-B	HIST1H2BB
+HUMAN	22945	P59045	"NACHT, LRR and PYD domains-containing protein 11"	NLRP11
+HUMAN	8729	P12004	Proliferating cell nuclear antigen	PCNA
+HUMAN	15837	Q96GQ7	Probable ATP-dependent RNA helicase DDX27	DDX27
+HUMAN	7967	Q96RI1	Bile acid receptor	NR1H4
+HUMAN	25517	Q9H583	HEAT repeat-containing protein 1	HEATR1
+HUMAN	19375	Q9BV35	Calcium-binding mitochondrial carrier protein SCaMC-3	SLC25A23
+HUMAN	17276	O43414	ERI1 exoribonuclease 3	ERI3
+HUMAN	15504	Q9BX70	BTB/POZ domain-containing protein 2	BTBD2
+HUMAN	1599	O60563	Cyclin-T1	CCNT1
+HUMAN	29523	Q9Y6A4	UPF0468 protein C16orf80	C16orf80
+HUMAN	13911	Q8IXT2	Doublesex- and mab-3-related transcription factor C2	DMRTC2
+HUMAN	6316	Q92945	Far upstream element-binding protein 2	KHSRP
+HUMAN	18755	Q9NR33	DNA polymerase epsilon subunit 4	POLE4
+HUMAN	23465	Q5VUJ5	"Arf-GAP with GTPase, ANK repeat and PH domain-containing protein 7"	AGAP7
+HUMAN	32207	Q6ZN17	Protein lin-28 homolog B	LIN28B
+HUMAN	795	Q13315	Serine-protein kinase ATM	ATM
+HUMAN	4740	O75367	Core histone macro-H2A.1	H2AFY
+HUMAN	3808	Q13461	Forkhead box protein E3	FOXE3
+HUMAN	16400	Q96P20	"NACHT, LRR and PYD domains-containing protein 3"	NLRP3
+HUMAN	20472	O15116	U6 snRNA-associated Sm-like protein LSm1	LSM1
+HUMAN	20673	P60153	Inactive ribonuclease-like protein 9	RNASE9
+HUMAN	13870	O43809	Cleavage and polyadenylation specificity factor subunit 5	NUDT21
+HUMAN	14478	Q9BYC9	"39S ribosomal protein L20, mitochondrial"	MRPL20
+HUMAN	16467	Q15027	"Arf-GAP with coiled-coil, ANK repeat and PH domain-containing protein 1"	ACAP1
+HUMAN	16924	Q8WZ64	"Arf-GAP with Rho-GAP domain, ANK repeat and PH domain-containing protein 2"	ARAP2
+HUMAN	26876	Q460N3	Poly [ADP-ribose] polymerase 15	PARP15
+HUMAN	25554	Q96CQ1	Solute carrier family 25 member 36	SLC25A36
+HUMAN	3261	Q13144	Translation initiation factor eIF-2B subunit epsilon	EIF2B5
+HUMAN	3266	P20042	Eukaryotic translation initiation factor 2 subunit 2	EIF2S2
+HUMAN	4881	Q9UBP5	Hairy/enhancer-of-split related with YRPW motif protein 2	HEY2
+HUMAN	11595	O95935	T-box transcription factor TBX18	TBX18
+HUMAN	20967	Q96RE7	Nucleus accumbens-associated protein 1	NACC1
+HUMAN	19026	Q8NFW5	Diencephalon/mesencephalon homeobox protein 1	DMBX1
+HUMAN	7723	Q8NHV4	Protein NEDD1	NEDD1
+HUMAN	12519	P55916	Mitochondrial uncoupling protein 3	UCP3
+HUMAN	10886	Q8IXJ6	NAD-dependent protein deacetylase sirtuin-2	SIRT2
+HUMAN	26955	Q9UFB7	Zinc finger and BTB domain-containing protein 47	ZBTB47
+HUMAN	29153	Q8TBE0	Bromo adjacent homology domain-containing 1 protein	BAHD1
+HUMAN	20857	Q9H9S0	Homeobox protein NANOG	NANOG
+HUMAN	5136	P35453	Homeobox protein Hox-D13	HOXD13
+HUMAN	4729	P20671	Histone H2A type 1-D	HIST1H2AD
+HUMAN	6643	Q8TAP4	LIM domain only protein 3	LMO3
+HUMAN	1160	Q96RR1	"Twinkle protein, mitochondrial"	PEO1
+HUMAN	19654	Q7RTT4	Protein SSX8	SSX8
+HUMAN	15446	Q8WWY3	U4/U6 small nuclear ribonucleoprotein Prp31	PRPF31
+HUMAN	8043	Q02818	Nucleobindin-1	NUCB1
+HUMAN	21581	Q5VZK9	Leucine-rich repeat-containing protein 16A	LRRC16A
+HUMAN	26665	Q8NA57	Uncharacterized protein C12orf50	C12orf50
+HUMAN	16093	Q8NDY6	Class E basic helix-loop-helix protein 23	BHLHE23
+HUMAN	4172	P23771	Trans-acting T-cell-specific transcription factor GATA-3	GATA3
+HUMAN	10328	P61353	60S ribosomal protein L27	RPL27
+HUMAN	11992	Q13472	DNA topoisomerase 3-alpha	TOP3A
+HUMAN	18801	Q7Z3K3	Pogo transposable element with ZNF domain	POGZ
+HUMAN	14310	Q9NPI1	Bromodomain-containing protein 7	BRD7
+HUMAN	29925	Q13823	Nucleolar GTP-binding protein 2	GNL2
+HUMAN	21209	A6NKF2	AT-rich interactive domain-containing protein 3C	ARID3C
+HUMAN	1975	P58304	Visual system homeobox 2	VSX2
+HUMAN	2062	O00299	Chloride intracellular channel protein 1	CLIC1
+HUMAN	20148	A6NEE1	Pleckstrin homology domain-containing family D member 1	PLEKHD1
+HUMAN	5044	P61978	Heterogeneous nuclear ribonucleoprotein K	HNRNPK
+HUMAN	7781	Q14494	Nuclear factor erythroid 2-related factor 1	NFE2L1
+HUMAN	28533	Q8N5S1	Solute carrier family 25 member 41	SLC25A41
+HUMAN	17055	Q9HAP2	MLX-interacting protein	MLXIP
+HUMAN	11337	Q99909	Protein SSX3	SSX3
+HUMAN	11106	Q96GM5	SWI/SNF-related matrix-associated actin-dependent regulator of chromatin subfamily D member 1	SMARCD1
+HUMAN	9459	Q92786	Prospero homeobox protein 1	PROX1
+HUMAN	11301	P61011	Signal recognition particle 54 kDa protein	SRP54
+HUMAN	445	Q7Z333	Probable helicase senataxin	SETX
+HUMAN	4653	P13984	General transcription factor IIF subunit 2	GTF2F2
+HUMAN	14099	Q9ULM6	CCR4-NOT transcription complex subunit 6	CNOT6
+HUMAN	5113	P14652	Homeobox protein Hox-B2	HOXB2
+HUMAN	28412	Q9BQ15	SOSS complex subunit B1	NABP2
+HUMAN	19841	Q6SJ96	TATA box-binding protein-like protein 2	TBPL2
+HUMAN	33632	A6NMK7	Putative cleavage and polyadenylation specificity factor subunit 4-like protein	CPSF4L
+HUMAN	17354	Q96AK3	DNA dC-dU-editing enzyme APOBEC-3D	APOBEC3D
+HUMAN	19702	Q96HA1	Nuclear envelope pore membrane protein POM 121	POM121
+HUMAN	10377	P05387	60S acidic ribosomal protein P2	RPLP2
+HUMAN	11600	Q9Y458	T-box transcription factor TBX22	TBX22
+HUMAN	15795	Q9NQ39	Putative 40S ribosomal protein S10-like	RPS10P5
+HUMAN	23099	Q8N7R0	Putative homeobox protein NANOG2	NANOGP1
+HUMAN	18116	Q07666	"KH domain-containing, RNA-binding, signal transduction-associated protein 1"	KHDRBS1
+HUMAN	11300	P09132	Signal recognition particle 19 kDa protein	SRP19
+HUMAN	17284	Q9NUX5	Protection of telomeres protein 1	POT1
+HUMAN	ENSG00000267303	K7EQG2	Uncharacterized protein (Fragment)	unassigned
+HUMAN	33834	Q6ZN32	ETS translocation variant 3-like protein	ETV3L
+HUMAN	3301	Q9GZV4	Eukaryotic translation initiation factor 5A-2	EIF5A2
+HUMAN	30369	Q9NXZ1	Sarcoma antigen 1	SAGE1
+HUMAN	1176	Q13405	"39S ribosomal protein L49, mitochondrial"	MRPL49
+HUMAN	33169	Q7RTU5	Achaete-scute homolog 5	ASCL5
+HUMAN	4724	P04908	Histone H2A type 1-B/E	HIST1H2AB
+HUMAN	14053	Q9NRX2	"39S ribosomal protein L17, mitochondrial"	MRPL17
+HUMAN	7969	Q14994	Nuclear receptor subfamily 1 group I member 3	NR1I3
+HUMAN	4668	Q9Y5Q8	General transcription factor 3C polypeptide 5	GTF3C5
+HUMAN	8044	P80303	Nucleobindin-2	NUCB2
+HUMAN	13998	Q9H4Q3	PR domain zinc finger protein 13	PRDM13
+HUMAN	11108	Q6STE5	SWI/SNF-related matrix-associated actin-dependent regulator of chromatin subfamily D member 3	SMARCD3
+HUMAN	226	P78563	Double-stranded RNA-specific editase 1	ADARB1
+HUMAN	16946	Q92791	Synaptonemal complex protein SC65	LEPREL4
+HUMAN	18479	Q9UHA3	Probable ribosome biogenesis protein RLP24	RSL24D1
+HUMAN	18594	Q969R5	Lethal(3)malignant brain tumor-like protein 2	L3MBTL2
+HUMAN	11316	P05455	Lupus La protein	SSB
+HUMAN	3581	Q12830	Nucleosome-remodeling factor subunit BPTF	BPTF
+HUMAN	10988	Q9H1K4	Mitochondrial glutamate carrier 2	SLC25A18
+HUMAN	21744	Q9BZB8	Cytoplasmic polyadenylation element-binding protein 1	CPEB1
+HUMAN	25893	Q96K80	Zinc finger CCCH domain-containing protein 10	ZC3H10
+HUMAN	2259	Q16206	Ecto-NOX disulfide-thiol exchanger 2	ENOX2
+HUMAN	7545	P10242	Transcriptional activator Myb	MYB
+HUMAN	6215	Q15046	Lysine--tRNA ligase	KARS
+HUMAN	3183	Q8IXK0	Polyhomeotic-like protein 2	PHC2
+HUMAN	11630	P35680	Hepatocyte nuclear factor 1-beta	HNF1B
+HUMAN	49187	C9J1V9	HCG2043275	EEF1E1-BLOC1S5
+HUMAN	10380	O15235	"28S ribosomal protein S12, mitochondrial"	MRPS12
+HUMAN	21248	A2RRH5	WD repeat-containing protein 27	WDR27
+HUMAN	6408	Q9Y5Q3	Transcription factor MafB	MAFB
+HUMAN	17874	P62310	U6 snRNA-associated Sm-like protein LSm3	LSM3
+HUMAN	24614	P57772	Selenocysteine-specific elongation factor	EEFSEC
+HUMAN	11339	O60225	Protein SSX5	SSX5
+HUMAN	740	Q9NQ33	Achaete-scute homolog 3	ASCL3
+HUMAN	32583	Q6UB28	"Methionine aminopeptidase 1D, mitochondrial"	METAP1D
+HUMAN	2750	Q08211	ATP-dependent RNA helicase A	DHX9
+HUMAN	12518	P55851	Mitochondrial uncoupling protein 2	UCP2
+HUMAN	26269	Q0P6H9	Transmembrane protein 62	TMEM62
+HUMAN	14037	Q96A35	"39S ribosomal protein L24, mitochondrial"	MRPL24
+HUMAN	5118	P09629	Homeobox protein Hox-B7	HOXB7
+HUMAN	24211	Q5GAN4	Probable inactive ribonuclease-like protein 12	RNASE12
+HUMAN	20116	Q8N8R3	Mitochondrial carnitine/acylcarnitine carrier protein CACL	SLC25A29
+HUMAN	9964	Q92785	Zinc finger protein ubi-d4	DPF2
+HUMAN	11327	Q08945	FACT complex subunit SSRP1	SSRP1
+HUMAN	7960	P51843	Nuclear receptor subfamily 0 group B member 1	NR0B1
+HUMAN	10396	P62249	40S ribosomal protein S16	RPS16
+HUMAN	22937	Q86W25	"NACHT, LRR and PYD domains-containing protein 13"	NLRP13
+HUMAN	3282	P60842	Eukaryotic initiation factor 4A-I	EIF4A1
+HUMAN	22984	Q9NQC1	Protein Jade-2	JADE2
+HUMAN	14089	Q9HCS7	Pre-mRNA-splicing factor SYF1	XAB2
+HUMAN	17958	Q6SPF0	Atherin	SAMD1
+HUMAN	25821	Q96K58	Zinc finger protein 668	ZNF668
+HUMAN	15831	P81877	Single-stranded DNA-binding protein 2	SSBP2
+HUMAN	11104	Q92922	SWI/SNF complex subunit SMARCC1	SMARCC1
+HUMAN	2736	Q96FC9	Probable ATP-dependent RNA helicase DDX11	DDX11
+HUMAN	18532	Q8NHZ7	Methyl-CpG-binding domain protein 3-like 2	MBD3L2
+HUMAN	26616	Q8NB37	Parkinson disease 7 domain-containing protein 1	PDDC1
+HUMAN	16005	Q9Y543	Transcription factor HES-2	HES2
+HUMAN	25386	Q6L8Q7	"2',5'-phosphodiesterase 12"	PDE12
+HUMAN	3270	O75822	Eukaryotic translation initiation factor 3 subunit J	EIF3J
+HUMAN	15825	Q9Y2N7	Hypoxia-inducible factor 3-alpha	HIF3A
+HUMAN	17196	Q8NG08	DNA helicase B	HELB
+HUMAN	17563	Q86U44	N6-adenosine-methyltransferase 70 kDa subunit	METTL3
+HUMAN	20320	Q8WXF1	Paraspeckle component 1	PSPC1
+HUMAN	6502	P08865	40S ribosomal protein SA	RPSA
+HUMAN	7659	P52298	Nuclear cap-binding protein subunit 2	NCBP2
+HUMAN	23145	Q8NHW3	Transcription factor MafA	MAFA
+HUMAN	32166	A6NFQ7	Divergent paired-related homeobox	DPRX
+HUMAN	10371	P05388	60S acidic ribosomal protein P0	RPLP0
+HUMAN	7213	O00566	U3 small nucleolar ribonucleoprotein protein MPP10	MPHOSPH10
+HUMAN	23984	Q9GZY0	Nuclear RNA export factor 2	NXF2
+HUMAN	11206	P23497	Nuclear autoantigen Sp-100	SP100
+HUMAN	17882	Q8WXA9	Splicing regulatory glutamine/lysine-rich protein 1	SREK1
+HUMAN	7973	Q9Y466	Nuclear receptor subfamily 2 group E member 1	NR2E1
+HUMAN	3511	Q9UQ84	Exonuclease 1	EXO1
+HUMAN	27089	Q6F5E8	Leucine-rich repeat-containing protein 16C	RLTPR
+HUMAN	9949	O94761	ATP-dependent DNA helicase Q4	RECQL4
+HUMAN	9812	P54725	UV excision repair protein RAD23 homolog A	RAD23A
+HUMAN	10768	O75533	Splicing factor 3B subunit 1	SF3B1
+HUMAN	5039	P52597	Heterogeneous nuclear ribonucleoprotein F	HNRNPF
+HUMAN	19336	Q149N8	E3 ubiquitin-protein ligase SHPRH	SHPRH
+HUMAN	5137	P31249	Homeobox protein Hox-D3	HOXD3
+HUMAN	29899	Q96QD5	DEP domain-containing protein 7	DEPDC7
+HUMAN	14273	Q8N9W6	Protein boule-like	BOLL
+HUMAN	2746	P17844	Probable ATP-dependent RNA helicase DDX5	DDX5
+HUMAN	5024	P41235	Hepatocyte nuclear factor 4-alpha	HNF4A
+HUMAN	26636	Q8NAP3	Zinc finger and BTB domain-containing protein 38	ZBTB38
+HUMAN	14067	Q8WUI4	Histone deacetylase 7	HDAC7
+HUMAN	10336	P62910	60S ribosomal protein L32	RPL32
+HUMAN	4761	P06899	Histone H2B type 1-J	HIST1H2BJ
+HUMAN	4882	Q9NQ87	Hairy/enhancer-of-split related with YRPW motif-like protein	HEYL
+HUMAN	26022	Q7L0Y3	Mitochondrial ribonuclease P protein 1	TRMT10C
+HUMAN	13826	Q5VZB9	Doublesex- and mab-3-related transcription factor A1	DMRTA1
+HUMAN	16719	Q14147	Probable ATP-dependent RNA helicase DHX34	DHX34
+HUMAN	449	O95076	Homeobox protein aristaless-like 3	ALX3
+HUMAN	25955	Q8ND82	Zinc finger protein 280C	ZNF280C
+HUMAN	11335	Q16384	Protein SSX1	SSX1
+HUMAN	30186	Q9UHW5	GPN-loop GTPase 3	GPN3
+HUMAN	6734	P12980	Protein lyl-1	LYL1
+HUMAN	4413	P36915	Guanine nucleotide-binding protein-like 1	GNL1
+HUMAN	7327	O15457	MutS protein homolog 4	MSH4
+HUMAN	11159	P62316	Small nuclear ribonucleoprotein Sm D2	SNRPD2
+HUMAN	23782	Q9BY77	Polymerase delta-interacting protein 3	POLDIP3
+HUMAN	13411	Q8N3S3	Putative homeodomain transcription factor 2	PHTF2
+HUMAN	3113	Q01094	Transcription factor E2F1	E2F1
+HUMAN	16369	Q99497	Protein DJ-1	PARK7
+HUMAN	13399	O60422	One cut domain family member 3	ONECUT3
+HUMAN	15968	Q8TB36	Ganglioside-induced differentiation-associated protein 1	GDAP1
+HUMAN	5010	P17096	High mobility group protein HMG-I/HMG-Y	HMGA1
+HUMAN	5106	P20719	Homeobox protein Hox-A5	HOXA5
+HUMAN	24535	Q9NV06	DDB1- and CUL4-associated factor 13	DCAF13
+HUMAN	22949	Q5TB30	DEP domain-containing protein 1A	DEPDC1
+HUMAN	17349	O43172	U4/U6 small nuclear ribonucleoprotein Prp4	PRPF4
+HUMAN	ENSG00000273049	V9GYH0	Uncharacterized protein (Fragment)	unassigned
+HUMAN	8633	P40425	Pre-B-cell leukemia transcription factor 2	PBX2
+HUMAN	9194	P62487	DNA-directed RNA polymerase II subunit RPB7	POLR2G
+HUMAN	33270	Q6NSH3	Cancer/testis antigen family 45 member A5	CT45A5
+HUMAN	26191	Q9H6B1	Zinc finger protein 385D	ZNF385D
+HUMAN	18501	Q8TD47	"40S ribosomal protein S4, Y isoform 2"	RPS4Y2
+HUMAN	6204	P05412	Transcription factor AP-1	JUN
+HUMAN	18522	Q5VV16	Forkhead box protein D4-like 5	FOXD4L5
+HUMAN	25652	Q9H089	Large subunit GTPase 1 homolog	LSG1
+HUMAN	4750	Q99879	Histone H2B type 1-M	HIST1H2BM
+HUMAN	28121	Q5JSZ5	Protein PRRC2B	PRRC2B
+HUMAN	36404	Q8NHW5	60S acidic ribosomal protein P0-like	RPLP0P6
+HUMAN	8002	P54845	Neural retina-specific leucine zipper protein	NRL
+HUMAN	3749	Q01543	Friend leukemia integration 1 transcription factor	FLI1
+HUMAN	11487	Q15431	Synaptonemal complex protein 1	SYCP1
+HUMAN	25105	Q9H930	Nuclear body protein SP140-like protein	SP140L
+HUMAN	6653	Q8TE12	LIM homeobox transcription factor 1-alpha	LMX1A
+HUMAN	26332	Q569K4	Zinc finger protein 385B	ZNF385B
+HUMAN	6945	P25205	DNA replication licensing factor MCM3	MCM3
+HUMAN	9185	Q9NP87	DNA-directed DNA/RNA polymerase mu	POLM
+HUMAN	9898	Q9NTZ6	RNA-binding protein 12	RBM12
+HUMAN	30776	Q8N3X6	Ligand-dependent nuclear receptor corepressor-like protein	LCORL
+HUMAN	15830	Q8N2R0	Protein odd-skipped-related 2	OSR2
+HUMAN	25316	Q5VZ19	Tudor domain-containing protein 10	TDRD10
+HUMAN	25722	Q8WTP8	Apoptosis-enhancing nuclease	AEN
+HUMAN	14360	P78415	Iroquois-class homeodomain protein IRX-3	IRX3
+HUMAN	17264	O95602	DNA-directed RNA polymerase I subunit RPA1	POLR1A
+HUMAN	9954	Q04864	Proto-oncogene c-Rel	REL
+HUMAN	7819	P55769	NHP2-like protein 1	NHP2L1
+HUMAN	29228	Q9ULI2	Beta-citrylglutamate synthase B	RIMKLB
+HUMAN	14987	Q8TDY4	"Arf-GAP with SH3 domain, ANK repeat and PH domain-containing protein 3"	ASAP3
+HUMAN	3079	O43812	Double homeobox protein 1	DUX1
+HUMAN	8075	Q9H1B4	Nuclear RNA export factor 5	NXF5
+HUMAN	20272	Q8ND23	Leucine-rich repeat-containing protein 16B	LRRC16B
+HUMAN	12860	O43829	Zinc finger and BTB domain-containing protein 14	ZBTB14
+HUMAN	17427	Q92784	Zinc finger protein DPF3	DPF3
+HUMAN	21100	Q96PU8	Protein quaking	QKI
+HUMAN	1834	P17676	CCAAT/enhancer-binding protein beta	CEBPB
+HUMAN	13804	Q96NK8	Neurogenic differentiation factor 6	NEUROD6
+HUMAN	10853	O15266	Short stature homeobox protein	SHOX
+HUMAN	8064	P35658	Nuclear pore complex protein Nup214	NUP214
+HUMAN	8522	P32243	Homeobox protein OTX2	OTX2
+HUMAN	3372	O95936	Eomesodermin homolog	EOMES
+HUMAN	11193	O95416	Transcription factor SOX-14	SOX14
+HUMAN	32060	Q5TEC6	Histone H3	HIST2H3PS2
+HUMAN	10075	O43148	mRNA cap guanine-N7 methyltransferase	RNMT
+HUMAN	26015	Q59GN2	Putative 60S ribosomal protein L39-like 5	RPL39P5
+HUMAN	29983	Q9HA38	Zinc finger matrin-type protein 3	ZMAT3
+HUMAN	14932	Q9Y6E7	NAD-dependent protein deacetylase sirtuin-4	SIRT4
+HUMAN	9199	P62875	"DNA-directed RNA polymerases I, II, and III subunit RPABC5"	POLR2L
+HUMAN	13222	Q9C0K0	B-cell lymphoma/leukemia 11B	BCL11B
+HUMAN	29025	O15090	Zinc finger protein 536	ZNF536
+HUMAN	9896	P98175	RNA-binding protein 10	RBM10
+HUMAN	19146	Q3KNT7	Putative NOL1/NOP2/Sun domain family member 5B	NSUN5P1
+HUMAN	17499	Q9UGK8	Secretion-regulating guanine nucleotide exchange factor	SERGEF
+HUMAN	9127	O95744	Putative postmeiotic segregation increased 2-like protein 2	PMS2P2
+HUMAN	29931	Q9BVP2	Guanine nucleotide-binding protein-like 3	GNL3
+HUMAN	10782	Q05519	Serine/arginine-rich splicing factor 11	SRSF11
+HUMAN	7234	Q96E11	"Ribosome-recycling factor, mitochondrial"	MRRF
+HUMAN	25297	Q6ZN04	RNA-binding protein MEX3B	MEX3B
+HUMAN	33268	Q8NHU0	Cancer/testis antigen family 45 member A3	CT45A3
+HUMAN	786	P18848	Cyclic AMP-dependent transcription factor ATF-4	ATF4
+HUMAN	22423	Q96H79	Zinc finger CCCH-type antiviral protein 1-like	ZC3HAV1L
+HUMAN	30146	A6NJG6	Arginine-fifty homeobox	ARGFX
+HUMAN	6107	P52945	Pancreas/duodenum homeobox protein 1	PDX1
+HUMAN	21300	Q9H633	Ribonuclease P protein subunit p21	RPP21
+HUMAN	1852	P07199	Major centromere autoantigen B	CENPB
+HUMAN	4185	Q14549	Homeobox protein GBX-1	GBX1
+HUMAN	8634	P40426	Pre-B-cell leukemia transcription factor 3	PBX3
+HUMAN	13726	Q8NEZ4	Histone-lysine N-methyltransferase 2C	KMT2C
+HUMAN	18808	Q9Y6E2	Basic leucine zipper and W2 domain-containing protein 2	BZW2
+HUMAN	15762	Q9BZJ0	Crooked neck-like protein 1	CRNKL1
+HUMAN	14935	Q9NRC8	NAD-dependent protein deacetylase sirtuin-7	SIRT7
+HUMAN	17341	Q96Q11	"CCA tRNA nucleotidyltransferase 1, mitochondrial"	TRNT1
+HUMAN	16060	Q8WWH5	Probable tRNA pseudouridine synthase 1	TRUB1
+HUMAN	4652	P35269	General transcription factor IIF subunit 1	GTF2F1
+HUMAN	7134	Q03111	Protein ENL	MLLT1
+HUMAN	24566	Q5T6S3	PHD finger protein 19	PHF19
+HUMAN	30616	P60008	Spermatid-specific linker histone H1-like protein	HILS1
+HUMAN	11158	P62314	Small nuclear ribonucleoprotein Sm D1	SNRPD1
+HUMAN	3806	O00358	Forkhead box protein E1	FOXE1
+HUMAN	16718	Q9H6R0	Putative ATP-dependent RNA helicase DHX33	DHX33
+HUMAN	26023	Q8N9H8	Probable exonuclease mut-7 homolog	EXD3
+HUMAN	4978	Q14774	H2.0-like homeobox protein	HLX
+HUMAN	29989	Q86YP4	Transcriptional repressor p66-alpha	GATAD2A
+HUMAN	10770	Q15393	Splicing factor 3B subunit 3	SF3B3
+HUMAN	22448	O60393	Homeobox protein NOBOX	NOBOX
+HUMAN	9701	Q00577	Transcriptional activator protein Pur-alpha	PURA
+HUMAN	11191	P35716	Transcription factor SOX-11	SOX11
+HUMAN	11197	Q9Y651	Transcription factor SOX-21	SOX21
+HUMAN	1581	P24863	Cyclin-C	CCNC
+HUMAN	29513	O60306	Intron-binding protein aquarius	AQR
+HUMAN	33845	P0CL85	STAG3-like protein 3	STAG3L3
+HUMAN	18855	Q68CJ9	Cyclic AMP-responsive element-binding protein 3-like protein 3	CREB3L3
+HUMAN	14068	Q9UQL6	Histone deacetylase 5	HDAC5
+HUMAN	30958	Q969S3	Zinc finger protein 622	ZNF622
+HUMAN	10526	Q9Y467	Sal-like protein 2	SALL2
+HUMAN	9121	P54277	PMS1 protein homolog 1	PMS1
+HUMAN	2720	Q9ULH1	"Arf-GAP with SH3 domain, ANK repeat and PH domain-containing protein 1"	ASAP1
+HUMAN	28972	Q8IXZ2	Zinc finger CCCH domain-containing protein 3	ZC3H3
+HUMAN	26814	Q5EBL4	RILP-like protein 1	RILPL1
+HUMAN	3506	P49640	Homeobox even-skipped homolog protein 1	EVX1
+HUMAN	8062	P49790	Nuclear pore complex protein Nup153	NUP153
+HUMAN	10301	P62913	60S ribosomal protein L11	RPL11
+HUMAN	18254	Q96HZ4	Transcription cofactor HES-6	HES6
+HUMAN	853	P15313	"V-type proton ATPase subunit B, kidney isoform"	ATP6V1B1
+HUMAN	19398	Q96JS3	PiggyBac transposable element-derived protein 1	PGBD1
+HUMAN	31817	Q5JNZ5	Putative 40S ribosomal protein S26-like 1	RPS26P11
+HUMAN	11137	Q5SXM2	snRNA-activating protein complex subunit 4	SNAPC4
+HUMAN	31921	Q3KQZ1	Solute carrier family 25 member 35	SLC25A35
+HUMAN	3798	P15408	Fos-related antigen 2	FOSL2
+HUMAN	12814	P23025	DNA repair protein complementing XP-A cells	XPA
+HUMAN	1190	Q9NZP6	Nuclear pore-associated protein 1	NPAP1
+HUMAN	4621	P15170	Eukaryotic peptide chain release factor GTP-binding subunit ERF3A	GSPT1
+HUMAN	19070	Q96FV9	THO complex subunit 1	THOC1
+HUMAN	8638	Q92831	Histone acetyltransferase KAT2B	KAT2B
+HUMAN	2352	Q03060	cAMP-responsive element modulator	CREM
+HUMAN	30021	Q9BYK8	Helicase with zinc finger domain 2	HELZ2
+HUMAN	2739	O60231	Putative pre-mRNA-splicing factor ATP-dependent RNA helicase DHX16	DHX16
+HUMAN	20813	Q9H4T2	Zinc finger and SCAN domain-containing protein 16	ZSCAN16
+HUMAN	3495	P41212	Transcription factor ETV6	ETV6
+HUMAN	13639	O95231	Homeobox protein VENTX	VENTX
+HUMAN	28866	Q9NZI8	Insulin-like growth factor 2 mRNA-binding protein 1	IGF2BP1
+HUMAN	36809	A6NE09	40S ribosomal protein SA	RPSAP58
+HUMAN	8073	Q9H4D5	Nuclear RNA export factor 3	NXF3
+HUMAN	21022	Q5JTZ9	"Alanine--tRNA ligase, mitochondrial"	AARS2
+HUMAN	4642	P0CG29	Glutathione S-transferase theta-2	GSTT2
+HUMAN	14603	Q9Y222	Cyclin-D-binding Myb-like transcription factor 1	DMTF1
+HUMAN	15921	Q9UKM9	RNA-binding protein Raly	RALY
+HUMAN	10991	P05141	ADP/ATP translocase 2	SLC25A5
+HUMAN	11365	Q14765	Signal transducer and activator of transcription 4	STAT4
+HUMAN	20854	Q9H0W7	THAP domain-containing protein 2	THAP2
+HUMAN	30534	Q5VTE6	Protein angel homolog 2	ANGEL2
+HUMAN	10241	Q9H814	Phosphorylated adapter RNA export protein	PHAX
+HUMAN	16385	Q96P11	Putative methyltransferase NSUN5	NSUN5
+HUMAN	14517	Q8N983	"39S ribosomal protein L43, mitochondrial"	MRPL43
+HUMAN	1107	Q07352	"Zinc finger protein 36, C3H1 type-like 1"	ZFP36L1
+HUMAN	4762	P57053	Histone H2B type F-S	H2BFS
+HUMAN	26209	Q8N3Z6	Zinc finger CCHC domain-containing protein 7	ZCCHC7
+HUMAN	7963	Q14995	Nuclear receptor subfamily 1 group D member 2	NR1D2
+HUMAN	10259	Q92753	Nuclear receptor ROR-beta	RORB
+HUMAN	15682	Q8NDX5	Polyhomeotic-like protein 3	PHC3
+HUMAN	27334	Q5JSJ4	Protein DDX26B	DDX26B
+HUMAN	33854	Q569K6	Coiled-coil domain-containing protein 157	CCDC157
+HUMAN	1596	O75909	Cyclin-K	CCNK
+HUMAN	25206	Q8WV99	AN1-type zinc finger protein 2B	ZFAND2B
+HUMAN	14056	Q5T653	"39S ribosomal protein L2, mitochondrial"	MRPL2
+HUMAN	10331	P47914	60S ribosomal protein L29	RPL29
+HUMAN	18331	Q6NT04	Tigger transposable element-derived protein 7	TIGD7
+HUMAN	4641	P30711	Glutathione S-transferase theta-1	GSTT1
+HUMAN	3342	Q05925	Homeobox protein engrailed-1	EN1
+HUMAN	17035	Q96B26	Exosome complex component RRP43	EXOSC8
+HUMAN	17933	Q9H7Z6	Histone acetyltransferase KAT8	KAT8
+HUMAN	27097	A6NFN3	RNA binding protein fox-1 homolog 3	RBFOX3
+HUMAN	10317	P62750	60S ribosomal protein L23a	RPL23A
+HUMAN	10425	P22090	"40S ribosomal protein S4, Y isoform 1"	RPS4Y1
+HUMAN	10441	P62241	40S ribosomal protein S8	RPS8
+HUMAN	3473	O95718	Steroid hormone receptor ERR2	ESRRB
+HUMAN	23193	Q9P2Z0	THAP domain-containing protein 10	THAP10
+HUMAN	1914	O95199	RCC1 and BTB domain-containing protein 2	RCBTB2
+HUMAN	14959	Q96T37	Putative RNA-binding protein 15	RBM15
+HUMAN	6038	Q12906	Interleukin enhancer-binding factor 3	ILF3
+HUMAN	10987	O43808	Peroxisomal membrane protein PMP34	SLC25A17
+HUMAN	961	Q9UIG0	Tyrosine-protein kinase BAZ1B	BAZ1B
+HUMAN	4053	P05161	Ubiquitin-like protein ISG15	ISG15
+HUMAN	2718	Q92466	DNA damage-binding protein 2	DDB2
+HUMAN	2584	Q9NQC7	Ubiquitin carboxyl-terminal hydrolase CYLD	CYLD
+HUMAN	20876	Q96S55	ATPase WRNIP1	WRNIP1
+HUMAN	10402	P39019	40S ribosomal protein S19	RPS19
+HUMAN	23208	Q9GZM3	DNA-directed RNA polymerase II subunit RPB11-b1	POLR2J2
+HUMAN	19683	Q8TAS1	Serine/threonine-protein kinase Kist	UHMK1
+HUMAN	10541	Q01826	DNA-binding protein SATB1	SATB1
+HUMAN	17944	Q9NQT5	Exosome complex component RRP40	EXOSC3
+HUMAN	5108	P31268	Homeobox protein Hox-A7	HOXA7
+HUMAN	29543	B1AK76	Putative SNURF-like protein	SNURFL
+HUMAN	9122	P54278	Mismatch repair endonuclease PMS2	PMS2
+HUMAN	13671	Q96KK5	Histone H2A type 1-H	HIST1H2AH
+HUMAN	17017	P62312	U6 snRNA-associated Sm-like protein LSm6	LSM6
+HUMAN	30959	Q8IWR0	Zinc finger CCCH domain-containing protein 7A	ZC3H7A
+HUMAN	9176	P49005	DNA polymerase delta subunit 2	POLD2
+HUMAN	20951	Q9C009	Forkhead box protein Q1	FOXQ1
+HUMAN	1104	Q15059	Bromodomain-containing protein 3	BRD3
+HUMAN	17854	Q9HAU5	Regulator of nonsense transcripts 2	UPF2
+HUMAN	18332	Q17RP2	Tigger transposable element-derived protein 6	TIGD6
+HUMAN	8111	Q8TAX0	Protein odd-skipped-related 1	OSR1
+HUMAN	28725	Q8IXN7	N-acetylaspartylglutamate synthase A	RIMKLA
+HUMAN	28084	Q2M1V0	Intestine-specific homeobox	ISX
+HUMAN	13907	Q8N100	Protein atonal homolog 7	ATOH7
+HUMAN	22952	Q8N2C3	DEP domain-containing protein 4	DEPDC4
+HUMAN	7672	O75376	Nuclear receptor corepressor 1	NCOR1
+HUMAN	17259	Q9Y4Z0	U6 snRNA-associated Sm-like protein LSm4	LSM4
+HUMAN	25481	O75648	Mitochondrial tRNA-specific 2-thiouridylase 1	TRMU
+HUMAN	27619	Q149M9	NACHT and WD repeat domain-containing protein 1	NWD1
+HUMAN	11634	P15884	Transcription factor 4	TCF4
+HUMAN	30074	O14802	DNA-directed RNA polymerase III subunit RPC1	POLR3A
+HUMAN	3650	P39748	Flap endonuclease 1	FEN1
+HUMAN	12791	Q14191	Werner syndrome ATP-dependent helicase	WRN
+HUMAN	24149	Q9HCC6	Transcription factor HES-4	HES4
+HUMAN	15676	Q9BWG4	Single-stranded DNA-binding protein 4	SSBP4
+HUMAN	2699	O15523	ATP-dependent RNA helicase DDX3Y	DDX3Y
+HUMAN	30869	Q9UGR2	Zinc finger CCCH domain-containing protein 7B	ZC3H7B
+HUMAN	1835	P49716	CCAAT/enhancer-binding protein delta	CEBPD
+HUMAN	4643	O43708	Maleylacetoacetate isomerase	GSTZ1
+HUMAN	3446	P11308	Transcriptional regulator ERG	ERG
+HUMAN	10363	P18124	60S ribosomal protein L7	RPL7
+HUMAN	7652	O60934	Nibrin	NBN
+HUMAN	739	Q99929	Achaete-scute homolog 2	ASCL2
+HUMAN	18335	Q8IY51	Tigger transposable element-derived protein 4	TIGD4
+HUMAN	17860	Q8NC51	Plasminogen activator inhibitor 1 RNA-binding protein	SERBP1
+HUMAN	20074	Q504Q3	PAB-dependent poly(A)-specific ribonuclease subunit PAN2	PAN2
+HUMAN	10530	O00422	Histone deacetylase complex subunit SAP18	SAP18
+HUMAN	32469	Q8NE65	Protein ZNF738	ZNF738
+HUMAN	7961	Q15466	Nuclear receptor subfamily 0 group B member 2	NR0B2
+HUMAN	3775	Q06787	Fragile X mental retardation protein 1	FMR1
+HUMAN	23189	Q8TBB0	THAP domain-containing protein 6	THAP6
+HUMAN	7887	Q9UNW9	RNA-binding protein Nova-2	NOVA2
+HUMAN	12458	P62987	Ubiquitin-60S ribosomal protein L40	UBA52
+HUMAN	7764	Q92886	Neurogenin-1	NEUROG1
+HUMAN	13544	Q9NRG0	Chromatin accessibility complex protein 1	CHRAC1
+HUMAN	14254	Q9UK39	Nocturnin	CCRN4L
+HUMAN	7983	Q13285	Steroidogenic factor 1	NR5A1
+HUMAN	37267	P0CJ85	Double homeobox protein 4-like protein 2	DUX4L2
+HUMAN	2345	P16220	Cyclic AMP-responsive element-binding protein 1	CREB1
+HUMAN	10884	O14893	Gem-associated protein 2	GEMIN2
+HUMAN	ENSG00000239665	M0R3G1	Protein LOC101928497 (Fragment)	LOC101928497
+HUMAN	27867	P0C1H6	Histone H2B type F-M	H2BFM
+HUMAN	26881	Q17RS7	Flap endonuclease GEN homolog 1	GEN1
+HUMAN	30855	O15042	U2 snRNP-associated SURP motif-containing protein	U2SURP
+HUMAN	16645	Q13595	Transformer-2 protein homolog alpha	TRA2A
+HUMAN	11203	P57073	Transcription factor SOX-8	SOX8
+HUMAN	26677	Q8NA19	Lethal(3)malignant brain tumor-like protein 4	L3MBTL4
+HUMAN	3801	Q99958	Forkhead box protein C2	FOXC2
+HUMAN	33164	Q6NXT2	Histone H3.3C	H3F3C
+HUMAN	21029	Q7Z4V0	Zinc finger protein 438	ZNF438
+HUMAN	21868	Q9GZY4	Cytochrome c oxidase assembly factor 1 homolog	COA1
+HUMAN	5002	Q9P0W2	SWI/SNF-related matrix-associated actin-dependent regulator of chromatin subfamily E member 1-related	HMG20B
+HUMAN	19374	O15226	NF-kappa-B-repressing factor	NKRF
+HUMAN	11597	Q13207	T-box transcription factor TBX2	TBX2
+HUMAN	3293	O60573	Eukaryotic translation initiation factor 4E type 2	EIF4E2
+HUMAN	16754	Q96P50	"Arf-GAP with coiled-coil, ANK repeat and PH domain-containing protein 3"	ACAP3
+HUMAN	5127	Q00444	Homeobox protein Hox-C5	HOXC5
+HUMAN	11989	P11388	DNA topoisomerase 2-alpha	TOP2A
+HUMAN	5026	Q14541	Hepatocyte nuclear factor 4-gamma	HNF4G
+HUMAN	14049	O60783	"28S ribosomal protein S14, mitochondrial"	MRPS14
+HUMAN	10303	P26373	60S ribosomal protein L13	RPL13
+HUMAN	17521	Q96PM9	Zinc finger protein 385A	ZNF385A
+HUMAN	744	Q9UBL3	Set1/Ash2 histone methyltransferase complex subunit ASH2	ASH2L
+HUMAN	15789	P53582	Methionine aminopeptidase 1	METAP1
+HUMAN	3702	Q13642	Four and a half LIM domains protein 1	FHL1
+HUMAN	16732	Q96PE7	"Methylmalonyl-CoA epimerase, mitochondrial"	MCEE
+HUMAN	11150	P08621	U1 small nuclear ribonucleoprotein 70 kDa	SNRNP70
+HUMAN	6598	P18858	DNA ligase 1	LIG1
+HUMAN	4758	P23527	Histone H2B type 1-O	HIST1H2BO
+HUMAN	3326	P28324	ETS domain-containing protein Elk-4	ELK4
+HUMAN	20564	Q9NUK0	Muscleblind-like protein 3	MBNL3
+HUMAN	9828	P78406	mRNA export factor	RAE1
+HUMAN	23720	Q70SY1	Cyclic AMP-responsive element-binding protein 3-like protein 2	CREB3L2
+HUMAN	15862	Q9NWM0	Spermine oxidase	SMOX
+HUMAN	6121	O14896	Interferon regulatory factor 6	IRF6
+HUMAN	11160	P62318	Small nuclear ribonucleoprotein Sm D3	SNRPD3
+HUMAN	1806	Q99626	Homeobox protein CDX-2	CDX2
+HUMAN	25895	Q53GL7	Poly [ADP-ribose] polymerase 10	PARP10
+HUMAN	11952	Q05952	Nuclear transition protein 2	TNP2
+HUMAN	8939	Q9UMS5	Putative homeodomain transcription factor 1	PHTF1
+HUMAN	24903	Q9Y520	Protein PRRC2C	PRRC2C
+HUMAN	24489	Q8ND56	Protein LSM14 homolog A	LSM14A
+HUMAN	7391	P28360	Homeobox protein MSX-1	MSX1
+HUMAN	11986	P11387	DNA topoisomerase 1	TOP1
+HUMAN	3252	O14602	"Eukaryotic translation initiation factor 1A, Y-chromosomal"	EIF1AY
+HUMAN	4792	Q99525	Histone H4-like protein type G	HIST1H4G
+HUMAN	13312	P78417	Glutathione S-transferase omega-1	GSTO1
+HUMAN	24636	Q9UHB6	LIM domain and actin-binding protein 1	LIMA1
+HUMAN	ENSG00000271786	U3KQU2	Uncharacterized protein (Fragment)	unassigned
+HUMAN	10983	Q9UJS0	Calcium-binding mitochondrial carrier protein Aralar2	SLC25A13
+HUMAN	8490	O43929	Origin recognition complex subunit 4	ORC4
+HUMAN	9962	Q92900	Regulator of nonsense transcripts 1	UPF1
+HUMAN	13266	Q9GZR7	ATP-dependent RNA helicase DDX24	DDX24
+HUMAN	9187	P24928	DNA-directed RNA polymerase II subunit RPB1	POLR2A
+HUMAN	7806	Q13952	Nuclear transcription factor Y subunit gamma	NFYC
+HUMAN	10989	Q00325	"Phosphate carrier protein, mitochondrial"	SLC25A3
+HUMAN	14499	Q9Y2R9	"28S ribosomal protein S7, mitochondrial"	MRPS7
+HUMAN	33186	Q6ZNG2	Homeobox protein DBX2	DBX2
+HUMAN	1186	Q9NR21	Poly [ADP-ribose] polymerase 11	PARP11
+HUMAN	11605	O95947	T-box transcription factor TBX6	TBX6
+HUMAN	25521	Q8N5C6	S1 RNA-binding domain-containing protein 1	SRBD1
+HUMAN	3289	Q13542	Eukaryotic translation initiation factor 4E-binding protein 2	EIF4EBP2
+HUMAN	20794	Q2NKX8	DNA excision repair protein ERCC-6-like	ERCC6L
+HUMAN	11796	P10827	Thyroid hormone receptor alpha	THRA
+HUMAN	9197	P52435	DNA-directed RNA polymerase II subunit RPB11-a	POLR2J
+HUMAN	7559	P04198	N-myc proto-oncogene protein	MYCN
+HUMAN	9128	Q13401	Putative postmeiotic segregation increased 2-like protein 3	PMS2P3
+HUMAN	17634	Q7Z417	Nuclear fragile X mental retardation-interacting protein 2	NUFIP2
+HUMAN	21735	Q9UPM6	LIM/homeobox protein Lhx6	LHX6
+HUMAN	10765	Q15459	Splicing factor 3A subunit 1	SF3A1
+HUMAN	2065	Q96NY7	Chloride intracellular channel protein 6	CLIC6
+HUMAN	ENSG00000272410	H7C1W4	Uncharacterized protein (Fragment)	unassigned
+HUMAN	604	P41238	C-U-editing enzyme APOBEC-1	APOBEC1
+HUMAN	9971	P40938	Replication factor C subunit 3	RFC3
+HUMAN	2740	Q92841	Probable ATP-dependent RNA helicase DDX17	DDX17
+HUMAN	4213	Q96MZ0	Ganglioside-induced differentiation-associated protein 1-like 1	GDAP1L1
+HUMAN	12862	P26651	Tristetraprolin	ZFP36
+HUMAN	17800	Q9NSD9	Phenylalanine--tRNA ligase beta subunit	FARSB
+HUMAN	17050	Q9UNX3	60S ribosomal protein L26-like 1	RPL26L1
+HUMAN	20569	Q9UK58	Cyclin-L1	CCNL1
+HUMAN	ENSG00000269547	M0R2C6	Uncharacterized protein (Fragment)	unassigned
+HUMAN	11098	P51531	Probable global transcription activator SNF2L2	SMARCA2
+HUMAN	6916	Q9UIS9	Methyl-CpG-binding domain protein 1	MBD1
+HUMAN	12305	Q15643	Thyroid receptor-interacting protein 11	TRIP11
+HUMAN	71	Q9UG63	ATP-binding cassette sub-family F member 2	ABCF2
+HUMAN	23696	Q7Z3E1	TCDD-inducible poly [ADP-ribose] polymerase	TIPARP
+HUMAN	11749	Q14186	Transcription factor Dp-1	TFDP1
+HUMAN	2678	P14868	"Aspartate--tRNA ligase, cytoplasmic"	DARS
+HUMAN	11799	P10828	Thyroid hormone receptor beta	THRB
+HUMAN	20038	Q9Y2R4	Probable ATP-dependent RNA helicase DDX52	DDX52
+HUMAN	15970	Q9NRJ5	Poly(A) polymerase beta	PAPOLB
+HUMAN	10074	P13489	Ribonuclease inhibitor	RNH1
+HUMAN	30046	Q96BK5	PIN2/TERF1-interacting telomerase inhibitor 1	PINX1
+HUMAN	13011	Q9P2Y4	Zinc finger protein 219	ZNF219
+HUMAN	25844	Q9H898	Zinc finger matrin-type protein 4	ZMAT4
+HUMAN	17419	Q6IS14	Eukaryotic translation initiation factor 5A-1-like	EIF5AL1
+HUMAN	30557	Q8WUT9	Solute carrier family 25 member 43	SLC25A43
+HUMAN	18700	Q9NQI0	Probable ATP-dependent RNA helicase DDX4	DDX4
+HUMAN	10045	P10153	Non-secretory ribonuclease	RNASE2
+HUMAN	25818	Q9H8M2	Bromodomain-containing protein 9	BRD9
+HUMAN	30329	P78345	Ribonuclease P protein subunit p38	RPP38
+HUMAN	6703	Q9Y608	Leucine-rich repeat flightless-interacting protein 2	LRRFIP2
+HUMAN	25858	Q8TCF1	AN1-type zinc finger protein 1	ZFAND1
+HUMAN	29279	Q9P281	BAH and coiled-coil domain-containing protein 1	BAHCC1
+HUMAN	2741	Q9NVP1	ATP-dependent RNA helicase DDX18	DDX18
+HUMAN	25499	Q9NW75	G patch domain-containing protein 2	GPATCH2
+HUMAN	19269	Q8TAA1	Probable ribonuclease 11	RNASE11
+HUMAN	10442	P46781	40S ribosomal protein S9	RPS9
+HUMAN	29295	O60812	Heterogeneous nuclear ribonucleoprotein C-like 1	HNRNPCL1
+HUMAN	7984	O00482	Nuclear receptor subfamily 5 group A member 2	NR5A2
+HUMAN	13732	Q9NNZ6	Protamine-3	PRM3
+HUMAN	854	P21281	"V-type proton ATPase subunit B, brain isoform"	ATP6V1B2
+HUMAN	34519	O60290	Zinc finger protein 862	ZNF862
+HUMAN	26202	Q6IN84	"rRNA methyltransferase 1, mitochondrial"	MRM1
+HUMAN	28952	P42695	Condensin-2 complex subunit D3	NCAPD3
+HUMAN	22265	Q7RTS1	Class A basic helix-loop-helix protein 15	BHLHA15
+HUMAN	5021	P55317	Hepatocyte nuclear factor 3-alpha	FOXA1
+HUMAN	26228	Q8N6Q8	Methyltransferase-like protein 25	METTL25
+HUMAN	18196	Q9BT81	Transcription factor SOX-7	SOX7
+HUMAN	11304	P49458	Signal recognition particle 9 kDa protein	SRP9
+HUMAN	22938	P59046	"NACHT, LRR and PYD domains-containing protein 12"	NLRP12
+HUMAN	23729	Q8IYA7	Homeobox protein Mohawk	MKX
+HUMAN	30361	Q9BUL9	Ribonuclease P protein subunit p25	RPP25
+HUMAN	37101	A8MPP1	Putative ATP-dependent RNA helicase DDX11-like protein 8	DDX11L8
+HUMAN	11962	O15417	Trinucleotide repeat-containing gene 18 protein	TNRC18
+HUMAN	10418	P62857	40S ribosomal protein S28	RPS28
+HUMAN	10414	P62854	40S ribosomal protein S26	RPS26
+HUMAN	14350	Q8IVW6	AT-rich interactive domain-containing protein 3B	ARID3B
+HUMAN	15815	Q7Z478	ATP-dependent RNA helicase DHX29	DHX29
+HUMAN	12823	O43895	Xaa-Pro aminopeptidase 2	XPNPEP2
+HUMAN	28737	Q8IXM2	Chromatin complexes subunit BAP18	BAP18
+HUMAN	8632	P40424	Pre-B-cell leukemia transcription factor 1	PBX1
+HUMAN	24575	Q9Y248	DNA replication complex GINS protein PSF2	GINS2
+HUMAN	26790	Q3MJ13	WD repeat-containing protein 72	WDR72
+HUMAN	3031	Q99856	AT-rich interactive domain-containing protein 3A	ARID3A
+HUMAN	11599	Q9UL17	T-box transcription factor TBX21	TBX21
+HUMAN	13032	P17028	Zinc finger protein 24	ZNF24
+HUMAN	19351	Q9H694	Protein bicaudal C homolog 1	BICC1
+HUMAN	9280	P50336	Protoporphyrinogen oxidase	PPOX
+HUMAN	26052	Q5TA45	Integrator complex subunit 11	CPSF3L
+HUMAN	11163	P62308	Small nuclear ribonucleoprotein G	SNRPG
+HUMAN	7732	Q15843	NEDD8	NEDD8
+HUMAN	22973	A3KN83	Protein strawberry notch homolog 1	SBNO1
+HUMAN	4916	P54198	Protein HIRA	HIRA
+HUMAN	12871	Q9UKY1	Zinc fingers and homeoboxes protein 1	ZHX1
+HUMAN	14358	P78414	Iroquois-class homeodomain protein IRX-1	IRX1
+HUMAN	785	P18847	Cyclic AMP-dependent transcription factor ATF-3	ATF3
+HUMAN	16983	Q8TAK6	Oligodendrocyte transcription factor 1	OLIG1
+HUMAN	16988	Q9BRL6	Serine/arginine-rich splicing factor 8	SRSF8
+HUMAN	14042	Q9Y3B7	"39S ribosomal protein L11, mitochondrial"	MRPL11
+HUMAN	10329	P46776	60S ribosomal protein L27a	RPL27A
+HUMAN	17030	Q9HCN4	GPN-loop GTPase 1	GPN1
+HUMAN	29657	Q8N108	Mesoderm induction early response protein 1	MIER1
+HUMAN	11479	O43463	Histone-lysine N-methyltransferase SUV39H1	SUV39H1
+HUMAN	2697	Q10586	D site-binding protein	DBP
+HUMAN	10555	Q99700	Ataxin-2	ATXN2
+HUMAN	12511	P17480	Nucleolar transcription factor 1	UBTF
+HUMAN	26818	Q68D10	Protein SPT2 homolog	SPTY2D1
+HUMAN	21039	Q6P9G9	Zinc finger protein 449	ZNF449
+HUMAN	32940	A6NCS4	Homeobox protein Nkx-2.6	NKX2-6
+HUMAN	10340	P49207	60S ribosomal protein L34	RPL34
+HUMAN	24603	Q5H9I0	Transcription factor Dp family member 3	TFDP3
+HUMAN	27252	Q7Z2G1	Histone H2B type W-T	H2BFWT
+HUMAN	17094	Q96EH5	60S ribosomal protein L39-like	RPL39L
+HUMAN	14476	Q9NX20	"39S ribosomal protein L16, mitochondrial"	MRPL16
+HUMAN	228	Q9BUB4	tRNA-specific adenosine deaminase 1	ADAT1
+HUMAN	11602	O15119	T-box transcription factor TBX3	TBX3
+HUMAN	26798	Q8N8R7	ARL14 effector protein	ARL14EP
+HUMAN	3114	Q14209	Transcription factor E2F2	E2F2
+HUMAN	14222	Q9NQ69	LIM/homeobox protein Lhx9	LHX9
+HUMAN	4984	P05114	Non-histone chromosomal protein HMG-14	HMGN1
+HUMAN	11594	Q96SF7	T-box transcription factor TBX15	TBX15
+HUMAN	30296	Q8IY67	Ribonucleoprotein PTB-binding 1	RAVER1
+HUMAN	1421	O43772	Mitochondrial carnitine/acylcarnitine carrier protein	SLC25A20
+HUMAN	31652	Q9UD57	NK1 transcription factor-related protein 2	NKX1-2
+HUMAN	25971	Q9H6Y2	WD repeat-containing protein 55	WDR55
+HUMAN	10990	P12235	ADP/ATP translocase 1	SLC25A4
+HUMAN	34342	A6NHR8	Putative protein FAM47D	FAM47DP
+HUMAN	3320	Q9UKW6	ETS-related transcription factor Elf-5	ELF5
+HUMAN	10781	P62995	Transformer-2 protein homolog beta	TRA2B
+HUMAN	10982	O75746	Calcium-binding mitochondrial carrier protein Aralar1	SLC25A12
+HUMAN	13490	Q9Y4E6	WD repeat-containing protein 7	WDR7
+HUMAN	3019	Q14919	Dr1-associated corepressor	DRAP1
+HUMAN	4612	P56915	Homeobox protein goosecoid	GSC
+HUMAN	11535	P21675	Transcription initiation factor TFIID subunit 1	TAF1
+HUMAN	11556	P17542	T-cell acute lymphocytic leukemia protein 1	TAL1
+HUMAN	18477	Q9UKD2	mRNA turnover protein 4 homolog	MRTO4
+HUMAN	28118	P13994	Coiled-coil domain-containing protein 130	CCDC130
+HUMAN	23292	P60321	Nanos homolog 2	NANOS2
+HUMAN	11466	O75486	Transcription initiation protein SPT3 homolog	SUPT3H
+HUMAN	25628	Q9NUU7	ATP-dependent RNA helicase DDX19A	DDX19A
+HUMAN	16095	Q96NM4	TOX high mobility group box family member 2	TOX2
+HUMAN	33179	A6NMX2	Eukaryotic translation initiation factor 4E type 1B	EIF4E1B
+HUMAN	9200	O00411	"DNA-directed RNA polymerase, mitochondrial"	POLRMT
+HUMAN	15593	Q9UHA2	SS18-like protein 2	SS18L2
+HUMAN	ENSG00000255663	I3L521	Uncharacterized protein (Fragment)	unassigned
+HUMAN	6600	P49916	DNA ligase 3	LIG3
+HUMAN	18681	Q7L014	Probable ATP-dependent RNA helicase DDX46	DDX46
+HUMAN	12463	P0CG47	Polyubiquitin-B	UBB
+HUMAN	24650	Q9H9B1	Histone-lysine N-methyltransferase EHMT1	EHMT1
+HUMAN	25538	Q6PI48	"Aspartate--tRNA ligase, mitochondrial"	DARS2
+HUMAN	11151	P09012	U1 small nuclear ribonucleoprotein A	SNRPA
+HUMAN	24700	Q5QNW6	Histone H2B type 2-F	HIST2H2BF
+HUMAN	12984	O15535	Zinc finger and SCAN domain-containing protein 9	ZSCAN9
+HUMAN	4778	Q16695	Histone H3.1t	HIST3H3
+HUMAN	31802	Q96CB9	5-methylcytosine rRNA methyltransferase NSUN4	NSUN4
+HUMAN	8615	P15863	Paired box protein Pax-1	PAX1
+HUMAN	5401	Q9HB58	Sp110 nuclear body protein	SP110
+HUMAN	9948	P46063	ATP-dependent DNA helicase Q1	RECQL
+HUMAN	22941	Q7RTR0	"NACHT, LRR and PYD domains-containing protein 9"	NLRP9
+HUMAN	691	O14813	Paired mesoderm homeobox protein 2A	PHOX2A
+HUMAN	6595	Q9UBR4	LIM/homeobox protein Lhx3	LHX3
+HUMAN	225	P55265	Double-stranded RNA-specific adenosine deaminase	ADAR
+HUMAN	13007	Q9UL58	Zinc finger protein 215	ZNF215
+HUMAN	30359	Q9Y534	Cold shock domain-containing protein C2	CSDC2
+HUMAN	3814	O75593	Forkhead box protein H1	FOXH1
+HUMAN	14377	Q9NX24	H/ACA ribonucleoprotein complex subunit 2	NHP2
+HUMAN	11152	P09661	U2 small nuclear ribonucleoprotein A'	SNRPA1
+HUMAN	18420	Q9BYW2	Histone-lysine N-methyltransferase SETD2	SETD2
+HUMAN	7565	P13349	Myogenic factor 5	MYF5
+HUMAN	25823	Q6N063	2-oxoglutarate and iron-dependent oxygenase domain-containing protein 2	OGFOD2
+HUMAN	30541	A8K979	ERI1 exoribonuclease 2	ERI2
+HUMAN	13718	P15407	Fos-related antigen 1	FOSL1
+HUMAN	21464	Q86W26	"NACHT, LRR and PYD domains-containing protein 10"	NLRP10
+HUMAN	10426	P46782	40S ribosomal protein S5	RPS5
+HUMAN	29933	Q86WI3	Protein NLRC5	NLRC5
+HUMAN	7880	O95628	CCR4-NOT transcription complex subunit 4	CNOT4
+HUMAN	3471	P11474	Steroid hormone receptor ERR1	ESRRA
+HUMAN	21961	Q6NSZ9	Zinc finger and SCAN domain-containing protein 25	ZSCAN25
+HUMAN	14929	Q96EB6	NAD-dependent protein deacetylase sirtuin-1	SIRT1
+HUMAN	33437	P0CG30	Glutathione S-transferase theta-2B	GSTT2B
+HUMAN	14361	P78411	Iroquois-class homeodomain protein IRX-5	IRX5
+HUMAN	3081	Q96PT4	Putative double homeobox protein 3	DUX3
+HUMAN	14479	Q7Z2W9	"39S ribosomal protein L21, mitochondrial"	MRPL21
+HUMAN	9864	P10276	Retinoic acid receptor alpha	RARA
+HUMAN	6132	P61371	Insulin gene enhancer protein ISL-1	ISL1
+HUMAN	4622	Q8IYD1	Eukaryotic peptide chain release factor GTP-binding subunit ERF3B	GSPT2
+HUMAN	1656	O95400	CD2 antigen cytoplasmic tail-binding protein 2	CD2BP2
+HUMAN	10979	P53007	"Tricarboxylate transport protein, mitochondrial"	SLC25A1
+HUMAN	14483	Q9P0M9	"39S ribosomal protein L27, mitochondrial"	MRPL27
+HUMAN	4315	Q53GS7	Nucleoporin GLE1	GLE1
+HUMAN	11162	P62306	Small nuclear ribonucleoprotein F	SNRPF
+HUMAN	2918	P56178	Homeobox protein DLX-5	DLX5
+HUMAN	2743	Q9UHI6	Probable ATP-dependent RNA helicase DDX20	DDX20
+HUMAN	15888	Q9NZ71	Regulator of telomere elongation helicase 1	RTEL1
+HUMAN	29036	Q96H78	Solute carrier family 25 member 44	SLC25A44
+HUMAN	4989	O00479	High mobility group nucleosome-binding domain-containing protein 4	HMGN4
+HUMAN	14279	Q6P1L8	"39S ribosomal protein L14, mitochondrial"	MRPL14
+HUMAN	8071	Q9UBU9	Nuclear RNA export factor 1	NXF1
+HUMAN	20516	Q6DN03	Putative histone H2B type 2-C	HIST2H2BC
+HUMAN	30097	O94913	Pre-mRNA cleavage complex 2 protein Pcf11	PCF11
+HUMAN	14234	Q96L73	"Histone-lysine N-methyltransferase, H3 lysine-36 and H4 lysine-20 specific"	NSD1
+HUMAN	23462	Q5T2P9	"Arf-GAP with GTPase, ANK repeat and PH domain-containing protein 10"	AGAP10
+HUMAN	4749	Q99877	Histone H2B type 1-N	HIST1H2BN
+HUMAN	5132	Q9GZZ0	Homeobox protein Hox-D1	HOXD1
+HUMAN	16403	Q9UL40	Zinc finger protein 346	ZNF346
+HUMAN	34005	A8CG34	Nuclear envelope pore membrane protein POM 121C	POM121C
+HUMAN	16682	Q86T24	Transcriptional regulator Kaiso	ZBTB33
+HUMAN	24893	Q75WM6	Testis-specific H1 histone	H1FNT
+HUMAN	3489	P15036	Protein C-ets-2	ETS2
+HUMAN	3316	P32519	ETS-related transcription factor Elf-1	ELF1
+HUMAN	11547	Q92804	TATA-binding protein-associated factor 2N	TAF15
+HUMAN	9235	Q03181	Peroxisome proliferator-activated receptor delta	PPARD
+HUMAN	14492	Q8IXM3	"39S ribosomal protein L41, mitochondrial"	MRPL41
+HUMAN	4771	P68431	Histone H3.1	HIST1H3A
+HUMAN	11355	Q8N3U4	Cohesin subunit SA-2	STAG2
+HUMAN	3492	P41162	ETS translocation variant 3	ETV3
+HUMAN	6947	P33991	DNA replication licensing factor MCM4	MCM4
+HUMAN	7762	Q13562	Neurogenic differentiation factor 1	NEUROD1
+HUMAN	11588	P20226	TATA-box-binding protein	TBP
+HUMAN	10047	P34096	Ribonuclease 4	RNASE4
+HUMAN	20508	Q8IUE6	Histone H2A type 2-B	HIST2H2AB
+HUMAN	4816	P12081	"Histidine--tRNA ligase, cytoplasmic"	HARS
+HUMAN	10411	P62847	40S ribosomal protein S24	RPS24
+HUMAN	13221	Q9H165	B-cell lymphoma/leukemia 11A	BCL11A
+HUMAN	23480	P85037	Forkhead box protein K1	FOXK1
+HUMAN	10759	Q9Y6X1	Stress-associated endoplasmic reticulum protein 1	SERP1
+HUMAN	49181	S4R435	Protein RPS10-NUDT3 (Fragment)	RPS10-NUDT3
+HUMAN	20084	Q8TDD1	ATP-dependent RNA helicase DDX54	DDX54
+HUMAN	9894	Q08999	Retinoblastoma-like protein 2	RBL2
+HUMAN	10854	O60902	Short stature homeobox protein 2	SHOX2
+HUMAN	9906	O43251	RNA binding protein fox-1 homolog 2	RBFOX2
+HUMAN	ENSG00000237452	C9JSJ3	Uncharacterized protein	unassigned
+HUMAN	4171	P23769	Endothelial transcription factor GATA-2	GATA2
+HUMAN	26347	B5ME19	Eukaryotic translation initiation factor 3 subunit C-like protein	EIF3CL
+HUMAN	28073	Q8N6M9	AN1-type zinc finger protein 2A	ZFAND2A
+HUMAN	20338	Q7L622	G2/M phase-specific E3 ubiquitin-protein ligase	G2E3
+HUMAN	13009	O75362	Zinc finger protein 217	ZNF217
+HUMAN	28875	Q8WZ79	Deoxyribonuclease-2-beta	DNASE2B
+HUMAN	13997	Q9H4Q4	PR domain zinc finger protein 12	PRDM12
+HUMAN	2064	O95833	Chloride intracellular channel protein 3	CLIC3
+HUMAN	17357	Q9HC16	DNA dC-dU-editing enzyme APOBEC-3G	APOBEC3G
+HUMAN	30858	Q15029	116 kDa U5 small nuclear ribonucleoprotein component	EFTUD2
+HUMAN	21397	Q8N228	Sex comb on midleg-like protein 4	SCML4
+HUMAN	30291	Q9UN86	Ras GTPase-activating protein-binding protein 2	G3BP2
+HUMAN	1918	Q12873	Chromodomain-helicase-DNA-binding protein 3	CHD3
+HUMAN	29322	Q9HCG8	Pre-mRNA-splicing factor CWC22 homolog	CWC22
+HUMAN	4880	Q9Y5J3	Hairy/enhancer-of-split related with YRPW motif protein 1	HEY1
+HUMAN	18523	Q6VB84	Forkhead box protein D4-like 3	FOXD4L3
+HUMAN	18193	Q9NY93	Probable ATP-dependent RNA helicase DDX56	DDX56
+HUMAN	26226	Q5TGS1	Transcription factor HES-3	HES3
+HUMAN	4273	Q14161	ARF GTPase-activating protein GIT2	GIT2
+HUMAN	15674	Q9BWW4	Single-stranded DNA-binding protein 3	SSBP3
+HUMAN	18677	Q9NXZ2	Probable ATP-dependent RNA helicase DDX43	DDX43
+HUMAN	3321	P19419	ETS domain-containing protein Elk-1	ELK1
+HUMAN	18524	Q96A47	Insulin gene enhancer protein ISL-2	ISL2
+HUMAN	10351	Q92901	60S ribosomal protein L3-like	RPL3L
+HUMAN	16717	Q7L7V1	Putative pre-mRNA-splicing factor ATP-dependent RNA helicase DHX32	DHX32
+HUMAN	18160	Q9Y603	Transcription factor ETV7	ETV7
+HUMAN	20454	Q9H9Y6	DNA-directed RNA polymerase I subunit RPA2	POLR1B
+HUMAN	15852	Q8N6T3	ADP-ribosylation factor GTPase-activating protein 1	ARFGAP1
+HUMAN	18570	Q8IUE1	Homeobox protein TGIF2LX	TGIF2LX
+HUMAN	4718	P10412	Histone H1.4	HIST1H1E
+HUMAN	17343	P31941	DNA dC-dU-editing enzyme APOBEC-3A	APOBEC3A
+HUMAN	24923	Q9Y5R4	HemK methyltransferase family member 1	HEMK1
+HUMAN	13575	O60885	Bromodomain-containing protein 4	BRD4
+HUMAN	8848	O00541	Pescadillo homolog	PES1
+HUMAN	5123	O43248	Homeobox protein Hox-C11	HOXC11
+HUMAN	11196	O60248	Protein SOX-15	SOX15
+HUMAN	7411	O94776	Metastasis-associated protein MTA2	MTA2
+HUMAN	5331	Q9HC29	Nucleotide-binding oligomerization domain-containing protein 2	NOD2
+HUMAN	29934	Q6ZQQ6	WD repeat-containing protein 87	WDR87
+HUMAN	17086	Q9H0L4	Cleavage stimulation factor subunit 2 tau variant	CSTF2T
+HUMAN	10904	Q14493	Histone RNA hairpin-binding protein	SLBP
+HUMAN	24974	Q8IZ69	tRNA (uracil-5-)-methyltransferase homolog A	TRMT2A
+HUMAN	ENSG00000268714	M0QZ94	Uncharacterized protein (Fragment)	unassigned
+HUMAN	17353	Q9NRW3	DNA dC-dU-editing enzyme APOBEC-3C	APOBEC3C
+HUMAN	14277	Q9BYD2	"39S ribosomal protein L9, mitochondrial"	MRPL9
+HUMAN	11515	O15178	Brachyury protein	T
+HUMAN	25319	Q9H0C2	ADP/ATP translocase 4	SLC25A31
+HUMAN	8057	Q9UHK0	Nuclear fragile X mental retardation-interacting protein 1	NUFIP1
+HUMAN	25592	Q9NV88	Integrator complex subunit 9	INTS9
+HUMAN	4764	P84243	Histone H3.3	H3F3A
+HUMAN	1080	P05423	DNA-directed RNA polymerase III subunit RPC4	POLR3D
+HUMAN	16944	Q96I25	Splicing factor 45	RBM17
+HUMAN	10761	Q15047	Histone-lysine N-methyltransferase SETDB1	SETDB1
+HUMAN	5122	Q9NYD6	Homeobox protein Hox-C10	HOXC10
+HUMAN	21375	Q5JTD7	Leucine-rich repeat-containing protein 73	LRRC73
+HUMAN	26948	Q5T013	Putative hydroxypyruvate isomerase	HYI
+HUMAN	25394	Q7Z3H4	Sterile alpha motif domain-containing protein 7	SAMD7
+HUMAN	18795	O15205	Ubiquitin D	UBD
+HUMAN	5129	P31273	Homeobox protein Hox-C8	HOXC8
+HUMAN	9236	P37231	Peroxisome proliferator-activated receptor gamma	PPARG
+HUMAN	3802	Q16676	Forkhead box protein D1	FOXD1
+HUMAN	16849	Q15014	Mortality factor 4-like protein 2	MORF4L2
+HUMAN	28987	Q92615	La-related protein 4B	LARP4B
+HUMAN	9905	Q9Y5S9	RNA-binding protein 8A	RBM8A
+HUMAN	24949	Q01804	OTU domain-containing protein 4	OTUD4
+HUMAN	784	P15336	Cyclic AMP-dependent transcription factor ATF-2	ATF2
+HUMAN	23188	Q7Z6K1	THAP domain-containing protein 5	THAP5
+HUMAN	21637	Q9UPW6	DNA-binding protein SATB2	SATB2
+HUMAN	31795	A6PVI3	Nuclear cap-binding protein subunit 2-like	NCBP2L
+HUMAN	10478	P28702	Retinoic acid receptor RXR-beta	RXRB
+HUMAN	2773	O76075	DNA fragmentation factor subunit beta	DFFB
+HUMAN	5358	Q02556	Interferon regulatory factor 8	IRF8
+HUMAN	11153	P14678	Small nuclear ribonucleoprotein-associated proteins B and B'	SNRPB
+HUMAN	1108	P47974	"Zinc finger protein 36, C3H1 type-like 2"	ZFP36L2
+HUMAN	5000	P26583	High mobility group protein B2	HMGB2
+HUMAN	18674	Q9UJV9	Probable ATP-dependent RNA helicase DDX41	DDX41
+HUMAN	11164	P63162	Small nuclear ribonucleoprotein-associated protein N	SNRPN
+HUMAN	16653	Q96GC5	"39S ribosomal protein L48, mitochondrial"	MRPL48
+HUMAN	30939	Q86UP3	Zinc finger homeobox protein 4	ZFHX4
+HUMAN	10362	Q02878	60S ribosomal protein L6	RPL6
+HUMAN	7871	Q15233	Non-POU domain-containing octamer-binding protein	NONO
+HUMAN	12467	J3QRK5	Protein UBBP4	UBBP4
+HUMAN	19440	Q9Y3A5	Ribosome maturation protein SBDS	SBDS
+HUMAN	31686	Q5HYR2	Doublesex- and mab-3-related transcription factor C1	DMRTC1
+HUMAN	17896	Q9UMS4	Pre-mRNA-processing factor 19	PRPF19
+HUMAN	31837	Q8N5X7	Eukaryotic translation initiation factor 4E type 3	EIF4E3
+HUMAN	7547	P10243	Myb-related protein A	MYBL1
+HUMAN	1552	Q14781	Chromobox protein homolog 2	CBX2
+HUMAN	4272	Q9Y2X7	ARF GTPase-activating protein GIT1	GIT1
+HUMAN	3816	Q92949	Forkhead box protein J1	FOXJ1
+HUMAN	18818	Q8NF99	Zinc finger protein 397	ZNF397
+HUMAN	8518	Q5XKR4	Homeobox protein orthopedia	OTP
+HUMAN	12311	Q15654	Thyroid receptor-interacting protein 6	TRIP6
+HUMAN	13517	Q9NZA1	Chloride intracellular channel protein 5	CLIC5
+HUMAN	9232	Q07869	Peroxisome proliferator-activated receptor alpha	PPARA
+HUMAN	6973	Q00987	E3 ubiquitin-protein ligase Mdm2	MDM2
+HUMAN	823	P25705	"ATP synthase subunit alpha, mitochondrial"	ATP5A1
+HUMAN	9125	Q13670	Putative postmeiotic segregation increased 2-like protein 11	PMS2P11
+HUMAN	25369	Q8N7R1	POM121-like protein 12	POM121L12
+HUMAN	15887	Q9BX40	Protein LSM14 homolog B	LSM14B
+HUMAN	6593	P48742	LIM/homeobox protein Lhx1	LHX1
+HUMAN	1555	P45973	Chromobox protein homolog 5	CBX5
+HUMAN	17101	Q15022	Polycomb protein SUZ12	SUZ12
+HUMAN	20870	Q9H7B2	Ribosome production factor 2 homolog	RPF2
+HUMAN	10383	P46783	40S ribosomal protein S10	RPS10
+HUMAN	12790	O00258	Tail-anchored protein insertion receptor WRB	WRB
+HUMAN	15954	Q96GM8	Target of EGR1 protein 1	TOE1
+HUMAN	25994	Q08J23	tRNA (cytosine(34)-C(5))-methyltransferase	NSUN2
+HUMAN	24975	Q15270	NK1 transcription factor-related protein 1	NKX1-1
+HUMAN	24959	Q9BZM3	GS homeobox 2	GSX2
+HUMAN	16364	O15522	Homeobox protein Nkx-2.8	NKX2-8
+HUMAN	11100	P51532	Transcription activator BRG1	SMARCA4
+HUMAN	17008	Q92547	DNA topoisomerase 2-binding protein 1	TOPBP1
+HUMAN	14453	Q9P0M6	Core histone macro-H2A.2	H2AFY2
+HUMAN	16923	Q96P47	"Arf-GAP with GTPase, ANK repeat and PH domain-containing protein 3"	AGAP3
+HUMAN	3343	P19622	Homeobox protein engrailed-2	EN2
+HUMAN	9986	P48382	DNA-binding protein RFX5	RFX5
+HUMAN	7839	P78426	Homeobox protein Nkx-6.1	NKX6-1
+HUMAN	5001	Q9NP66	High mobility group protein 20A	HMG20A
+HUMAN	10325	P83731	60S ribosomal protein L24	RPL24
+HUMAN	20507	Q7L7L0	Histone H2A type 3	HIST3H2A
+HUMAN	26784	Q9H3J6	"Probable peptide chain release factor C12orf65, mitochondrial"	C12orf65
+HUMAN	24320	Q71RC2	La-related protein 4	LARP4
+HUMAN	18003	Q7RTU3	Oligodendrocyte transcription factor 3	OLIG3
+HUMAN	29620	Q8TBF4	Zinc finger CCHC-type and RNA-binding motif-containing protein 1	ZCRB1
+HUMAN	20900	Q9UJA5	tRNA (adenine(58)-N(1))-methyltransferase non-catalytic subunit TRM6	TRMT6
+HUMAN	30011	Q9BQY4	Rhox homeobox family member 2	RHOXF2
+HUMAN	9356	Q9HCU5	Prolactin regulatory element-binding protein	PREB
+HUMAN	19655	Q7RTT3	Protein SSX9	SSX9
+HUMAN	11546	Q15543	Transcription initiation factor TFIID subunit 13	TAF13
+HUMAN	11105	Q8TAQ2	SWI/SNF complex subunit SMARCC2	SMARCC2
+HUMAN	18476	Q71UM5	40S ribosomal protein S27-like	RPS27L
+HUMAN	3290	O60516	Eukaryotic translation initiation factor 4E-binding protein 3	EIF4EBP3
+HUMAN	29094	O75153	Clustered mitochondria protein homolog	CLUH
+HUMAN	18117	O75525	"KH domain-containing, RNA-binding, signal transduction-associated protein 3"	KHDRBS3
+HUMAN	10345	P18077	60S ribosomal protein L35a	RPL35A
+HUMAN	29536	O60336	Mitogen-activated protein kinase-binding protein 1	MAPKBP1
+HUMAN	1151	O43684	Mitotic checkpoint protein BUB3	BUB3
+HUMAN	37204	A6NJ08	Putative methyl-CpG-binding domain protein 3-like 5	MBD3L5
+HUMAN	7763	Q15784	Neurogenic differentiation factor 2	NEUROD2
+HUMAN	5042	P55795	Heterogeneous nuclear ribonucleoprotein H2	HNRNPH2
+HUMAN	4920	P15822	Zinc finger protein 40	HIVEP1
+HUMAN	21269	P59047	"NACHT, LRR and PYD domains-containing protein 5"	NLRP5
+HUMAN	18189	Q9NPD3	Exosome complex component RRP41	EXOSC4
+HUMAN	8028	P78549	Endonuclease III-like protein 1	NTHL1
+HUMAN	29788	Q9H2K0	"Translation initiation factor IF-3, mitochondrial"	MTIF3
+HUMAN	ENSG00000272869	D6RBG4	Uncharacterized protein	unassigned
+HUMAN	7985	Q15406	Nuclear receptor subfamily 6 group A member 1	NR6A1
+HUMAN	7785	O00712	Nuclear factor 1 B-type	NFIB
+HUMAN	30347	Q9NVU0	DNA-directed RNA polymerase III subunit RPC5	POLR3E
+HUMAN	1081	Q01954	Zinc finger protein basonuclin-1	BNC1
+HUMAN	18114	Q5VWX1	"KH domain-containing, RNA-binding, signal transduction-associated protein 2"	KHDRBS2
+HUMAN	30486	Q658K8	Putative elongation factor 1-delta-like protein	EEF1DP3
+HUMAN	23168	Q8IYD8	Fanconi anemia group M protein	FANCM
+HUMAN	5138	P09016	Homeobox protein Hox-D4	HOXD4
+HUMAN	15592	O75177	Calcium-responsive transactivator	SS18L1
+HUMAN	23467	A6NIR3	"Arf-GAP with GTPase, ANK repeat and PH domain-containing protein 5"	AGAP5
+HUMAN	7002	A6NDR6	Putative homeobox protein Meis3-like 1	MEIS3P1
+HUMAN	11107	Q92925	SWI/SNF-related matrix-associated actin-dependent regulator of chromatin subfamily D member 2	SMARCD2

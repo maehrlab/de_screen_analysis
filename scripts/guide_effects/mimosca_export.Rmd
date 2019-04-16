@@ -1,0 +1,33 @@
+---
+title: "R Notebook"
+output: html_document
+---
+  
+  
+#### Set up workspace / data
+  
+```{r}
+results_path = Sys.getenv("FREEZR_DESTINATION")
+dge = freezr::inventory_get(tag = "DE_TERA_reclustered_no_dub") %>% readRDS
+TidynessChecklist( dge ) 
+```
+
+Exclude guides/KRAB from raw data.
+
+```{r}
+keep = rownames(dge@raw.data) %>% setdiff("dCas9_KRAB") %>% setdiff(GUIDE_NAMES)
+dge@raw.data = dge@raw.data[keep, ]
+dge@data = dge@data[keep, ]
+dge@scale.data = dge@scale.data[keep, ]
+```
+
+Then save data (main cluster and all clusters).
+
+```{r}
+dge_c0 = dge %>% SubsetDataFlex("ident", "ident==0")
+dge_c0@raw.data = dge_c0@raw.data[keep, ] #Somehow, subsetting un-does this, so I re-do it.
+assertthat::assert_that( !any(GUIDE_NAMES %in% rownames( GetAssayData(dge_c0, slot = "raw.data") ) ) )
+Write10X(dge,    data.dir = file.path(proj_dir, "mimosca", "data", "DE_TERA"))
+Write10X(dge_c0, data.dir = file.path(proj_dir, "mimosca", "data", "DE_TERA_c0"))
+```
+

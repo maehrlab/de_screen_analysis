@@ -1,0 +1,64 @@
+---
+  title: "R Notebook"
+output: html_document
+---
+  
+```{r}
+results_path = Sys.getenv("FREEZR_DESTINATION")
+dge = freezr::inventory_get(tag = "DE_c0") %>% readRDS
+TidynessChecklist( dge ) 
+gu = dge@data %>% 
+  rownames %>%
+  setdiff(GUIDE_NAMES) %>% 
+  setdiff("dCas9_KRAB")
+```
+
+#### Find, save, and plot markers (cluster-specific)
+
+```{r}
+markers = lapply( levels(dge@ident), FindMarkers, 
+                  object = dge, 
+                  logfc.threshold = 0.25,  
+                  test.use = "MAST", 
+                  genes.use = gu  ) 
+names(markers) = paste0("cluster", 0:3)
+for(ii in seq_along(markers)){ 
+  markers[[ii]]$gene = rownames( markers[[ii]] )
+  markers[[ii]]$q_val = p.adjust(markers[[ii]]$p_val, method = "fdr", n = dge@data %>% nrow)
+  markers[[ii]]$p_val_adj = NULL
+}
+SaveMarkerTables(markers, save_dir = "cluster_de_versus_all")
+inventory_add(tag      = "DE_TERA_cluster_markers_versus_all", 
+              extra    = "Markers for each DE TERA cluster",
+              force    = T, 
+              filename = file.path(results_path, "cluster_de_specific"))
+# markers = inventory_get("DE_TERA_cluster_markers") %>% LoadMarkerTables
+
+to_plot = markers %>% lapply(extract2, "gene") %>% Reduce(f=union)
+# save_feature_plots( dge, results_path,
+#                     gene_list = to_plot, gene_list_name = "cluster_de_specific" )
+```
+
+
+```{r}
+markers_ps = c("NODAL", "WNT3A", "OTX2", "GSC", "FOXA2", "LIM1", "T", "EOMES", "MIXL1", "HHEX")
+markers_troph = c( "CDX2", "EOMES", "HCG", "EPCAM", "FGF4", "ERR2", "TROP2" )
+# save_feature_plots( dge, results_path,
+#                     gene_list = markers_ps,
+#                     gene_list_name = "markers_ps" )
+# save_feature_plots( dge, results_path,
+#                     gene_list = markers_troph,
+#                     gene_list_name = "markers_troph" )
+# save_feature_plots( dge, results_path,
+#                     gene_list = c("POU5F1", "SOX17", "MIXL1"),
+#                     gene_list_name = "markers_figure" )
+# 
+# save_feature_plots( dge, results_path,
+#                     gene_list = c("orig.ident"),
+#                     cols.use = REPLICATE_COLORS,
+#                     gene_list_name = "markers_figure" )
+# save_feature_plots( dge, results_path,
+#                     gene_list = paste0("PC", 1:10),
+#                     gene_list_name = "pca" )
+
+```

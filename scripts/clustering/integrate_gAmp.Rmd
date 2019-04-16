@@ -1,0 +1,230 @@
+---
+title: ""
+author: "Eric Kernfeld"
+date: "January 18, 2017"
+output: html_document
+---
+
+#### Collect data
+
+```{r}
+results_path = Sys.getenv( "FREEZR_DESTINATION" )
+
+# Read data
+  
+# ========================================================================================
+# ===================  Fill this in based on where you saved the data. ===================  
+# ========================================================================================
+dge_list_full = list(
+  CR_perturb_2018JAN_hDE_tera_rep1 = Seurat::Read10X("PATH/TO/DIGITAL_GENE_EXPRESSION_MATRIX_tera_rep1"), 
+  CR_perturb_2018JAN_hDE_tera_rep2 = Seurat::Read10X("PATH/TO/DIGITAL_GENE_EXPRESSION_MATRIX_tera_rep2") 
+) 
+dge_list_gAmp = list( 
+  CR_perturb_2018JAN_hDE_tera_gAMP_rep1 = Seurat::Read10X("PATH/TO/GUIDE_AMP_MATRIX_tera_rep1"), 
+  CR_perturb_2018JAN_hDE_tera_gAMP_rep2 = Seurat::Read10X("PATH/TO/GUIDE_AMP_MATRIX_tera_rep2") 
+) 
+# ========================================================================================
+
+assess_guide_content(dge_list_gAmp[[1]])
+assess_guide_content(dge_list_gAmp[[2]])
+
+# Make colnames compatible with MergeSeurat output from clustering script (and each other)
+fix_repname = function(X, repname, sep="", ...) {
+  colnames(X) %<>% gsub("\\|.*", "", .)
+  colnames(X) %<>% paste(repname, ., sep=sep, ...)
+  colnames(X) %<>% gsub(paste0(repname, sep, repname), repname, .)
+  colnames(X) %<>% gsub(paste0(repname, sep, repname), repname, .)
+  colnames(X) %<>% gsub(paste0(repname, sep, repname), repname, .)
+  return( X )
+}
+compatible_repnames = paste0("Terarep", 1:2)
+dge_list_gAmp %<>% setNames(compatible_repnames)
+dge_list_full %<>% setNames(compatible_repnames)
+dge_list_gAmp = mapply( fix_repname , dge_list_gAmp, compatible_repnames, sep = "_", SIMPLIFY = F )
+dge_list_full = mapply( fix_repname , dge_list_full, compatible_repnames, sep = "_", SIMPLIFY = F )
+dge_list_gAmp %>% extract2(1) %>% colnames %>% head
+dge_list_full %>% extract2(1) %>% colnames %>% head
+
+
+# Check for a UMI-tools bug where certain genes were excluded. 
+has_krab = function(X) ("dCas9_KRAB" %in% rownames(X))
+has_USF1 = function(X) any(grepl("USF1", rownames(X)))
+dge_list_full %>% sapply( has_krab )
+dge_list_full %>% sapply( has_USF1 )
+dge_list_gAmp %>% sapply( has_USF1 )
+
+# get guide counts from amplification run as dataframe for metadata
+dge_list_metadata = mapply( prepare_gAmp_metadata, 
+                            dge_gAMP = dge_list_gAmp, 
+                            dge_raw  = dge_list_full, 
+                            SIMPLIFY = F )
+rownames(dge_list_metadata[[1]]) %<>% paste0("|CR_perturb_2018JAN_hDE_tera_rep1")
+rownames(dge_list_metadata[[2]]) %<>% paste0("|CR_perturb_2018JAN_hDE_tera_rep2")
+
+# Initial look at cell counts by guide by replicate.
+factorize_no_drop = function(x, levels, ...){
+  assertthat::assert_that(all(x %in% levels))
+  return( factor(x, levels = levels, ... ) )
+}
+  
+dge_list_metadata %>% 
+  lapply( extract2, "highest_expressed_guide") %>%
+  lapply( factorize_no_drop, levels = c(GUIDE_NAMES, "(no guides detected)") ) %>%
+  lapply( table ) %>% 
+  lapply( sort, decreasing = T ) %>% 
+  lapply( as.data.frame ) %>% 
+  mapply( fix_repname, X = ., repname = names(dge_list_metadata), SIMPLIFY = F ) %>%
+  Reduce(f=cbind) %>%
+  write.table(file = file.path(results_path, "guide_cellcounts_by_rep.tsv"),
+              quote = F, sep = "\t", row.names = F )
+
+```
+
+How clean is the assignment of cells to guides? What about the second highest guide in each cell?
+
+```{r}
+
+dge_list_metadata = mapply( model_peak_vs_second, metadata = dge_list_metadata, SIMPLIFY = F )
+mapply( plot_peak_vs_second, metadata = dge_list_metadata, rep = names(dge_list_metadata) )
+
+```
+
+#### Save metadata table
+
+```{r}
+
+desired_names = dge_list_metadata %>% lapply(colnames) %>% Reduce(f=union) 
+zeropad = function( X ){
+  for( name in desired_names ){
+    if(is.null(X[[name]])){ X[[name]] = 0 }
+  } 
+  return(X)
+}
+guide_metadata_path = file.path(results_path, "all_gAmp_metadata.tsv")
+write.table( dge_list_metadata %>% lapply(zeropad) %>% Reduce( f=rbind ), 
+             guide_metadata_path, 
+             sep = "\t", quote = F, row.names = T, col.names = T )
+inventory_add( tag = "guide_metadata", filename = guide_metadata_path, force = T,
+               extra = "Guide counts for DE TERA reps. Includes amplified and unamplified; individual and total; and extra info (KRAB, guide assignment, double-guide modeling.) " )
+```
+
+#### Integrate with Seurat object, tag doubleguides, and save
+
+```{r}
+# dge no guides
+dge = readRDS( inventory_get( "DE_TERA_processed" ))
+# guides no dge
+guide_metadata = inventory_get("guide_metadata") %>%
+  read.table(sep = "\t", header =T, row.names = 1, stringsAsFactors = F)
+# put'em together
+dge %<>% AddMetaData( guide_metadata )
+
+# save & inventory
+fp = file.path(results_path, "DE_TERA_processed_plus_guide.Robj")
+saveRDS(dge, fp)
+inventory_add( tag = "DE_TERA_processed_plus_guide", force = T, 
+               filename = fp,
+               extra = "Seurat object with DE TERA reps. Clustered and with gRNA amplification metadata. No doublet removal." )
+# dge = readRDS( inventory_get( "DE_TERA_processed_plus_guide" ))
+```
+
+#### Plot sequencing depth
+
+```{r}
+depth_data = dge %>% FetchData(c("nUMI", "nGene", "orig.ident"))
+medians = aggregate_nice( depth_data[1:2], by = depth_data$orig.ident, FUN = median ) %>% as.data.frame
+medians$orig.ident = medians %>% rownames()
+p = ggplot(depth_data) + 
+  #geom_density2d(aes(x=nUMI, y = nGene), colour = "black") + 
+  geom_point(aes(x=nUMI, y = nGene, colour = orig.ident), size = 0) + 
+  geom_hline(aes(yintercept = nGene, colour = orig.ident), data = medians) + 
+  geom_vline(aes(xintercept=nUMI, colour = orig.ident), data = medians) + 
+  scale_colour_manual(values = REPLICATE_COLORS) + 
+  scale_x_log10(breaks = 4000*(2^(0:4))) + 
+  scale_y_log10(breaks = 1000*(1:8)) + 
+  ggtitle("TERA DE cellwise sequencing depth") + 
+  theme(axis.text.x = element_text(angle = 45, vjust=0.5))
+ggsave(file.path(results_path, "library_depth.pdf"), p, height = 3, width = 5)
+
+p = dge %>% 
+  FetchData(c("gAmp_total", "highest_expressed_value", "orig.ident")) %>% 
+  ggplot() + 
+  geom_histogram(aes(x=gAmp_total, fill = orig.ident), bins = 100) + 
+  scale_fill_manual(values = REPLICATE_COLORS) + 
+  scale_x_log10(breaks = 10^(1:5)) + facet_wrap(~orig.ident, ncol = 1) + 
+  ggtitle("Sequencing depth from gRNA amplification") + 
+  ylab("Num cells") + xlab("Total UMI count") 
+ggsave(file.path(results_path, "gAmp_depth.pdf"), p, height = 3, width = 5)
+```
+
+#### Next QC step: deplete doublets and check scramble guides
+
+```{r}
+
+{
+  doublet_LR_cutoff = 0.2
+  pdf(file.path(results_path, "LR_capped.pdf"), width = 4, height = 3)
+  print(
+    dge@meta.data %>% ggplot() + 
+    geom_histogram(bins = 400, aes(x=log10_LR_capped)) + 
+    geom_vline(xintercept=doublet_LR_cutoff, colour = "red") + 
+    ggtitle( "Doublet removal criterion" ) + 
+    xlab("Log10 likelihood ratio (capped at ±2)") 
+  )
+  dev.off()
+}
+
+dir.create.nice(file.path(results_path, "filtering"))
+cat( file = file.path(results_path, "filtering", "initial_count.txt"), 
+     length(dge@cell.names))
+dge_clean = dge
+dge_clean %<>% SubsetDataFlex( "log10_LR_capped", "log10_LR_capped < doublet_LR_cutoff" )
+cat( file = file.path(results_path, "filtering", "doubleguides_removed.txt"), 
+     length(dge_clean@cell.names))
+dge_clean@raw.data[GUIDES_SCRAMBLE, ] = 0
+across_target_guides_test_v_panel( "Scramble", object = dge_clean, save_dir = "effects_scramble" )
+across_target_guides_test_v_all  ( "Scramble", object = dge_clean, save_dir = "effects_scramble" )
+across_target_guides_plot_reps   ( "Scramble", object = dge_clean, save_dir = "effects_scramble" )
+fc_dfs = apply_over_guides( gene = "Scramble", object = dge_clean, FUN = get_logfc_by_rep)
+fc_dfs %<>% lapply(as.data.frame)
+fc_dfs[[11]] = NULL
+fc_dfs = mapply(function(X, name){X$guide = name; return(X)}, fc_dfs, names(fc_dfs), SIMPLIFY = F)
+fc_dfs %<>% Reduce(f = rbind)
+fc_dfs %<>% subset(!(gene %in% GUIDE_NAMES))
+p = ggplot(fc_dfs)  + coord_fixed() +
+  geom_point(aes(x = FC_Terarep1, y = FC_Terarep2, colour = guide), size = 3) 
+
+ggsave( file.path(results_path, "Scramble_effects_all.png"), p, height = 5, width =  8)
+ggsave( file.path(results_path, "Scramble_effects_all.pdf"), p, height = 5, width =  8)
+inventory_add(tag = "scramble_effects", 
+              filename = file.path(results_path, "effects_scramble"),
+              force = T, 
+              extra = "Plots and tables showing differential expression of each scramble guide over the rest.")
+
+num_diff_expr = inventory_get("scramble_effects") %>% file.path("tables") %>% list.files(full.names = T) %>% lapply(read.csv) %>% lapply( subset, q_val < 0.1 ) %>% sapply(nrow)
+names(num_diff_expr) = inventory_get("scramble_effects") %>% file.path("tables") %>% list.files(full.names = F)
+names(num_diff_expr) %<>% gsub("\\.csv", "", .)
+num_diff_expr = num_diff_expr[GUIDES_SCRAMBLE]
+names(num_diff_expr) %<>% gsub("Scramble_gRNA", "", .)
+{
+  pdf( file.path( results_path, "scramble_effects.pdf" ), width = 10, height = 5 )
+  barplot( num_diff_expr, main = "Number of genes with FDR < 0.1", xlab = "Scramble guides" )
+  dev.off()
+}
+```
+
+#### Clean and save
+
+```{r}
+# save & inventory with doublets and mutant guides removed
+fp = file.path(results_path, "DE_TERA_processed_plus_guide_nodub.Robj")
+dge_clean %<>% SubsetDataFlex( "highest_expressed_guide", "! highest_expressed_guide %in% GUIDES_BLACKLIST" )
+saveRDS(dge_clean, fp)
+inventory_add( tag = "DE_TERA_processed_plus_guide_nodub", force = T, 
+               filename = fp,
+               extra = "Seurat object with DE TERA reps. Clustered and with gRNA amplification metadata. Doublets and blacklisted guides have been removed, but tSNE + clustering has not been redone." )
+# dge = readRDS( inventory_get( "DE_TERA_processed_plus_guide_nodub" ))
+```
+
+
+

@@ -1,0 +1,126 @@
+---
+title: "R Notebook"
+output: html_document
+---
+
+#### Set up data
+
+```{r}
+results_path = Sys.getenv("FREEZR_DESTINATION")
+
+dge = freezr::inventory_get(tag = "HE_processed") %>% readRDS
+
+summary_items = c( "ident", "orig.ident",
+                   grep("res\\.", AvailableData(dge), value = T),
+                   "nUMI","log10_nUMI", "nGene", "ACTB",
+                   "dCas9_KRAB","ACTC1", "ACTA1", "Phase", 
+                   "FOXA2", "highest_expressed_guide", 
+                   "highest_expressed_value",
+                   "Scramble_gRNA1", "FOXA2_gRNA2" )
+hox_genes = grep("^hox", AvailableData(dge), ignore.case = T, value = T)
+sfp = function(...) save_feature_plots(dge, results_path, types = c( "PDF", "pdf_png_split", "pdf_no_leg" ), 
+                                       height = 5, width = 6, ...)
+sfp( gene_list = hox_genes, gene_list_name = "hox_genes", size.use = 2 )
+sfp( gene_list = get_hepatic_genes(), gene_list_name = "hepatic_genes", size.use = 2 )
+sfp( gene_list = get_hepatic_genes(), gene_list_name = "hepatic_genes", col = c("white", "red"), mode = "umi_density",
+     n = 100, h = 5  )
+sfp( gene_list = summary_items,
+     gene_list_name = "summary", size.use = 2  )
+sfp( gene_list = "orig.ident", cols.use  = REPLICATE_COLORS, 
+     gene_list_name = "summary" )
+sfp( gene_list = "ident", cols.use  = HE_IDENT_COLORS, 
+     gene_list_name = "summary" )
+
+supp_genes = c("log10_nUMI", "nGene", "Scramble_gRNA1", "FOXA2_gRNA2",
+               "ACTB", "EPCAM", "GATA4", "FOXA2",
+               "HNF1B", "HNF4A", "HHEX", "AFP")
+
+sfp( gene_list = supp_genes, 
+     gene_list_name = "supplement_featureplots",
+     col = c("white", "red"),
+     mode = "umi_density",
+     n = 100, h = 5  )
+
+SavePlotGrid( dge, results_path = results_path, 
+              gene_list = supp_genes,
+              gene_list_name = "supplement_featureplots", 
+              ncol = 4, width = 16, height = 12, 
+              mode = "umi_density", cols.use = c("white", "red"), n = 100 )
+SavePlotGrid( dge, results_path = results_path, 
+              gene_list = supp_genes,
+              gene_list_name = "supplement_featureplots_no_leg", 
+              ncol = 4, width = 16, height = 12, 
+              edit_fun = function(p) {p + theme(legend.position = "none")},
+              mode = "umi_density", cols.use = c("white", "red"), n = 100 )
+
+
+```
+
+
+
+```{r}
+
+dco = dge@ident %>% levels %>% sort
+p = make_heatmap_for_table(dge, genes_in_order = GUIDES_HE, 
+                            aggregator = mean, desired_cluster_order = dco ,
+                           normalize = "row", norm_fun = standardize) + coord_flip() +
+  scale_fill_gradient2(low = "blue", high = "red", mid = "white")
+
+ggsave( file.path(results_path, "guides_heatmap.pdf"), 
+        plot = p, width = 4, height = 6 )
+
+
+ggsave( file.path(results_path, "guides_dotplot.pdf"), 
+        plot = DotPlot(dge, genes.plot = GUIDES_HE, 
+                       do.return = T, scale.by = "size", group.by = "ident") )
+
+go =  make_heatmap_for_table(dge, genes_in_order = get_hepatic_genes(), 
+                           aggregator = mean, desired_cluster_order = dco,
+                           normalize = "row", norm_fun = standardize, return_type = "table") %>% OrderRowsForHeatmap
+
+p = make_heatmap_for_table(dge, genes_in_order = go, 
+                           aggregator = mean, desired_cluster_order = dco,
+                           normalize = "row", norm_fun = standardize) +
+  scale_fill_gradient2(low = "blue", high = "red", mid = "white")
+X = read.delim( inventory_get( tag = "HE_clusters_unfiltered" ))
+signif = X %>% subset( gene %in% go ) %>% 
+  dplyr::mutate(significance = -log10(q_val) / 50) %>% 
+  dplyr::mutate(is_significant = ifelse( q_val < 0.1, "*", ""))
+p = p + 
+  # geom_tile(data = signif, 
+  #           aes(x = 3.75 + significance/2, width = significance, y = gene)) + 
+  geom_text(data = signif, 
+            aes(x=3.6, y = gene, label = is_significant)) +
+  expand_limits(x= c(0.5, 3.7))
+ggsave( file.path(results_path, "markers_heatmap.pdf"), 
+        plot = p, width = 4, height = 6 )
+
+
+p = make_heatmap_for_table(dge, genes_in_order = c(go, GUIDES_HE), 
+                           aggregator = mean, desired_cluster_order = dco,
+                           normalize = "row", norm_fun = standardize) +
+  scale_fill_gradient2(low = "blue", high = "red", mid = "white")
+ggsave( file.path(results_path, "markers_heatmap_with_guides.pdf"), 
+        plot = p, width = 5, height = 6 )
+
+```
+
+```{r}
+# reticulate::use_condaenv("r-reticulate")
+# reticulate::use_python("/anaconda/bin/python")
+# reticulate::py_install("umap-learn", envname = "r-reticulate", method = "conda")
+reticulate::py_module_available("umap")
+print(reticulate::py_config())
+dge %<>% (Seurat::RunUMAP)(dims.use = 1:8)
+save_feature_plots( dge, 
+                    results_path,
+                    gene_list = summary_items,
+                    gene_list_name = "summary_umap",
+                    axes = paste0("UMAP", 1:2), axes_description = "UMAP")
+
+save_feature_plots( dge, 
+                    results_path,
+                    gene_list = get_hepatic_genes(),
+                    gene_list_name = "hepatic_genes_umap",
+                    axes = paste0("UMAP", 1:2), axes_description = "UMAP")
+```

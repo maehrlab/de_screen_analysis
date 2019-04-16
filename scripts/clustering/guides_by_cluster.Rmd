@@ -1,0 +1,123 @@
+---
+  title: "R Notebook"
+output: html_document
+---
+  
+  
+  
+```{r}
+results_path = Sys.getenv("FREEZR_DESTINATION")
+dge = freezr::inventory_get(tag = "DE_TERA_reclustered_no_dub") %>% readRDS
+TidynessChecklist( dge ) 
+```
+
+Plot guide distribution across clusters
+
+```{r}
+analyze_guides_by_cluster = function(dge, name){
+  guide_freqs_by_target = get_guides_by_cluster( dge, aggregate_by_target = T, skip = GUIDES_BLACKLIST )
+  guide_freqs_scramble  = get_guides_by_cluster( dge, aggregate_by_target = F, skip = c(GUIDES_TRT, GUIDES_BLACKLIST ) )
+  guides_by_cluster_aggr = rbind( guide_freqs_by_target, guide_freqs_scramble )
+  # Wipe out duplicate row from rbind operation
+  guides_by_cluster_aggr = guides_by_cluster_aggr[setdiff(rownames(guides_by_cluster_aggr), "Scramble1"), ]
+  guides_by_cluster_aggr %>% heatmap_guides_by_cluster(paste0(name, "guides_by_cluster_aggr.pdf"), desired_order = 0:3)
+  guides_by_cluster_aggr %>% calc_save_pvals(paste0(name, "guide_vs_cluster_aggr")) -> x
+  guides_by_cluster %>% heatmap_guides_by_cluster(paste0(name, "guides_by_cluster.pdf"), desired_order = 0:3) 
+  guides_by_cluster %>% calc_save_pvals(paste0(name, "guide_vs_cluster"))
+  return(guides_by_cluster)
+}
+analyze_guides_by_cluster(dge %>% SubsetDataFlex("orig.ident", "orig.ident %in% 'Terarep1'"), name = "Terarep1" )
+analyze_guides_by_cluster(dge %>% SubsetDataFlex("orig.ident", "orig.ident %in% 'Terarep2'"), name = "Terarep2" )
+guides_by_cluster = analyze_guides_by_cluster(dge, name = "")
+inventory_add( tag = "guide_vs_cluster_qvals", force = T, 
+               extra = "Fisher exact test p-values for guide effect on cluster assignment. Jointly FDR adjusted.",
+               filename = file.path(results_path, "guide_vs_clusterqvals.tsv") )
+
+guide_pairs = combn( rownames(guides_by_cluster) %>% setdiff("Scramble"), 2 ) %>% t %>% as.data.frame
+guide_pairs %<>% set_colnames(c("guide1", "guide2"))
+guide_pairs$gene1 = get_genes_from_guides( guide_pairs$guide1 )
+guide_pairs$gene2 = get_genes_from_guides( guide_pairs$guide2 )
+guide_pairs$same_gene = guide_pairs$gene1 == guide_pairs$gene2
+tvnorm = function( p1, p2 ) sum(abs(p1-p2)) / 2
+guide_pairs$distance = mapply( guide1 = guide_pairs$guide1, 
+                               guide2 = guide_pairs$guide2, 
+                               function( guide1, guide2 ){
+                                 tvnorm(
+                                   guides_by_cluster[guide1, ] %>% div_by_sum,
+                                   guides_by_cluster[guide2, ] %>% div_by_sum
+                                 )
+                               }) 
+guide_pairs$min_prop_outside_c0 = mapply( guide1 = guide_pairs$guide1, 
+                                  guide2 = guide_pairs$guide2, 
+                                  function( guide1, guide2 ){
+                                    pmin(
+                                      guides_by_cluster[guide1, ] %>% div_by_sum %>% extract2(1) %>% subtract(1, .),
+                                      guides_by_cluster[guide2, ] %>% div_by_sum %>% extract2(1) %>% subtract(1, .)
+                                    )
+                                  }) 
+p = ggplot( guide_pairs ) + ggtitle( "Differences between cluster assignments of guides" ) +
+  geom_point (aes(x = min_prop_outside_c0, y = distance, colour = same_gene, alpha = same_gene)) + 
+  geom_smooth(aes(x = min_prop_outside_c0, y = distance, fill = same_gene), colour = "black") + 
+  xlab( "Effect size\n(Highest proportion outside cluster 0 for either guide)") + 
+  ylab( "Effect difference\n(Total variation distance\nbetween guide distributions)")
+ggsave( file.path( results_path, "Differences between cluster assignments.pdf"), p, width = 8, height = 4 )
+```
+
+Test scramble distribution versus null model
+
+```{r}
+freq_scramble = guide_freqs_by_target["Scramble", ]
+freq_rest = colSums( guide_freqs_by_target) - freq_scramble
+fisher.test(rbind(freq_scramble, freq_rest))
+```
+
+#### Plot guides within clusters
+
+```{r}
+{
+  target_assignment = dge@meta.data$highest_expressed_guide %>% get_genes_from_guides()
+  target_assignment_indicators = model.matrix( ~target+0, data.frame("target" = target_assignment))
+  colnames(target_assignment_indicators) %<>% gsub("target", "targeted_locus__", .)
+  dge@meta.data %<>% cbind(target_assignment_indicators)
+  save_feature_plots( dge, results_path, 
+                      gene_list = colnames(target_assignment_indicators), 
+                      gene_list_name = "target_assignments_density_style", 
+                      types = c("PDF", "PDF_PNG_SPLIT"),
+                      mode = "umi_density", n = 100, 
+                      contour_params = list( "alpha" = 0 ),
+                      cols.use = c("white", "red") )
+  save_feature_plots( dge, results_path, 
+                      gene_list = colnames(target_assignment_indicators), 
+                      gene_list_name = "target_assignments", 
+                      types = c("PDF", "PDF_PNG_SPLIT") )
+  pdt = file.path(proj_dir, "tables")
+  ryan_markers = read.csv( file.path( pdt, "markers_ryan.csv"), 
+                           stringsAsFactors = F, header = T ) %>%
+    Reduce(f=c) %>% unique
+  save_feature_plots( dge, results_path, 
+                      gene_list = ryan_markers, 
+                      gene_list_name = "staging_markers_density_style", 
+                      types = c("PDF", "PDF_PNG_SPLIT"),
+                      mode = "umi_density", n = 100,  
+                      contour_params = list( "alpha" = 0 ),
+                      cols.use = c("white", "red") )
+  save_feature_plots( dge, results_path, 
+                      gene_list = ryan_markers, 
+                      gene_list_name = "staging_markers", 
+                      types = c("PDF", "PDF_PNG_SPLIT") )
+}
+```
+
+
+```{r}
+{
+  pdf(file.path(results_path, "scrambles_by_cluster.pdf"))
+  X =  table(dge %>% FetchData(c("highest_expressed_guide", "ident")))[GUIDES_SCRAMBLE[-5], ]
+  totals =  table(dge %>% FetchData(c( "ident")))
+  barplot( 100* colSums(X) / totals,
+           main = "Scramble distribution",
+           xlab = "Cluster",
+           ylab = "Scrambles per 100 within cluster" )
+  dev.off()
+}
+```

@@ -1,0 +1,599 @@
+---
+title: ""
+author: "Eric Kernfeld"
+date: "January 18, 2017"
+output: html_document
+---
+
+
+```{r}
+results_path = Sys.getenv("FREEZR_DESTINATION")
+
+
+
+#' Make a small heatmap with guides versus targets or selected signature genes.
+#'
+#' Effect size is measured within each replicate as guide minus scramble.
+#'
+heatmap_guide_effects = function( object, 
+                                  genes,
+                                  guides_ctrl = GUIDES_SCRAMBLE,
+                                  guides_trt  = GUIDES_TRT %>% sort, 
+                                  include_targets = FALSE,
+                                  order_method = "endoderm_score", 
+                                  score_genes = DE_SIGNATURE, 
+                                  row_transform = standardize ){
+
+  # Check input
+  guide_genes = guides_trt %>% get_genes_from_guides %>% unique
+  other_genes = genes[!(genes %in% guide_genes)]
+  if( include_targets && !all(guide_genes == genes[1:length(guide_genes)])){
+    warning("Guides and genes do not seem to match. Some genes may be added.")
+    print( "guide_genes:" )
+    print( guide_genes )
+    print( "genes input" )
+    print( genes )
+    print( "genes augmented and reordered" )
+    genes = c(guide_genes, other_genes)
+    print( genes )
+  }
+
+  # Make sure we actually have each guides
+  guides_have = FetchData(object, c("highest_expressed_guide"))[[1]] %>% unique
+  guides_trt  %<>% intersect_preserving_order( guides_have )
+  guides_ctrl %<>% intersect_preserving_order( guides_have )
+  
+  # Aggregate expression by rep and guide
+  expr = FetchData(object, genes)
+  expr_means = aggregate( expr, 
+                          by = FetchData(object, c("highest_expressed_guide", "orig.ident")),
+                          FUN = mean )
+  expr_means_long = reshape2::melt( expr_means, id.vars = c("highest_expressed_guide", "orig.ident"),
+                                    variable.name = "gene", value.name = "expression" )
+  expr_means_array = reshape2::acast(expr_means_long, highest_expressed_guide ~ gene ~ orig.ident)
+  ctrl         = expr_means_array[guides_ctrl, , ] %>% apply(2:3, mean)
+  
+  # Calculate FC over control within each rep, then average
+  fc_over_ctrl = expr_means_array[guides_trt , , ] 
+  for( g in guides_trt ){
+    fc_over_ctrl[g, , ] %<>% subtract( ctrl )
+  }
+  assertthat::are_equal(fc_over_ctrl    [guides_trt[[1]], , ],
+                        expr_means_array[guides_trt[[1]], , ] - ctrl )
+  fc_over_ctrl_rep_avg = apply( fc_over_ctrl, 1:2, mean, na.rm = T ) 
+  fc_over_ctrl_rep_avg %<>% apply( 2, row_transform )
+
+  # The entry
+  #       fc_aggregated["FOXA2_guides", "SOX17"]
+  # refers to SOX17 expression in cells where FOXA2 was targeted.
+  # The numbers give fold change over control cells.
+  fc_aggregated = aggregate_nice( fc_over_ctrl_rep_avg, 
+                                  fc_over_ctrl_rep_avg %>% rownames %>% get_genes_from_guides(append = "_guides"),
+                                  FUN = median )
+  # This function accepts genes and reorders them by the effects they show across guides.
+  # Similarly affected genes will be similarly positioned. 
+  seriation_reorderfun = function( g ){
+    if(length(g)<=1){return(g)}
+    manhattan = function(x, y) sum(abs(x-y))
+    pd = proxy::dist
+    seriate = seriation::seriate
+    my_perm = fc_over_ctrl_rep_avg[, g] %>% t %>% pd(manhattan) %>% seriate(method = "TSP") %>% (seriation::get_order)
+    return(g[my_perm])
+  }
+  if ( order_method=="endoderm_score" ){
+    endoderminess_by_gene = fc_aggregated[, score_genes] %>% rowSums 
+    names(endoderminess_by_gene) = rownames(fc_aggregated)
+    endoderminess_by_gene %<>% sort
+    guide_genes = endoderminess_by_gene %>% names %>% gsub("_guides", "", .)
+    other_genes %<>% seriation_reorderfun
+    guides_trt  %<>% sort_guides_matching_genes(guide_genes)
+    genes = c(guide_genes, other_genes)
+  } else if ( order_method=="seriation" ){
+    guide_genes %<>% seriation_reorderfun
+    other_genes %<>% seriation_reorderfun
+    guides_trt  %<>% sort_guides_matching_genes(guide_genes)
+    genes = c(guide_genes, other_genes)
+  } else {
+    print("Will not reorder genes or guides.")
+  }
+
+  
+  # Reshape and plot
+  fc_over_ctrl_rep_avg %<>% as.data.frame()
+  fc_over_ctrl_rep_avg[["guide"]] = rownames(fc_over_ctrl_rep_avg)
+  fc_over_ctrl_rep_avg_long = reshape2::melt( fc_over_ctrl_rep_avg, 
+                                              value.var = "expression",
+                                              id.vars = "guide", 
+                                              variable.name = "gene", 
+                                              value.name = "fc_over_scramble" )
+  assertthat::assert_that(all(unique(fc_over_ctrl_rep_avg_long$guide) %in% guides_trt))
+  assertthat::assert_that(all(unique(fc_over_ctrl_rep_avg_long$gene)  %in% genes))
+  fc_over_ctrl_rep_avg_long$guide %<>% factor( ordered = T, levels = guides_trt )
+  fc_over_ctrl_rep_avg_long$gene  %<>% factor( ordered = T, levels = genes %>% rev )
+  fc_over_ctrl_rep_avg_long$guide_gene = fc_over_ctrl_rep_avg_long$guide %>% get_genes_from_guides
+  fc_over_ctrl_rep_avg_long$gene_matches_guide = 
+    fc_over_ctrl_rep_avg_long$guide_gene==
+    fc_over_ctrl_rep_avg_long$gene
+
+  if( include_targets ){
+    as_colour = "gene_matches_guide"
+  } else {
+    as_colour = NULL
+  }
+  p = ggplot( fc_over_ctrl_rep_avg_long ) + 
+    geom_tile( aes_string( x="guide", y = "gene", 
+                           fill = "fc_over_scramble", 
+                           colour = as_colour ) ) + 
+    scale_fill_gradient2(low = scales::muted("blue"), high = scales::muted("red")) + 
+    scale_color_manual(values = c("white", "black"))  + 
+    scale_x_discrete(position = "top", 
+                     labels = fc_over_ctrl_rep_avg_long$guide %>% levels %>% prettify_guide_labels ) + 
+    theme(axis.text.x = element_text(angle = 90, hjust = 0.05)) + 
+    theme(legend.background = element_rect(colour = 'black', fill = 'grey')) 
+
+  return(p)
+}
+```
+
+
+How to run the above code. 
+
+```{r}
+
+# DE_SIGNATURE = read.csv(file = "tables/thompson_endoderm_signature.csv", header = T, stringsAsFactors = F)[[1]]
+# low_abundance = c( "NFYB_gRNA2",
+#                    "CTCF_gRNA1",
+#                    "NFYB_gRNA1",
+#                    "MYBL2_gRNA1",
+#                    "MYBL2_gRNA2",
+#                    "MYBL2_gRNA3",
+#                    "CDC5L_gRNA1",
+#                    "CDC5L_gRNA2",
+#                    "CDC5L_gRNA3",
+#                    "ETV5_gRNA3",
+#                    "TGIF2_gRNA1",
+#                    "CREB3_gRNA2")
+# {
+#   p = heatmap_guide_effects(object     = dge_DE_TERA, 
+#                             guides_trt = GUIDES_TRT %>% setdiff(low_abundance),
+#                             genes      = TARGETS %>% sort %>% union(DE_SIGNATURE) )
+#   ggsave(file.path( results_path, "curated_genes_vs_guides_ordered_by_DE_score.pdf"), p, width = 30, height = 15)
+#   p = heatmap_guide_effects(object     = dge_DE_TERA, 
+#                             guides_trt = GUIDES_TRT %>% setdiff(low_abundance),
+#                             genes      = TARGETS %>% sort %>% union(DE_SIGNATURE), 
+#                             order_method = "seriation" )
+#   ggsave(file.path( results_path, "curated_genes_vs_guides_ordered_by_seriation.pdf"), p, width = 30, height = 15)
+# }
+
+```
+
+
+```{r}
+#' Highlight cells where a given gene was targeted for repression (using scrambles as the comparator).
+#' 
+#' @param Seurat object.
+#' @param gene Gene under study. 
+#' @param FUN Function to call for each comparison
+#' @param ... Additional params passed to FUN.
+#'
+#' This function wraps differential expression testers, facilitating the following comparisons:
+#'
+#' - scrambles vs gRNA1, 
+#' - scrambles vs gRNA2, 
+#' - scrambles vs gRNA3, 
+#' - scrambles vs all gRNAs.
+#'
+#' FUN should take as the first three inputs:
+#' - a Seurat object 
+#' - a guide name
+#' - the gene given to apply_over_guides
+#' 
+#' It may rely on 
+#' FetchData(object, "TEMP_COMPARE") to retrieve appropriate cell labels.
+#' This column will have levels "scramble", "other", and the guides in question, or for groups, 
+#' the string \code{paste0( "any_", gene, "_guide" )}.
+#'
+#' There is special behavior if gene == "Scramble". Then, the comparisons allowed are between 
+#' each scramble and the rest. The levels of "TEMP_COMPARE" for Scramble_gRNA5 will be "Scramble_gRNA5", 
+#' "other_scramble", and "other".
+#'
+#' @export
+#'
+apply_over_guides = function( object, gene = "FOXA2", FUN, ... ){
+
+  #### Categorize cells 
+  guides = get_guides_from_genes(gene)
+  idx_scram = object@meta.data$highest_expressed_guide %in% GUIDES_SCRAMBLE
+  idx_FOXA2 = object@meta.data$highest_expressed_guide %in% guides
+  if(sum(idx_FOXA2)<3){
+    warning(paste0("In apply_over_guides, few or no cells assigned to these guides! (", paste0(guides, collapse = ", "), ")\n"))
+  }  
+  # Fine categories keep gRNA1, 2, 3 separate
+  temp_group_fine = rep("other", length(idx_scram))
+  temp_group_fine[idx_scram] = "scramble"
+  temp_group_fine[idx_FOXA2] = object@meta.data$highest_expressed_guide[idx_FOXA2]
+  # Coarse categories lump together gRNA1, 2, 3
+  temp_group_coarse = temp_group_fine
+  all_guides_label = paste0( "any_", gene, "_guide" )
+  temp_group_coarse[idx_FOXA2] = all_guides_label
+  # Iterate over fine categories
+  results = listify(c(guides, all_guides_label))
+  for( guide in guides ){
+    object@meta.data[["TEMP_COMPARE"]] = temp_group_fine
+    # Have to treat the scrambles differently if that's the comparison of interest
+    if( gene == "Scramble" ){
+      object@meta.data[["TEMP_COMPARE"]] = "other"
+      object@meta.data[["TEMP_COMPARE"]][idx_scram] = "other_scramble"
+      object@meta.data[["TEMP_COMPARE"]][temp_group_fine==guide] = guide
+      object@meta.data[["TEMP_COMPARE"]] %<>% as.character
+    }
+    results[[guide]] = FUN(object, guide, gene, ...)
+  }
+  
+  # One more iteration over the coarse category
+  if( gene != "Scramble" ){
+    object@meta.data[["TEMP_COMPARE"]] = temp_group_coarse
+    results[[all_guides_label]] = FUN(object, all_guides_label, gene, ...)
+  }
+  # Clean up; return
+  object@meta.data[["TEMP_COMPARE"]] = NULL
+  return(results)
+}
+
+
+
+
+#' Obtain gene-wise summary of guide effects. Meant to be applied via apply_over_guides.
+#'
+get_logfc_by_rep = function(object, guide, gene){
+  log2_normalize = function( x ) x %>% div_by_sum %>% multiply_by(1E4) %>% add(1) %>% log2
+  reps = object@meta.data$orig.ident %>% unique 
+  fc_df = data.frame( gene = rownames(object@raw.data), stringsAsFactors = F)
+  for( this_rep in reps ){
+    in_group    = object@meta.data[["TEMP_COMPARE"]] == guide
+    in_scramble = object@meta.data[["TEMP_COMPARE"]] %in% c("scramble", "other_scramble")
+    in_rep      = object@meta.data[["orig.ident"]]   == this_rep
+    cells.guide = in_rep & in_group
+    cells.scram = in_rep & in_scramble
+    if(sum(cells.guide)==0 | sum(cells.scram)==0 ){
+      warning("In get_logfc_by_rep, no cells for one group or the other. Returning NULL.\n")
+      return(NULL)
+    }
+    expr.guide = object@raw.data %>% extract(, cells.guide, drop = F) %>% (Matrix::rowSums) %>% log2_normalize
+    expr.scram = object@raw.data %>% extract(, cells.scram, drop = F) %>% (Matrix::rowSums) %>% log2_normalize
+    informative_name = paste0("FC_", this_rep)
+    fc_df[[informative_name]] = expr.guide - expr.scram
+  }
+  return( fc_df )
+}
+
+select_top_genes = function( object, guide, gene, n_genes ){
+  fc_df = get_logfc_by_rep( object, guide, gene )
+  if( is.null(fc_df) ){
+    warning("In select_top_genes, NULL result from get_logfc_by_rep. Returning NULL.\n")
+    return(NULL)
+  }
+  fc_df$effect_summary = abs(rowSums( fc_df[-1] ) )
+  dplyr::top_n( x = fc_df, n = n_genes, wt = effect_summary )$gene %>% as.character
+}
+  
+
+#' A test wrapper. Meant to be applied via apply_over_guides.
+#'
+#'
+#' @param include_target Test for an effect on gene corresponding to guide? 
+#' @param n_genes How many genes to skim off the top and test formally. 
+#'
+test_wrapper = function( object, guide, gene, include_target = T, n_genes = 0 ){
+  if( sum( guide == object@meta.data[["TEMP_COMPARE"]] ) <= 3 ) {
+    warning("Guide not found in sufficient amounts.\n")
+    return(NULL)
+  }
+  
+  if( n_genes > 0 ){
+    genes.use = select_top_genes( object, guide, gene, n_genes = n_genes )
+    if(length(genes.use) < n_genes){
+      warning("In test_wrapper, select_top_genes yielded nothing. Returning NULL.")
+      return(NULL)
+    }
+  } else {
+    genes.use = c()
+  }
+  if( include_target & n_genes == 0 ){
+    genes.use %<>% c( gene, "CXCR4")
+  } 
+  if( include_target ){
+    genes.use %<>% union( gene )
+  } 
+  if(!length(genes.use) >= 2){
+    stop("In test_wrapper: please include at least 2 genes.\n")
+  }
+  genes.use %<>% intersect(object %>% AvailableData())
+  flip_table = function(X) X[nrow(X):1, ]
+  lv = levels(object@meta.data$orig.ident)
+  if( length(lv) < 2){
+    lv = NULL
+  } else {
+    object@meta.data %<>% cbind( model.matrix( ~orig.ident+0, object@meta.data ) )
+  }
+  X = FindMarkersFlex(object, 
+                      logfc.threshold = 0, min.pct = 0, 
+                      test.use = "MAST", 
+                      genes.use = genes.use,
+                      ident.use = "TEMP_COMPARE", 
+                      ident.1 = guide,
+                      ident.2 = c("other_scramble", "scramble"), 
+                      order_by_var = "p_val",
+                      latent.vars = lv ) %>% flip_table
+  X$p_bonf = X$p_val_adj
+  X$p_val_adj = NULL
+  X$q_val = p.adjust(X$p_val, n = nrow(dge@raw.data), method = "fdr")
+  return(X)
+}
+
+test_panel_wrapper = function(object, guide, gene, 
+                              genes.use = inventory_get("DE_signature") %>% 
+                                read.csv %>% 
+                                extract2(1) %>% 
+                                as.character %>% 
+                                intersect(AvailableData(object))){
+  flip_table = function(X) X[nrow(X):1, ]
+  guide_present = sum( guide == FetchData(object, "TEMP_COMPARE")[[1]] ) >= 3
+  if(!guide_present){
+    return(NULL)
+  }
+  lv = levels(object@meta.data$orig.ident)
+  if( length(lv) < 2){
+    lv = NULL
+  } else {
+    object@meta.data %<>% cbind( model.matrix( ~orig.ident+0, object@meta.data ) )
+  }
+  X = FindMarkersFlex(object, 
+                      logfc.threshold = 0, min.pct = 0, 
+                      test.use = "MAST", 
+                      genes.use = genes.use,
+                      ident.use = "TEMP_COMPARE", 
+                      ident.1 = guide,
+                      ident.2 = c("scramble", "other_scramble"), 
+                      order_by_var = "p_val",
+                      latent.vars = lv ) %>% flip_table 
+  X$p_val_adj = NULL
+  X$q_val = X$p_val %>% p.adjust
+  return(X)
+}
+
+
+#' Counts cells by rep and trt vs ctrl. Meant to be applied via apply_over_guides.
+#'
+get_cell_counts = function( object, guide, gene ){
+  return( table(object@meta.data$orig.ident, object@meta.data$TEMP_COMPARE) )  
+}
+
+
+
+#' A plotting function. Meant to be applied via apply_over_guides.
+#'
+plot_replicates = function( object, guide, gene, table_in_subtitle = F, prop_label = 0.002, ... ){
+  fc_df = get_logfc_by_rep( object, guide, gene )
+  cell_counts = get_cell_counts(object) %>% print %>% capture.output %>% paste0(collapse = "\n")
+  if(is.null(fc_df)) {return(NULL)}
+  p = outlier_labeled_scatterplot( fc_df[c(2, 3, 1)], prop_label = prop_label, ... ) + coord_fixed()
+  srcc = Hmisc::spearman(fc_df[[2]], fc_df[[3]]) %>% round(3)
+  st = paste0( " (corr=", srcc, ")" )
+  if( table_in_subtitle ) {
+    st %<>% paste0( cell_counts )
+  } 
+  p = p + ggtitle( guide %>% gsub("any_|_guide", "", .), 
+                   subtitle = st )
+  p = p + theme( plot.subtitle = element_text( family = "mono" ) )
+  return( p )  
+}
+
+
+SaveMarkerTables = function( markers, save_dir = "cluster_de" ) {
+  do_one = function(X, name ){
+    write.table(X,
+                file.path(results_path, save_dir, paste0(name, ".tsv")),
+                sep="\t", row.names = F, col.names = T, quote =F)
+  }
+  dir.create.nice(file.path(results_path, save_dir ))
+  mapply( do_one,
+          X = markers,
+          name = names(markers) )
+}
+
+LoadMarkerTables = function( save_dir ){
+  tables          = list.files( save_dir, full.names = T ) %>% lapply( read.table, header = T )
+  names( tables ) = list.files( save_dir, full.names = F ) %>% gsub("\\.txt|\\.tsv|\\.csv", "", .)
+  return(tables)
+}
+
+
+#' Perform all pairwise comparisons.
+#'
+#' @param levels_in_order Specifies the levels of FetchData(dge, ident.use) to be tested. The ordering
+#' determines which cluster is "ident.1": in c("TEC", "BLD", "MES"), "TEC" is always "ident.1".
+#' @param ident.use Fetched from dge to define the cell clusters that are being contrasted.
+#' @param dge Seurat object.
+#' @param ... Extra args passed to FindMarkersFlex via mapply( <stuff>, moreArgs = list(<stuff>, ...)).
+#'
+#' @export
+#'
+TestPairwise = function( dge, ident.use = "cell_type", 
+                              levels_in_order = FetchData(dge, ident.use)[[1]] %>% levels, ... ){
+  
+  # Generate combinations
+  types = factor(levels_in_order, levels = levels_in_order, ordered = T )
+  comparisons = combn(types, 2)
+  comparisons_ = matrix("", nrow(comparisons), ncol(comparisons))
+  comparisons_[1, ] = as.character(comparisons[1, ] )
+  comparisons_[2, ] = as.character(comparisons[2, ] )
+  comparisons = comparisons_
+  
+  # Run tests
+  de_gene_tables = mapply( FindMarkersFlex,
+                           ident.1 = comparisons[1, ],  
+                           ident.2 = comparisons[2, ], 
+                           SIMPLIFY = F,
+                           MoreArgs = list(object = dge, ident.use = ident.use, ...) )
+  names( de_gene_tables ) = apply(comparisons, 2, paste0, collapse = "_v_")
+  return( de_gene_tables )
+}
+
+
+#' Find genes specific to a single cluster by comparing to the next-highest cluster.
+#'
+#'
+#' @param dge Seurat object
+#' @param logfc.threshold Genes will be returned if the logfc between the top cluster and the second is at least this high. 
+#' @param ident.use A categorical variable obtainable via FetchData.
+#'
+#' @export
+#'
+FindClusterSpecific = function( dge, ident.use = "ident", logfc.threshold = 1, 
+                                genes.use = dge@data %>% rownames ){
+  ident_df = FetchData(dge, ident.use)
+  assertthat::assert_that(is.data.frame(ident_df))
+  ident_df[[ident.use]] %<>% as.character
+  cluster_indicators = model.matrix( object = paste0("~", ident.use, " + 0") %>% as.formula, 
+                                     data = ident_df )
+  cluster_sizes_inverted = diag( 1 / colSums( cluster_indicators ) )
+  cluster_means = dge@data %*% cluster_indicators %*% cluster_sizes_inverted
+  cluster_means %<>% as.matrix()
+  cluster_labels = colnames(cluster_indicators)
+  
+  second       = function(x) sort (x, decreasing = T) %>% extract2(2)
+  which.second = function(x) order(x, decreasing = T) %>% extract2(2)
+  X = data.frame(
+    gene = rownames(cluster_means),
+    highest_label = apply(cluster_means, 1, which.max)    %>% extract(cluster_labels, . ), 
+    second_label  = apply(cluster_means, 1, which.second) %>% extract(cluster_labels, .), 
+    highest_value = apply(cluster_means, 1, max), 
+    second_value  = apply(cluster_means, 1, second )
+  )
+  X$logfc = X$highest_value - X$second_value
+  X = X[c(1, 6, 2, 3, 4, 5)]
+  X = subset(X, gene %in% genes.use )
+  X = subset(X, logfc > logfc.threshold)
+  X = X[order(X$highest_label, -X$logfc), ]
+  X_as_list = lapply(cluster_labels, function(s) subset(X, highest_label==s))
+  names(X_as_list) = cluster_labels
+  return( X_as_list )
+}
+```
+
+
+#### Even more wrappers 
+
+Each of these accepts a target and will perform operations over all corresponding guides. They save results to files. These help study effect of each guide on its target; they depict global effects by plotting logfc of all genes; and they study global effects of each guide via differential expression testing of either all genes or a DE signature panel.
+
+The tricky part is handling NULL values returned by the functions above, for example when there are too few cells from a given guide. 
+
+```{r}
+rp_alt = results_path
+across_target_guides_test_guide_v_target = function( gene,
+                                                     object, 
+                                                     results_path=rp_alt,  
+                                                     save_dir = "guides_vs_target" ){
+  test_results = apply_over_guides(object, gene, test_wrapper )
+  if(0==length(test_results)){ return() }
+  fp = file.path( results_path, save_dir, "target")
+  dir.create.nice(fp)
+  mapply( write.csv, x=test_results, 
+          file = file.path( fp,
+                            paste0( names( test_results ), ".csv" ) ) )
+  get_p = function(X) X[gene, "p_val"]
+  return(data.frame(guide = names( test_results ), pval = sapply(test_results, get_p)))
+}
+
+across_target_guides_plot_reps = function( gene, 
+                                           object,
+                                           results_path=rp_alt,
+                                           save_dir, ... ){
+  plots        = apply_over_guides(object, gene, plot_replicates, ...)
+  bad_idx = lapply(plots, class) %>% lapply(extract, 1) %>% equals("gg") %>% not
+  plots[bad_idx] = NULL
+  if(0==length(plots)){ return() }
+  fp = file.path(results_path, save_dir, "plots")
+  dir.create.nice(fp)
+  mapply(ggsave,   
+         plot=plots,     
+         file = file.path(fp, paste0(names(plots), ".png")),
+         height = 8, width = 9)
+  mapply(ggsave,   
+         plot=plots,     
+         file = file.path(fp, paste0(names(plots), ".pdf")),
+         height = 8, width = 9)
+  return( plots )
+}
+
+across_target_guides_test_v_all = function( gene, 
+                                            object, 
+                                            results_path=rp_alt,
+                                            save_dir, 
+                                            n_genes = 300){
+  test_results = apply_over_guides(object, gene, test_wrapper, n_genes = n_genes )
+  bad_idx = sapply(test_results, is.data.frame) %>% not
+  nbad = sum(bad_idx)
+  if( nbad > 0){
+    warning(paste0("Empty results for guides:", paste0(names(bad_idx[bad_idx]), collapse = " ")))
+  }
+  test_results[bad_idx] = NULL
+  if(0==length(test_results)){ return() }
+  fp = file.path(results_path, save_dir, "tables")
+  dir.create.nice(fp)
+  mapply( write.csv, 
+          x=test_results, 
+          file = file.path( fp, 
+                            paste0( names( test_results ), ".csv" ) ) )
+  return(test_results)
+}
+
+across_target_guides_test_v_panel = function( target, 
+                                              object, 
+                                              results_path=rp_alt, 
+                                              save_dir,
+                                              list_name = "DE_signature",
+                                              ... ){
+  test_results = apply_over_guides(object, target, test_panel_wrapper, ... )
+  bad_idx = sapply(test_results, is.data.frame) %>% not
+  nbad = sum(bad_idx)
+  if( nbad > 0){
+    warning(paste0("Empty results for guides:", paste0(names(bad_idx[bad_idx]), collapse = " ")))
+  }
+  test_results[bad_idx] = NULL
+  if(0==length(test_results)){ return() }
+  fp = file.path(results_path, save_dir, list_name )
+  dir.create.nice(fp)
+  mapply( write.csv, 
+          x=test_results, 
+          file = file.path( fp, paste0( names( test_results ), ".csv" ) ) )
+}
+
+across_target_guides_test_guide_v_krab = function(...) {
+  across_target_guides_test_v_panel(..., 
+                                    genes.use = c("dCas9_KRAB", "ACTB"),        
+                                    list_name = "KRAB" )
+}
+```
+
+
+```{r}
+get_endoderm_go_term = function(go_term = 'GO:0007492'){
+  library(biomaRt)
+  ensembl = useMart("ensembl",dataset="hsapiens_gene_ensembl") #uses human ensembl annotations
+  #gets gene symbol, transcript_id and go_id for all genes annotated with GO:0007507
+  gene.data <- getBM(attributes=c('hgnc_symbol', 'ensembl_transcript_id', 'go_id'),
+                     filters = c('go_parent_term', "with_hgnc"), 
+                     values = list(go_term, T), 
+                     mart = ensembl)
+  return(gene.data$hgnc_symbol %>% unique)
+}
+
+
+# From this list https://www.rndsystems.com/research-area/hepatic-endoderm-cell-markers
+# and Ludovic Vallier https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3673228/
+get_hepatic_genes = function() c("ALB", "FOXA2", "FOXA1", "HHEX", "CXCR4", "GATA4",
+                                 "AFP", "FABP1", "GFER", "MET", "ITGB1", "TBX3", "SERPINA1", 
+                                 "PTP4A2", "PROX1", "HNF1B", "HNF4A", "EPCAM" )
+```

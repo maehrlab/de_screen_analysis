@@ -1,0 +1,81 @@
+---
+title: ""
+author: "Eric Kernfeld"
+date: "January 18, 2017"
+output: html_document
+---
+
+
+```{r}
+#' Add a colourbar to a ggplot heatmap.
+#'
+gg_colourbar = function( p, 
+                         labels_by_category, 
+                         labelname = colnames(labels_by_category)[[1]],
+                         category_colours = NULL,
+                         thickness = 5 ){
+  if( is.null( category_colours ) ){
+    categories = unique(labels_by_category[[2]])
+    category_colours = setNames(scales::hue_pal()(length(categories)), categories) 
+  }
+  
+  assertthat::are_equal( class( p ), c( "gg", "ggplot" ) )
+  assertthat::assert_that( is.data.frame( labels_by_category ) )
+  assertthat::are_equal( p$data[[labelname]] %>% sort %>% unique %>% as.character, labels_by_category[[labelname]] )
+
+  #run-length encoding keeps from overwhelming ggplot with too many annotation layers
+  X = labels_by_category[[2]] %>% as.character %>% rle
+  X$positions = c(0, cumsum(X$lengths) ) + 0.5
+  X$add_label = X$lengths >= ave(X$lengths, X$values, FUN = max) 
+  for( i in 1:length( X$values ) ){
+    # TODO: figure out good defaults for non-varying axis
+    current_label = X$values[i]
+    gap_size = thickness / 5
+    p = p +
+      annotate( "rect", 
+                ymin = X$positions[i],
+                ymax = X$positions[i+1],
+                xmin = -thickness,
+                xmax = -gap_size,
+                fill = category_colours[current_label] ) 
+    if( X$add_label[i] ){
+      p = p + 
+        annotate( "label", 
+                  y = mean( X$positions[c(i, i+1)]),
+                  x = -gap_size / 2,
+                  colour = category_colours[current_label],
+                  label = current_label ) 
+    }
+  } 
+  return( p )
+}
+
+#' Guides, genes, grammar of graphics: a basic heatmapping function
+#'
+gggg_heatmap = function( to_plot, main ){
+  assertthat::assert_that(!is.null(dimnames(to_plot)))
+  assertthat::assert_that(!is.null(names(dimnames(to_plot))))
+  genes_ordered  = rownames(to_plot)
+  guides_ordered = colnames(to_plot) 
+  xname = names(dimnames(to_plot))[1]
+  yname = names(dimnames(to_plot))[2]
+  to_plot_long = reshape2::melt( to_plot, value.name = "X" )
+  to_plot_long[[xname]] %<>% as.character %>% factor( ordered = T, levels = genes_ordered %>% rev )
+  to_plot_long[[yname]] %<>% as.character %>% factor( ordered = T, levels = guides_ordered )
+  p = ggplot( to_plot_long ) + ggtitle( main ) + 
+    geom_tile( aes_string( x = xname, 
+                           y = yname, 
+                           #colour = "gene_matches_guide" ,
+                           fill = "X" ) ) + 
+    scale_fill_gradient2(low = scales::muted("blue"), high = scales::muted("red")) + 
+    scale_color_manual(values = c("white", "black"))  + 
+    scale_x_discrete(position = "top", 
+                     labels = to_plot_long$guide %>% levels  ) + 
+    theme(axis.text.x = element_text(angle = 90, hjust = 0.05, face = "italic")) + 
+    theme(legend.background = element_rect(colour = 'black', fill = 'grey')) 
+  return(p)
+}
+
+```
+
+

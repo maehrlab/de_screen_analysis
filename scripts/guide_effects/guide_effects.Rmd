@@ -1,0 +1,98 @@
+---
+title: ""
+author: "Eric Kernfeld"
+date: "January 18, 2017"
+output: html_document
+---
+
+Load data
+
+```{r}
+results_path = Sys.getenv()[["FREEZR_DESTINATION"]]
+dge = readRDS( inventory_get( "DE_TERA_reclustered_no_dub" ))
+TidynessChecklist( dge ) 
+dge@raw.data[GUIDE_NAMES %>% intersect(rownames(dge@raw.data)), ] = 0
+```
+
+#### Which guides worked? (using all clusters)
+
+
+Also separate out the main cluster.
+
+```{r}
+dge_c0 = SubsetDataFlex(dge, "ident", "ident==0")
+```
+
+
+
+#### Run tests and make plots.
+
+Effects across all cells
+
+```{r}
+lapply( TARGETS, across_target_guides_plot_reps,           object = dge, save_dir = "effects_all" )
+lapply( TARGETS, across_target_guides_test_v_all,          object = dge, save_dir = "effects_all" )
+lapply( TARGETS, across_target_guides_test_v_panel,        object = dge, save_dir = "effects_all" )
+lapply( TARGETS, across_target_guides_test_guide_v_target, object = dge, save_dir = "effects_all" )
+lapply( TARGETS, across_target_guides_test_guide_v_krab,   object = dge, save_dir = "effects_all" )
+plots_featured = lapply( c("SOX17", "FOXH1", "SMAD2", "SMAD4", "FOXA2", "EOMES"), 
+                         across_target_guides_plot_reps,           
+                         object = dge, save_dir = "effects_all", prop_label = 0 )
+plots_featured %<>% lapply(rev) %>% lapply(extract2, 1)
+p = do.call( what = cowplot::plot_grid, args = plots_featured)
+ggsave(file.path(results_path, "Selected_guides_rep_corr.pdf"), p, width = 8, height = 6)
+```
+
+Effects within main cluster
+
+```{r}
+lapply( TARGETS,    across_target_guides_plot_reps,  object = dge_c0, save_dir = "effects_c0" )
+lapply( TARGETS,    across_target_guides_test_v_all, object = dge_c0, save_dir = "effects_c0" )
+lapply( "Scramble", across_target_guides_test_v_all, object = dge_c0, save_dir = "effects_c0" )
+```
+
+More lenient cutoffs
+
+```{r}
+tva_lenient = function(...) across_target_guides_test_v_all( ..., n_genes = 1000 )
+lapply( TARGETS, tva_lenient, object = dge,    save_dir = "effects_all/lenient" )
+lapply( TARGETS, tva_lenient, object = dge_c0, save_dir = "effects_c0/lenient" )
+across_target_guides_test_v_all( gene = "FOXA2", 
+                                 object = dge_c0, 
+                                 results_path = results_path, 
+                                 save_dir = "effects_c0/foxa2_all", 
+                                 n_genes = dge_c0@data %>% nrow )
+
+```
+
+Filter based on FDR <= 0.05
+
+```{r}
+
+filter_fdr = function( from_dir, to_dir ){
+  to_dir %<>% file.path(results_path, .)
+  dir.create(to_dir, recursive = T)
+  for( tablename in list.files( file.path(results_path, from_dir), full.names = T ) ){
+    X = read.csv( tablename )
+    if(!any(X$q_val > 0.05)){
+      cat("You may need to test additional genes for ", tablename, " .\n")
+    }
+    outname = tablename %>% basename %>% (tools::file_path_sans_ext) %>% paste0("_fdr_0_05.csv")
+    write.csv( subset( X, q_val <= 0.05 ), file.path( to_dir, outname ) )
+  }
+}
+
+filter_fdr("effects_c0/lenient/tables", "effects_c0/fdr_0_05")
+filter_fdr("effects_all/lenient/tables", "effects_all/fdr_0_05")
+```
+
+
+Add results to inventory for downstream use. 
+
+```{r}
+inventory_add(tag = "guide_effects_various_output", filename = results_path,
+              extra = "A folder containing many different views of the guides' effects.", 
+              force = T )
+```
+
+

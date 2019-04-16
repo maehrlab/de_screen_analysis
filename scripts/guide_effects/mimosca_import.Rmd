@@ -1,0 +1,236 @@
+---
+title: "R Notebook"
+output: html_document
+---
+  
+#### Set up workspace / data
+  
+```{r}
+results_path = Sys.getenv("FREEZR_DESTINATION")
+mimosca_output = file.path(proj_dir, "mimosca", "results", "use_for_heatmap", "DE_TERA_c0")
+coeffs = read.csv(file.path( mimosca_output, "coeffs.csv" ), row.names = 1)
+
+collapse_reps = function(list_in, combine_fun){
+  list_in = list_in[order(names(list_in))]
+  list_in_rep1 = list_in[names(list_in) %>% grep("rep1", ., value = T)]
+  list_in_rep2 = list_in[names(list_in) %>% grep("rep2", ., value = T)]
+  names(list_in_rep1) %<>% gsub("_Terarep.", "", .) 
+  names(list_in_rep2) %<>% gsub("_Terarep.", "", .) 
+  shared = intersect(names(list_in_rep1), 
+                     names(list_in_rep2))
+  list_in_rep1 %<>% extract(shared)
+  list_in_rep2 %<>% extract(shared)
+  assertthat::are_equal(names(list_in_rep1),
+                        names(list_in_rep2))
+  X = mapply(combine_fun, list_in_rep1, list_in_rep2)
+  rownames(X) = rownames(list_in)
+  return( X )
+}
+
+collapse_guides = function(effect_by_guide){
+  genes_guides = data.frame( guide = effect_by_guide %>% colnames(), 
+                             gene =  effect_by_guide %>% colnames() %>% get_genes_from_guides(), 
+                             stringsAsFactors = F)
+  adder = model.matrix(data = genes_guides, ~gene+0)
+  adder = sweep( adder, MARGIN = 2, STATS = colSums(adder), FUN = "/")
+  effect_by_gene = effect_by_guide %*% adder
+  colnames(effect_by_gene) %<>% paste0("_gRNAs")
+  colnames(effect_by_gene) %<>% gsub("gene", "", .)
+  return(effect_by_gene)
+}
+
+coeffs_reps_collapsed = collapse_reps(coeffs, combine_fun = add) %>% collapse_guides
+coeffs_rep1_clean     = collapse_reps(coeffs, combine_fun = function(x, y) x) %>% collapse_guides
+coeffs_rep2_clean     = collapse_reps(coeffs, combine_fun = function(x, y) y) %>% collapse_guides
+
+
+gene_correlations = suppressWarnings( mapply( cor,
+                                              as.data.frame(t(coeffs_rep1_clean)),
+                                              as.data.frame(t(coeffs_rep2_clean)) ) )
+genes_correlated = gene_correlations %>% is_greater_than(0.25) %>% which %>% names
+
+```
+
+
+```{r}
+scorecard = read.csv( file.path( proj_dir, "tables", "diff_potential_scorecard_Tsankov_Meissner.csv" ),
+                      stringsAsFactors = F )
+
+order_by_scorecard = function( guides ){
+  genes_pluri = scorecard[scorecard$class == "Pluri",    "gene"]
+  genes_end   = scorecard[scorecard$class == "Endoderm", "gene"]
+  genes_pluri %<>% intersect( genes_correlated )
+  genes_end   %<>% intersect( genes_correlated )
+  rank_by = 
+    colSums( coeffs_reps_collapsed[genes_end, guides] ) -  
+    colSums( coeffs_reps_collapsed[genes_pluri, guides] ) 
+  names( rank_by ) = guides
+  return(rank_by %>% sort %>% names)
+}
+```
+
+
+Functions for isolating common effects across guides 
+
+```{r}
+sort_by_abs = function(x){x[order(abs(x), decreasing = T)]}
+
+get_top = function( coeff_ica, i, which_thing, n = 20, 
+                    method = c("two_sided", "sort_by_abs", "one_sided") ){
+  if( grepl("guide", which_thing, ignore.case = T)){
+    X = coeff_ica$A %>% t 
+  } else {
+    X = coeff_ica$S
+  }
+  labeled_loadings = X %>% vectorize_preserving_rownames(i) %>% sort
+  if(method == "two_sided"){
+    return( c( labeled_loadings %>% head(n), 
+               labeled_loadings %>% tail(n), use.names = T ) )
+  } else if (method == "sort_by_abs") {
+    return( labeled_loadings %>% sort_by_abs %>% head(n) )
+  } else if (method == "one_sided") {
+    sign_of_biggest = labeled_loadings %>% sort_by_abs %>% extract(1) %>% sign
+    return( labeled_loadings[sign(labeled_loadings) == sign_of_biggest] %>% sort_by_abs)
+  }
+}
+
+
+```
+
+Filter for interesting guides and make heatmap.
+
+```{r}
+subset_interesting_blocks = function( X, num_ic, which_ic = NULL, seed = 0){
+  
+  set.seed(seed)
+  
+  coeff_ica = elasticnet::spca(X, K = num_ic, para = rep(20, num_ic), trace = T, max.iter = 20 )
+  coeff_ica$A = coeff_ica$loadings %>% t
+  coeff_ica$S = X %*% coeff_ica$loadings
+  
+  rp_int = file.path(results_path)
+  pdf(file.path(rp_int, "elbow.pdf"));   coeff_ica$pev %>% plot; dev.off()
+  dir.create.nice(file.path(rp_int, "tables"))
+  dir.create.nice(file.path(rp_int, "guide_loadings"))
+  dir.create.nice(file.path(rp_int, "gene_loadings"))
+  
+  colnames(coeff_ica$A) = colnames(X)
+  rownames(coeff_ica$S) = rownames(X)
+  interesting_genes = interesting_guides = c()
+  if(is.null(which_ic)) {
+    which_ic= 1:num_ic
+  }
+  gene_categories = data.frame()
+  for(i in which_ic){
+    guides_long = get_top( coeff_ica, i=i, n = 100, which_thing = "guides", method = "two_sided" )
+    genes_long  = get_top( coeff_ica, i=i, n = 100, which_thing = "genes",  method = "two_sided" )
+    guides = guides_long
+    genes  = genes_long
+    #guides = guides[ abs(guides) / max(abs(guides)) > 1/10]
+    genes  = genes[  abs(genes)  / abs(genes) [1] > 1/3]
+    num_targets = guides %>% names %>% get_genes_from_guides %>% unique %>% length
+    num_guides  = guides %>% length
+    num_genes   = genes %>% length
+    is_interesting = 
+      #( num_targets > 2 ) &&
+      #( num_guides > 2 ) &&
+      #( num_genes > 30 ) &&
+      #( guides[2] / guides[1] > 0.5) &&
+      #( genes[2] / genes[1] > 0.75) &&
+      TRUE
+    
+    
+    if( is_interesting ){  
+      fname = paste0("IC", i, "_", names(guides)[1], ".csv")
+      table_nrow = max(length(genes), length(guides))
+      pad = function(x, filler, n = table_nrow) c(x, rep(filler, n-length(x)))
+      to_save = cbind(pad(names(guides), ""),
+                      pad(guides, 0),
+                      pad(names(genes), ""),
+                      pad(genes, 0)) 
+      write.csv(to_save, file.path(rp_int, "tables", fname), row.names = F) 
+
+      pdf(file.path(rp_int, "guide_loadings",  gsub(".csv", ".pdf", fname)))
+      barplot(sort(guides_long), names.arg = names(sort(guides_long)), las = 2 )
+      dev.off()
+      
+      pdf(file.path(rp_int, "gene_loadings", gsub(".csv", ".pdf", fname)))
+      barplot(sort(genes_long), names.arg = names(sort(genes_long)), las = 2 )
+      dev.off()
+      new_genes  = setdiff( names(genes),  interesting_genes  )
+      new_guides = setdiff( names(guides), interesting_guides )
+      interesting_genes  %<>% c(new_genes)
+      interesting_guides %<>% c(new_guides)
+      gene_categories_increment = data.frame( gene = new_genes, component = i )
+      gene_categories %<>% rbind( gene_categories_increment )
+    }
+  }
+  return(list( logfc = X[interesting_genes, interesting_guides], gene_categories = gene_categories  ) )
+}
+
+
+
+
+num_ic = 1
+list_out = subset_interesting_blocks(coeffs_reps_collapsed[genes_correlated, ], num_ic = num_ic, which_ic = 1:num_ic)
+coeffs_interesting = list_out$logfc
+coeffs_interesting %<>% pmin(3) %>% pmax(-3)
+names(dimnames(coeffs_interesting)) = c("gene", "guide")
+#o_guide = order_by_scorecard(colnames(coeffs_interesting))
+o_gene  = seriation::seriate( dist(  coeffs_interesting) ) %>% (seriation::get_order) %>% rev
+o_guide = seriation::seriate( dist(t(coeffs_interesting)) ) %>% (seriation::get_order)
+p = gggg_heatmap( to_plot = coeffs_interesting[o_gene, o_guide] %>% t, main = "Common effects across targets" )
+p = p + coord_flip() +  scale_x_discrete(position = "bottom") + scale_y_discrete(position = "right")
+gene_categories = list_out$gene_categories
+gene_categories %<>% set_rownames(gene_categories$gene)
+gene_categories = gene_categories[o_gene, ]
+ggsave(file.path(results_path, paste0( "heatmap_", num_ic, "ic.pdf" ) ), p, height = 10, width = 15)
+
+```
+
+Add barplot of number of genes affected.
+
+```{r}
+path_effects  = inventory_get("guide_effects_various_output")
+get_num_affected = function( guide,  save_dir ){
+  fp = file.path( save_dir, "tables", paste0(guide, ".csv"))
+  if(!file.exists(fp)){
+    warning("Folder not found!\n")
+    return()
+  }
+  X = read.csv(fp)
+  X$q_val = p.adjust(method = "fdr", p = X$p_val, n = dge@data %>% nrow)
+  return(sum(X$q_val < 0.05))
+}
+
+de_filenames = GUIDE_NAMES %>% get_genes_from_guides %>% paste0("any_", ., "_guide") %>% unique
+de_filenames %<>% c(GUIDES_SCRAMBLE)
+num_affected = sapply( de_filenames,
+                       get_num_affected,  save_dir = file.path( path_effects, "effects_c0" ))
+names(num_affected) = de_filenames
+num_affected %<>% unlist %>% sort %>% rev
+X = data.frame( guide = names(num_affected) %>% gsub("any_|_guide", "", .), 
+                num_genes_affected_downstream = num_affected )
+X$guide %<>% paste0("_gRNAs") %>% as.character
+X %<>% subset( guide %in% levels(p$data$guide))
+X$guide %<>% factor(ordered = T, levels = levels(p$data$guide))
+X$xpos = rank(X$guide)
+plot_end = p$data$gene %>% unique %>% length + 1
+X$ypos = plot_end + X$num_genes_affected_downstream / 30
+q = p + 
+  geom_rect(data = X, aes( xmin = xpos - 0.5, 
+                           xmax = xpos + 0.5, 
+                           ymin = plot_end, 
+                           ymax = ypos, stat = "identity")) +
+  geom_hline(yintercept = max(X$ypos), linetype = "dotted", alpha = 0.5) + 
+  geom_text(data = X %>% subset(num_genes_affected_downstream >= 25), 
+            aes(x = xpos, y = ypos + 2, label = num_genes_affected_downstream)) + 
+  expand_limits( y = c(0, max(X$ypos) + 5))
+
+ggsave(file.path(results_path, paste0( "Fig 3A with added barplot.pdf" ) ), q, height = 10, width = 18)
+
+```
+
+
+
+

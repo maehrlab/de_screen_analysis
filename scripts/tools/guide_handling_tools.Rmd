@@ -1,0 +1,156 @@
+---
+title: ""
+author: "Eric Kernfeld"
+date: "January 18, 2017"
+output: html_document
+---
+
+
+```{r}
+
+# Get Ryan's info on the guides and replace spaces with underscores to fix names
+PATH_TO_GUIDES = file.path(proj_dir, "/tables/2018JAN17_gRNAs_plus_blank.csv")
+guides_info = readr::read_csv( PATH_TO_GUIDES )
+GUIDE_NAMES = sapply(guides_info$Gene, gsub, pattern=" ", replace = "_")
+GUIDES_SCRAMBLE = GUIDE_NAMES %>% grep("Scramble", ., value = T)
+GUIDES_BLANK    = GUIDE_NAMES %>% grep("blank", ., value = T)
+GUIDES_TRT      = GUIDE_NAMES %>% setdiff( c( GUIDES_SCRAMBLE, GUIDES_BLANK ) )
+GUIDES_HE = c("FOXA2_gRNA2", "Scramble_gRNA1")
+TARGETS = GUIDES_TRT %>% gsub("_gRNA.+$", "", x =.) %>% unique 
+GUIDES_MUTATED = c("ARNT_gRNA2",
+                   "ATF3_gRNA3",
+                   "CREB3_gRNA2",
+                   "FOXA2_gRNA3",
+                   "FOXA3_gRNA1",
+                   "GATA4_gRNA1",
+                   "GATA6_gRNA2",
+                   "JUND_gRNA2"	,
+                   "TGIF2_gRNA1",
+                   "ZNF263_gRNA2")
+GUIDES_BLACKLIST = c(GUIDES_MUTATED, "Scramble_gRNA5", "(no guides detected)", GUIDES_BLANK)
+
+
+TidynessChecklist = function( dge ){
+  x = dge %>% FetchData("tSNE_1") %>% extract(1,1)
+  tol = 0.0001
+  if(abs(x - 19.18016) > tol ){
+    cat("It's possible that the tSNE hasn't be updated after data cleaning.\n")
+    warning("It's possible that the tSNE hasn't be updated after data cleaning.\n")
+  }
+  
+  if(!"highest_expressed_guide" %in% names(dge@meta.data)){
+    cat("Missing crucial guide metadata.\n")
+    stop("Missing crucial guide metadata.\n")
+  }
+  if( "dCas9_KRAB" %in% rownames(dge@raw.data)){
+    cat("dCas9_KRAB still in raw data, just FYI.\n")
+    warning("dCas9_KRAB still in raw data, just FYI.\n")
+  }
+  if( "dCas9_KRAB" %in% dge@var.genes){
+    cat("dCas9_KRAB in variable genes??!!??\n")
+    stop("dCas9_KRAB in variable genes??!!??\n")
+  }
+  
+  if( any( GUIDE_NAMES %in% rownames(dge@raw.data))){
+    cat("guides still in raw data, just FYI.\n")
+    warning("guides still in raw data, just FYI.\n")
+  }
+  if( any( GUIDE_NAMES %in% dge@var.genes)){
+    cat("guides in variable genes??!!??\n")
+    stop("guides in variable genes??!!??\n")
+  }
+
+  if( any(dge@meta.data$is_double_guide) ){
+    cat("doublets??!!??\n")
+    stop("doublets??!!??\n")
+  }
+  
+  if( any(dge@meta.data$highest_expressed_guide %in% GUIDES_MUTATED) ){
+    cat("mutant guides??!!??\n")
+    stop("mutant guides??!!??\n")
+  }
+  
+  if( any(dge@meta.data$highest_expressed_guide %in% "Scramble_gRNA5") ){
+    cat("Scramble_gRNA5 ??!!??\n")
+    stop("Scramble_gRNA5 ??!!??\n")
+  }
+  
+  if( any(dge@meta.data$highest_expressed_guide %in% GUIDES_BLANK) ){
+    cat("blank guides??!!??\n")
+    stop("blank guides??!!??\n")
+  }
+}
+
+```
+
+
+```{r}
+
+get_genes_from_guides = function(x, number_instead = FALSE, append = ""){
+  x[x=="(no guides detected)"] = "NA_NA"
+  y = x %>% as.character %>% sapply(strsplit_drop, "_") 
+  if(number_instead){
+    return(y[2, ])
+  } else {
+    return(paste0(y[1, ], append))
+  }
+} 
+
+get_guides_from_genes = function(x) lapply(x, get_guides_from_gene_) %>% Reduce(f=c)
+get_guides_from_gene_ = function(genes){
+  return( grep( paste( genes, collapse = "|" ), GUIDE_NAMES, value = T ) )
+} 
+
+sort_guides_matching_genes = function( guides, genes_in_order ){
+  assertthat::assert_that(!is.null(guides))
+  assertthat::assert_that(!is.null(genes_in_order))
+  guides_df = data.frame(guides)
+  guides_df$guide_gene = guides_df$guides %>% get_genes_from_guides
+  guides_df$guide_gene %<>% factor(ordered = T, levels = genes_in_order )
+  guides_df = guides_df[order(guides_df$guide_gene, guides_df$guides), ]
+  return( guides_df$guides )
+}
+
+#' For a gAMP library, how pure is it?
+#'
+assess_guide_content = function(X){
+  not_guides = rownames(X) %>% setdiff(   GUIDE_NAMES )
+  yes_guides = rownames(X) %>% intersect( GUIDE_NAMES )
+  nUMI_guide = Matrix::colSums(X[yes_guides, ]) 
+  nUMI_other = Matrix::colSums(X[not_guides, ]) 
+  plot(nUMI_guide, nUMI_other)
+  print(sum(nUMI_guide))
+  print(sum(nUMI_other))
+}
+
+#'  This function removes guides from a DGE matrix. 
+#'
+#' @export
+#'
+remove_guides_and_KRAB = function( dge_raw, remove_KRAB = T ){
+  not_guides = rownames( dge_raw ) %>% setdiff( GUIDE_NAMES )
+  dge_raw %<>% extract(not_guides,)
+  
+  if( remove_KRAB ){
+    KRAB_idx = grepl(rownames(dge_raw), pattern = "KRAB", ignore.case = T)
+    dge_raw = dge_raw[!KRAB_idx, ]
+  }
+  
+  return( dge_raw )
+}
+
+# This will minimize repetitive elements of guide axis labels
+prettify_guide_labels = function( guides ){
+  idx_modify   = guides %in% GUIDE_NAMES
+  guide_genes  = guides[idx_modify] %>% get_genes_from_guides
+  guide_number = guides[idx_modify] %>% get_genes_from_guides(number_instead = T) %>% gsub("gRNA", "", .)
+  keep_gene = !duplicated(guide_genes)
+  pretty_label = guides
+  pretty_label[idx_modify] = guide_number
+  pretty_label[idx_modify][ keep_gene] %<>% paste0( guide_genes[keep_gene], "- ", . )
+  pretty_label[idx_modify][!keep_gene] %<>% paste0( "     ", . )
+  return( pretty_label )
+}
+```
+
+

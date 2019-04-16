@@ -1,0 +1,107 @@
+---
+title: "R Notebook"
+output: html_document
+---
+
+#### Set up data
+
+```{r}
+results_path = Sys.getenv("FREEZR_DESTINATION")
+
+dge = freezr::inventory_get(tag = "HE_processed") %>% readRDS
+
+X = FindAllMarkers(dge,
+                   genes.use = dge@data %>% rownames,
+                   logfc.threshold = 0,
+                   test.use = "MAST")
+
+# Keep only positive markers, only fdr < 0.1
+# For each cluster, correct p-values
+X$q_val = -1
+for(cluster_id in X$cluster %>% unique){
+  idx = X$cluster==cluster_id
+  X$q_val[idx] = p.adjust( X$p_val[idx], method = "fdr", n = nrow(dge@data) )
+  X[idx, ] %<>% (dplyr::arrange)(-avg_logFC)
+  # do_enrichr(results_path = file.path(results_path, "enrichr"),
+  #            geneset = X[idx, ] %>% subset(q_val < 0.1 & avg_logFC > 0, select = "gene", drop = T),
+  #            desired_db = desired_dbs,
+  #            geneset_name = cluster_id)
+}
+X$FCPE = X$pct.1 / X$pct.2
+write.table( X %>% subset(q_val < 0.1 & avg_logFC > 0 ),
+             file.path(results_path, "fdr_0.10_cluster_markers.tsv"),
+             quote = F, col.names = T, row.names = F, sep = "\t")
+write.table( X,
+             file.path(results_path, "unfiltered_cluster_markers.tsv"),
+             quote = F, col.names = T, row.names = F, sep = "\t")
+X %>% subset(gene %in% get_hepatic_genes() ) %>% View
+inventory_add( tag = "HE_clusters_unfiltered", 
+               filename = file.path(results_path, "unfiltered_cluster_markers.tsv"), 
+               extra = "HE differential expression results by cluster. Unfiltered." )
+#X = read.delim("/Users/erickernfeld/Desktop/scRNA_data_analysis/cr_fq_cropseq_analysis/results/interactive/2018_Oct_30__14_01_36__guides_by_cluster_tools/user/unfiltered_cluster_markers.tsv")
+Y = subset(X, ( q_val < 0.05 & avg_logFC > log2(1.5) & (X$pct.1 > 0.1 )) )
+Y %<>% (dplyr::arrange)(-avg_logFC)
+Y = Y[!duplicated(Y$gene),]
+Y %<>% (dplyr::arrange)(cluster, -avg_logFC)
+og = subset(Y, select = "gene", drop = T )
+p = make_heatmap_for_table( dge, desired_cluster_order = LETTERS[1:3],
+                            genes_in_order = og,
+                            norm_fun = standardize,
+                            genes_to_label = og %>% intersect(get_hepatic_genes()) )
+p = p + scale_fill_gradient2(low = "blue", high = "red")
+ggsave(file.path(results_path, "HE_marker_heatmap.pdf"), p, width = 4, height = 20)
+
+og %<>% setdiff(GUIDE_NAMES) %>% setdiff("dCas9_KRAB")
+DoHeatmapFast( dge,
+               results_path, 
+               width = 15, height = 15,
+               genes.use = og, 
+               genes.label = og, #%>% intersect(get_hepatic_genes()),  
+               genes.preview = og %>% intersect(get_hepatic_genes()),  
+               col = colorRampPalette(c("blue", "white", "red")),
+               norm_fun = function(x) standardize(x) %>% pmin(3) %>% pmax(-3),
+               cluster_colors = HE_IDENT_COLORS )
+
+```
+
+Head-to-head comparisons 
+
+```{r}
+
+comparison = paste0( "FOXA2_gRNA_over_Scramble" )
+Z = FindMarkersFlex(dge, 
+                genes.use = dge@data %>% rownames,
+                logfc.threshold = 0, min.pct = 0,
+                ident.use = "highest_expressed_guide",
+                ident.1 = "FOXA2_gRNA2", 
+                ident.2 = "Scramble_gRNA1",
+                test.use = "MAST")
+Z$gene = rownames(Z)
+Z$cluster = comparison
+Z = Z[order(-Z$avg_logFC), ]
+Z$q_val = p.adjust( Z$p_val, n = nrow(dge@data) , method = "fdr")
+write.table(Z %>% subset(q_val < 0.1), 
+            file.path(results_path, paste0("fdr_0.10_", comparison, ".tsv")), 
+            quote = F, col.names = T, row.names = F, sep = "\t")
+write.table(Z, 
+            file.path(results_path, paste0("no_filter_", comparison, ".tsv")), 
+            quote = F, col.names = T, row.names = F, sep = "\t")
+write.table(Z[get_hepatic_genes(),], 
+            file.path(results_path, paste0("hep_genes_", comparison, ".tsv")), 
+            quote = F, col.names = T, row.names = F, sep = "\t")
+  
+markers_path = file.path(results_path, paste0("no_filter_", comparison, ".tsv"))
+inventory_add( tag = "HE_FOXA2_gRNA_over_Scramble", 
+               filename = markers_path, 
+               extra = "HE differential expression results for FOXA2 gRNA versus scramble. Unfiltered." )
+Z = read.table(header = T, inventory_get("HE_FOXA2_gRNA_over_Scramble")  )
+Z %<>% subset( !grepl( "gRNA", gene ) )
+library(ggrepel)
+p = ggplot() + ggtitle(comparison) + 
+  geom_point(aes( y= -log10(q_val), x = avg_logFC),
+             data = Z) + 
+  geom_text_repel(aes( y= -log10(q_val), x = avg_logFC, label = gene),
+            data = subset(Z, -log10(q_val) > 80 | abs(avg_logFC) > 2)) 
+ggsave(file.path(results_path, paste0("volcano", comparison, ".pdf")), p, width = 6, height = 6)
+```
+

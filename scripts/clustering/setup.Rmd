@@ -1,0 +1,174 @@
+---
+title: "R Notebook"
+output: html_document
+---
+
+#### Set up data
+
+```{r}
+library(Seurat)
+library(dplyr)
+library(Matrix)
+library(thymusatlastools2)
+results_path = Sys.getenv("FREEZR_DESTINATION")
+
+#### Load data
+# ========================================================================================
+# ===================  Fill this in based on where you saved the data. ===================  
+# ========================================================================================
+# Tera_rep1 <- Seurat::Read10X("PATH/TO/DIGITAL_GENE_EXPRESSION_MATRIX")
+# Tera_rep2 <- Seurat::Read10X("PATH/TO/DIGITAL_GENE_EXPRESSION_MATRIX")
+# ============== We load the data using code hardwired for our lab
+Tera_rep1 = thymusatlastools2::load_maehrlab_data("CR_perturb_2018JAN_hDE_tera_rep1")[[1]]
+Tera_rep2 = thymusatlastools2::load_maehrlab_data("CR_perturb_2018JAN_hDE_tera_rep2")[[1]]
+# ========================================================================================
+
+
+
+dge_DE_TERA1 <- CreateSeuratObject(raw.data = Tera_rep1,
+                             min.cells = 2,
+                             min.genes = 200,
+                             project = "Terarep1")
+
+dge_DE_TERA2 <- CreateSeuratObject(raw.data = Tera_rep2,
+                             min.cells = 2,
+                             min.genes = 200,
+                             project = "Terarep2")
+dge_DE_TERA <- MergeSeurat(dge_DE_TERA1,dge_DE_TERA2, add.cell.id1 = "Terarep1", add.cell.id2 = "Terarep2", 
+                           do.normalize = T)
+
+
+
+###clear some memory
+rm( 
+  Scramble_rep1 ,
+  Scramble_rep2 ,
+  Tera_rep1 ,
+  Tera_rep2 ,
+  dge_DE_TERA1 ,
+  dge_DE_TERA2 ,
+  dge_DE_TERA3 ,
+  dge_DE_TERA4 ,
+  dge_DE_TERA_temp ,
+  dge_DE_TERA_temp2 
+)
+gc()
+
+```
+
+Plot summary features
+
+```{r}
+{
+  file.path(results_path, "key_features_violin.pdf")
+  VlnPlot(object = dge_DE_TERA,
+          features.plot = c("nGene", "nUMI", "POU5F1", "dCas9_KRAB"),
+          nCol = 2)
+  dev.off()
+}
+
+{
+  file.path(results_path, "nUMI_vs_nGene.pdf")
+  GenePlot(object = dge_DE_TERA, gene1 = "nUMI", gene2 = "nGene", pch.use = '.')
+  dev.off()
+}
+
+{
+  file.path(results_path, "expression totals pre-normalization.pdf")
+  hist(colSums(dge_DE_TERA@data),
+       breaks = 100,
+       main = "Total expression before normalisation",
+       xlab = "Sum of expression")
+  dev.off()
+}
+
+
+
+dge_DE_TERA <- NormalizeData(object = dge_DE_TERA,
+                             normalization.method = "LogNormalize",
+                             scale.factor = 1e4)
+{
+  pdf(file.path(results_path, "Cellwise expression.pdf"))
+  hist(colSums(dge_DE_TERA@data),
+       breaks = 1000,
+       main = "Total expression after normalisation",
+       xlab = "Sum of expression")
+  dev.off
+}
+
+
+
+
+#### Find variable genes, excluding guides 
+dge_DE_TERA <- FindVariableGenes(object = dge_DE_TERA,
+                          mean.function = ExpMean,
+                          dispersion.function = LogVMR,
+                          x.low.cutoff = 0.0125,
+                          x.high.cutoff = 3,
+                          y.cutoff = 0.5)
+dge_DE_TERA@var.genes=dge_DE_TERA@var.genes %<>% setdiff(c(GUIDE_NAMES, "dCas9_KRAB"))
+assertthat::assert_that(!any(grepl("KRAB", dge_DE_TERA@var.genes)))
+
+
+### regress out nUMI
+dge_DE_TERA <- ScaleData(object = dge_DE_TERA, vars.to.regress = "nUMI")
+dge_DE_TERA <- RunPCA(object = dge_DE_TERA,
+               pc.genes = dge_DE_TERA@var.genes,
+               do.print = TRUE,
+               pcs.print = 1:5,
+               genes.print = 5)
+
+# visualise top genes associated with principal components
+{
+  pdf(file.path(results_path, "PCA_info.pdf"))
+  VizPCA(object = dge_DE_TERA, pcs.use = 1:2)
+  PCAPlot(object = dge_DE_TERA, dim.1 = 1, dim.2 = 2)
+  PCElbowPlot(object = dge_DE_TERA)
+dev.off()
+}
+
+
+dge_DE_TERA <- RunTSNE(object = dge_DE_TERA,
+                dims.use = 1:15,
+                do.fast = TRUE)
+
+{
+  dir.create.nice(file.path(results_path, "featureplots"))
+  pdf(file.path(results_path, "featureplots", "PCA_info.pdf"))
+  TSNEPlot(object = dge_DE_TERA, do.label = F)
+  dev.off()
+}
+
+pdf("tSNE_Perturb.pdf",width=10,height=10)
+TSNEPlot(object = dge_DE_TERA, do.label = F, colors.use = c("blue3","red3"))
+dev.off()
+
+
+dge_DE_TERA <- FindClusters(object = dge_DE_TERA,
+                      reduction.type = "pca",
+                      dims.use = 1:15,
+                      resolution = 0.075,
+                      print.output = 0,
+                      save.SNN = TRUE)
+dge_DE_TERA %<>% BuildClusterTree()
+
+{
+  pdf(file.path(results_path, "tSNE_Perturbcluster.pdf"),width=10,height=10)
+  TSNEPlot(object = dge_DE_TERA, do.label = TRUE)
+  PlotClusterTree(dge_DE_TERA)
+  dev.off()
+}
+```
+
+```{r}
+
+####save seurat object
+fp = file.path( results_path, "DE_TERA_clustered_no_gAmp.Robj" )
+saveRDS( dge_DE_TERA, fp )
+freezr::inventory_add(tag = "DE_TERA_processed", force = T,
+                      filename = fp,
+                      extra = "Initial clustering + tSNE with the DE TERA replicates. No gAmp data added yet.")
+
+#dge_DE_TERA = freezr::inventory_get(tag = "DE_TERA_processed") %>% readRDS
+rm(dge_DE_TERA); gc()
+```

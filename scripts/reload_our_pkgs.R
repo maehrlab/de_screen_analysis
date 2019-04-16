@@ -1,0 +1,10 @@
+unloadNamespace("thymusatlastools2")
+unloadNamespace("Seurat")
+unloadNamespace("freezr")
+unloadNamespace("monocle")
+unloadNamespace("diffusionMap")
+unloadNamespace("igraph")
+
+library("Seurat")
+library("thymusatlastools2")
+library("freezr")

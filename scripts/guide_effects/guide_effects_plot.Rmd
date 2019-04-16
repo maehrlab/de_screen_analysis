@@ -1,0 +1,216 @@
+---
+title: ""
+author: "Eric Kernfeld"
+date: "January 18, 2017"
+output: html_document
+---
+
+
+Plot guide effects on targets & KRAB
+
+```{r}
+p = ggplot( guide_effects_assembled ) + 
+  geom_point(aes(x = target_effect, y = -target_log10p)) + 
+  ggrepel::geom_label_repel(aes(
+    x = target_effect,
+    y = -target_log10p,
+    label = paste0( guide, "  (", cell_counts_DE1 + cell_counts_DE2, " cells)") 
+  ), 
+  data = subset(guide_effects_assembled, target_effect > 0)) + 
+  ggtitle("Guide effects on targets")
+ggsave( file.path(results_path, "Effect_on_target_volcano.pdf"), p, height = 4, width = 6)
+
+p = ggplot( guide_effects_assembled ) + 
+  geom_point(aes(x = KRAB_effect, y = -KRAB_log10p)) + 
+  ggrepel::geom_label_repel(aes(
+    x = KRAB_effect,
+    y = -KRAB_log10p,
+    label = paste0( guide, "  (", cell_counts_DE1 + cell_counts_DE2, " cells)") 
+  ), 
+  data = subset(guide_effects_assembled, KRAB_effect < -0.4 | -KRAB_log10p > 10)) + 
+  ggtitle("Guide effects on KRAB")
+ggsave( file.path(results_path, "Effect_on_KRAB_volcano.pdf"), p, height = 4, width = 6)
+```
+
+Make volcano plots for each guide.
+
+```{r}
+# This function looks for differential expression results in a results subfolder called 
+# either guides_vs_all (for the full data) or guides_vs_all_c0 (for the main cluster only).
+rp_alt = results_path
+make_volcano = function( guide,  save_dir, results_path = rp_alt, genes_label = NULL ){
+  fp = file.path( save_dir, "tables", paste0(guide, ".csv"))
+  if(!file.exists(fp)){
+    warning("Folder not found!\n")
+    return()
+  }
+  X = read.csv(fp)
+  X$q_val_log10 = X$q_val %>% log10 %>% multiply_by(-1)
+  X$is_significant = X$q_val < 0.05
+  X %<>% subset(!gene %in% GUIDE_NAMES)
+  if( genes_label %>% is.null){
+    genes_label = subset(X, q_val_log10 > 10, select = "gene", drop = T)
+  }
+  library(ggrepel)
+  p = ggplot() + ggtitle(guide)  + 
+    geom_point(data = X,
+               aes(x = avg_logFC,
+                   y = q_val_log10), size = 0) +
+    geom_label_repel( data = subset(X, gene %in% genes_label ), 
+                     aes(x = avg_logFC,
+                         y = q_val_log10,
+                         label = gene, 
+                         colour = is_significant),
+                     point.padding = 1) +
+    geom_point( data = subset(X, gene %in% genes_label ), 
+                     aes(x = avg_logFC,
+                         y = q_val_log10),
+                         colour = "red")
+  
+  fp_out = file.path( results_path, basename(save_dir), "volcano" )
+  dir.create.nice( fp_out )
+  ggsave( plot = p,
+          file.path( fp_out, paste0( guide, ".pdf" ) ), 
+          width = 5, 
+          height = 4 )
+  return(p)
+}
+
+plots = lapply("any_FOXA2_guide", make_volcano,  save_dir = file.path( path_effects, "effects_c0/foxa2_all" ), 
+               genes_label = c( "CXCR4",
+                                "LEFTY1",
+                                "HHEX",
+                                "LEFTY2",
+                                "MIXL1",
+                                "FOXA2",
+                                "CER1",
+                                "EPCAM",
+                                "GSC",
+                                "OTX2",
+                                "DUSP4",
+                                get_guides_from_genes("FOXA2")[1:2]) )
+plots = lapply(GUIDE_NAMES, make_volcano,  save_dir = file.path( path_effects, "effects_all" ))
+plots = lapply(GUIDE_NAMES, make_volcano,  save_dir = file.path( path_effects, "effects_c0" ))
+aggr_filenames = GUIDE_NAMES %>% get_genes_from_guides %>% paste0("any_", ., "_guide") %>% unique
+plots = lapply(aggr_filenames, make_volcano,  save_dir = file.path( path_effects, "effects_all" ))
+plots = lapply(aggr_filenames, make_volcano,  save_dir = file.path( path_effects, "effects_c0" ))
+```
+
+Assessing guide consistency -- shared differentially expressed genes
+
+```{r}
+
+get_shared_affected = function( guide1, guide2, save_dir, type = c("jaccard", "union") ){
+  fp1 = file.path( save_dir, "tables", paste0(guide1, ".csv"))
+  fp2 = file.path( save_dir, "tables", paste0(guide2, ".csv"))
+  if(!file.exists(fp1) || !file.exists(fp2) ){
+    warning("Folder not found!\n")
+    return( 0 )
+  }
+  X1 = read.csv(fp1)
+  X2 = read.csv(fp2)
+  X1$q_val = p.adjust(method = "fdr", p = X1$p_val, n = dge@data %>% nrow)
+  X2$q_val = p.adjust(method = "fdr", p = X2$p_val, n = dge@data %>% nrow)
+  X1 %<>% subset(q_val < 0.1)
+  X2 %<>% subset(q_val < 0.1)
+  to_updown = function(x) ifelse(x>0, "up", "down") 
+  effect1 = paste0(X1$gene, "_", to_updown(X1$avg_logFC))
+  effect2 = paste0(X2$gene, "_", to_updown(X2$avg_logFC))
+  diff_exp_jaccard = 
+    length( intersect( effect1, effect2 ) ) /
+    length( union(     effect1, effect2 ) ) 
+  
+  diff_exp_union = 
+    length( union( effect1, effect2 ) ) 
+  if( type[[1]] == "jaccard" ){
+    to_return = diff_exp_jaccard 
+  } else {
+    to_return = diff_exp_union 
+  }
+  
+  if( is.na( to_return ) | 
+      is.null( to_return ) | 
+      is.nan( to_return ) 
+  ){
+    to_return = 0
+  }
+  return( to_return )
+ 
+}
+# List pairs in a df
+guide_pairs = combn( GUIDE_NAMES %>% setdiff(GUIDES_BLACKLIST), 2 ) %>% t %>% as.data.frame
+guide_pairs %<>% set_colnames(c("guide1", "guide2"))
+guide_pairs$gene1 = get_genes_from_guides( guide_pairs$guide1 )
+guide_pairs$gene2 = get_genes_from_guides( guide_pairs$guide2 )
+guide_pairs$jaccard_index = mapply( get_shared_affected, 
+                                    guide1 = guide_pairs$guide1, 
+                                    guide2 = guide_pairs$guide2,
+                                    MoreArgs = list( save_dir = file.path( path_effects, "effects_all" ) ), 
+                                    SIMPLIFY = T )
+guide_pairs$total_diff_expr = mapply( get_shared_affected, 
+                                    guide1 = guide_pairs$guide1, 
+                                    guide2 = guide_pairs$guide2,
+                                    MoreArgs = list( save_dir = file.path( path_effects, "effects_all" ), 
+                                                     type = "union"), 
+                                    SIMPLIFY = T )
+guide_pairs$same_gene = guide_pairs$gene1 == guide_pairs$gene2
+
+
+p = ggplot( guide_pairs ) + 
+  geom_point( aes( y = jaccard_index*100, 
+                   x = total_diff_expr, 
+                   colour = same_gene ), 
+              alpha = 0.5 )  + 
+  geom_smooth( aes( y = jaccard_index*100, 
+                    x = total_diff_expr, 
+                    fill = same_gene ),
+               colour = "black",
+               method.args= list(family=quasipoisson( ) ), 
+               )  + 
+  ylab("Shared differential expression (%)") + 
+  xlab("Number of DE genes") + 
+  scale_y_continuous(limits = c(0, 100))
+ggsave( file.path( results_path, "guide_consistency.pdf"), p, width = 8, height = 4)
+library(dplyr)
+to_label = guide_pairs %>% subset(!same_gene) %>% subset(total_diff_expr >= 10) %>% arrange(-jaccard_index) %>% head(20)
+p2 = p + 
+  ggrepel::geom_label_repel( data = to_label, 
+                    aes( y = jaccard_index*100, 
+                         x = total_diff_expr, 
+                         label = paste(gene1, gene2)))
+ggsave( file.path( results_path, "guide_consistency_extra_labels.pdf"), p2, width = 20, height = 10)
+
+```
+
+Barplot of number of genes affected.
+
+```{r}
+get_num_affected = function( guide,  save_dir ){
+  fp = file.path( save_dir, "tables", paste0(guide, ".csv"))
+  if(!file.exists(fp)){
+    warning("Folder not found!\n")
+    return()
+  }
+  X = read.csv(fp)
+  X$q_val = p.adjust(method = "fdr", p = X$p_val, n = dge@data %>% nrow)
+  return(sum(X$q_val < 0.05))
+}
+
+de_filenames = GUIDE_NAMES %>% get_genes_from_guides %>% paste0("any_", ., "_guide") %>% unique
+de_filenames %<>% c(GUIDES_SCRAMBLE)
+num_affected = sapply( de_filenames,
+                       get_num_affected,  save_dir = file.path( path_effects, "effects_c0" ))
+names(num_affected) = de_filenames
+num_affected %<>% unlist %>% sort %>% rev
+X = data.frame( target = names(num_affected) %>% gsub("any_|_guide", "", .), 
+                num_genes_affected_downstream = num_affected )
+X$target = factor(X$target, ordered = T, levels = X$target)
+write.table(X, file.path(results_path, "num_affected_genes_c0.tsv"), 
+            row.names = F, col.names = T, quote = F, sep = "\t")
+p = ggplot(X) + 
+  geom_bar(aes(x = target, y = num_genes_affected_downstream), stat = "identity") + 
+  theme(axis.text.x = element_text(angle  = 90))
+ggsave(file.path( results_path, "num_affected_genes_c0.pdf"), p, height = 5, width = 8)
+```
+
+

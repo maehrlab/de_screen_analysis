@@ -1,0 +1,115 @@
+---
+  title: "R Notebook"
+output: html_document
+---
+  
+  
+Functions to retrieve, plot, and statistically compare guide frequencies by cluster, with and without aggregating by target.
+
+```{r}
+get_guides_by_cluster = function( dge, aggregate_by_target, skip = GUIDES_BLACKLIST, ident.use = "ident" ){
+  assertthat::assert_that(is.character(skip) & is.vector(skip))
+  dge@meta.data$assigned_guide_target = dge@meta.data$highest_expressed_guide %>% get_genes_from_guides
+  if( aggregate_by_target ){
+    raw_data = FetchData( dge, c( "assigned_guide_target", ident.use ) )
+    raw_data %<>% subset( !(assigned_guide_target %in% skip) )
+  } else {
+    raw_data = FetchData( dge, c( "highest_expressed_guide", ident.use ) )
+    raw_data %<>% subset( !(highest_expressed_guide %in% skip) )
+  }
+  guides_by_cluster_counts = table( raw_data )
+  guides_by_cluster_counts %<>% extract(!(rownames(guides_by_cluster_counts) %in% skip), )
+  
+  # Hacky way to get the table into a dataframe without converting to long format
+  guides_by_cluster_counts %<>% as("Matrix") %>% as.matrix %>% as.data.frame
+
+  # For downstream convenience, sum up all scrambles even if not otherwise aggregating 
+  if(!aggregate_by_target){
+    scramble_names = GUIDES_SCRAMBLE[GUIDES_SCRAMBLE %in% rownames(guides_by_cluster_counts)]
+    guides_by_cluster_counts["Scramble", ] = guides_by_cluster_counts[scramble_names, ] %>% colSums 
+  }
+
+  return( guides_by_cluster_counts )
+}
+
+calc_save_pvals = function( guides_by_cluster_counts, filename ){
+  pvals = rep(1, nrow(guides_by_cluster_counts))
+  tvnorm = rep(0, nrow(guides_by_cluster_counts))
+  names(pvals) = rownames(guides_by_cluster_counts)
+  names(tvnorm) = rownames(guides_by_cluster_counts)
+  get_tv = function(p1, p2)  0.5 * sum(abs(p1 - p2))
+  for( guide in rownames(guides_by_cluster_counts)){
+    pvals[guide] = fisher.test( guides_by_cluster_counts[c(guide, "Scramble"), ], 
+                                alternative = "greater", simulate.p.value = T )$p
+    tvnorm[guide] = get_tv( guides_by_cluster_counts[guide,      ] %>% div_by_sum,
+                            guides_by_cluster_counts["Scramble", ] %>% div_by_sum )
+  }
+  qvals = p.adjust(pvals)
+  qvals %>% sort %>% matrixify_preserving_rownames %>% 
+    write.table(quote = F, sep = "\t", file = file.path(results_path, paste0(filename, "qvals.tsv")))
+  tvnorm %>% sort %>% rev %>% matrixify_preserving_rownames %>% 
+    write.table(quote = F, sep = "\t", file = file.path(results_path, paste0(filename, "tvnorm.tsv")))
+  return(qvals)
+}
+
+
+gdo = file.path(proj_dir, "tables/guides_by_TERA_rank.csv") %>%
+  read.csv( stringsAsFactors = F) %>% 
+  extract2("hgnc_symbol") %>%
+  rev
+
+# Note: put genes for gene_order, not guides, even if guides_by_cluster_counts is not aggregated by target.
+heatmap_guides_by_cluster = function(guides_by_cluster_counts, 
+                                     filename,
+                                     desired_order = colnames(guides_by_cluster_counts), 
+                                     gene_order = gdo
+                                     ){
+  # Parse input, especially guide ordering
+  guides_by_cluster_counts = guides_by_cluster_counts[, desired_order %>% as.character]
+  if( any(grepl("gRNA", gene_order))){
+    stop("\nPut genes for gene_order, not guides.\n")
+  }
+  if( any(grepl("Scramble", gene_order))){
+    stop("\nSorry, it's hardwired: scramble guides go at the end. Don't put them in gene_order.\n")
+  }
+
+  # Convert to probabilities Pr(cluster|guide)
+  scramble_probs = guides_by_cluster_counts["Scramble", ]
+  guides_by_cluster_counts %<>% extract(setdiff( rownames(guides_by_cluster_counts), "Scramble" ), )
+  scramble_probs %<>% div_by_sum
+  guides_by_cluster_probs = guides_by_cluster_counts
+  for(i in 1:nrow(guides_by_cluster_probs)){
+    guides_by_cluster_probs[i, ] %<>% div_by_sum
+    guides_by_cluster_probs[i, ] %<>% subtract( scramble_probs )
+  }
+  
+  # Convert to long format
+  # Coercing to matrix ensures rownames are recognized
+  values_long = reshape2::melt(guides_by_cluster_probs %>% as.matrix,  
+                               varnames  = c("assigned_guide", "ident"))
+  
+  factor_order = c( GUIDES_SCRAMBLE, 
+                    get_guides_from_genes( gene_order ), 
+                    gene_order,           
+                    "Scramble" ) %>% setdiff(GUIDES_BLACKLIST) 
+   
+  values_long[["assigned_guide"]] %<>% factor(levels=factor_order, ordered = T)
+  
+  values_long = values_long[complete.cases(values_long), ]
+  values_long[["is_scramble"]] = grepl( "Scramble", values_long[["assigned_guide"]], ignore.case = T )
+  values_long[["ident"]] %<>% factor(ordered = T, levels = desired_order )
+  p = ggplot(values_long) +
+    geom_tile(aes_string(y= "assigned_guide", 
+                         x = "ident", 
+                         fill = "value")) + 
+    scale_colour_manual(values = c("white", "black")) + 
+    scale_fill_gradient2(low = "blue", high = "red") + 
+    labs( fill="Cluster probabilities \ngiven guide assignment \nminus scramble."  ) +
+    scale_y_discrete( labels = prettify_guide_labels(values_long[["assigned_guide"]] %>% 
+                                                       unique %>% sort %>% as.character))   
+  ggsave(file.path(results_path, filename), p, height = 14, width = 7)
+  
+  return(p)
+}
+```
+

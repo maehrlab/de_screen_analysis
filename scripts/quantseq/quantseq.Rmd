@@ -1,0 +1,199 @@
+---
+  title: "R Notebook"
+output: html_document
+---
+  
+```{r}
+results_path = Sys.getenv("FREEZR_DESTINATION")
+dge = freezr::inventory_get(tag = "DE_TERA_reclustered_no_dub") %>% readRDS
+TidynessChecklist( dge ) 
+
+miniheat = function( X, name, reorder = T ){
+  if( reorder ){
+    gene_order = seriation::get_order(seriation::seriate(dist(X*(X>0)), "TSP")) %>% extract(rownames(X), .)
+    #gene_order = OrderRowsForHeatmap(X, wrap = T)
+  } else {
+    gene_order = rownames(X)
+  }
+  X_long = reshape2::melt(X)
+  colnames(X_long) = c("gene", "day", "expr")
+  p = ggplot(X_long) + 
+    geom_tile(aes(x = day, 
+                  y = factor(gene, ordered = T, levels = gene_order),
+                  fill = expr)) + 
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5)) + 
+    scale_fill_gradient2( low = "blue", high = "red")
+  p = p + ylab( "gene" )
+  ggsave(file.path(results_path, name), p, width = 5, height = 10)
+  return( gene_order )
+}
+```
+
+#### Grab and clean quant-seq data
+
+```{r}
+options(stringsAsFactors=F)
+library(pheatmap)
+library(DESeq2)
+
+# Read data and get relevant samples into a single deseq object
+anDat = read.table("~/Dropbox/DE_CROPseq/Quantseq/QuantSeq_annotation.txt",sep="\t",header=T)
+anDat$is_timecourse = grepl("Day", anDat$X) & !grepl("SOX17", anDat$X)
+anDat %<>% subset(is_timecourse)
+assertthat::are_equal(nrow(anDat), 8)
+anDat$day = substr(anDat$X, 4,4) %>% as.numeric
+cts = read.table("~/Dropbox/DE_CROPseq/Quantseq/quant.gene.txt",sep="\t",header=T)
+geneDat = cts[c("Symbol", "chr") ]
+cts = cts[anDat$X]
+de_quantseq = DESeqDataSetFromMatrix(countData = cts,
+                              colData = anDat,
+                              design = ~Condition)
+rownames(geneDat) = geneDat$Symbol
+mcols(de_quantseq) = geneDat
+rm(anDat)
+rm(geneDat)
+rm(cts)
+
+# filter out lower 30% and top 1%
+mcols(de_quantseq)$totals_by_gene = rowSums( counts(de_quantseq) )
+cutoff_lo = quantile(mcols(de_quantseq)$totals_by_gene,probs = 0.3) 
+cutoff_hi = quantile(mcols(de_quantseq)$totals_by_gene,probs = 0.99)
+mcols(de_quantseq)$high_enough = mcols(de_quantseq)$totals_by_gene > cutoff_lo 
+mcols(de_quantseq)$low_enough  = mcols(de_quantseq)$totals_by_gene < cutoff_hi 
+mcols(de_quantseq)[c("totals_by_gene", "Symbol")] %>% as.data.frame %>% View
+
+de_quantseq %<>% estimateSizeFactors
+de_quantseq %<>% estimateDispersions(fitType = "local")
+de_quantseq %<>% DESeq2::nbinomLRT( full = ~Condition, reduced = ~1 )
+X = results(de_quantseq, name = "Condition_D3_WT_vs_D0_WT")
+X$gene = mcols(de_quantseq)$Symbol
+rownames(X) = X$gene
+X[c("FOXA2", "SOX17", "POU5F1", "SOX2"), ]
+X %<>% subset( padj < 0.05 )
+write.table(X, file.path(results_path, "quantseq_de_genes.tsv"), row.names = F, sep = "\t", quote = F)
+
+Y = data.frame(gene = X$gene, padj = X$padj )
+norm_counts = counts(de_quantseq, normalized = T) 
+mean_counts = norm_counts %*% model.matrix(~Condition+0, data = colData(de_quantseq)) 
+rownames( mean_counts ) = rowData(de_quantseq)$Symbol
+Y$peak_stage = apply( mean_counts[Y$gene, ], 1, function(x) names(which.max(x)))
+Y$count_peak = apply( mean_counts[Y$gene, ], 1, function(x) max(x)  )
+Y$count_2nd  = apply( mean_counts[Y$gene, ], 1, function(x) sort(x, decreasing = T)[2] )
+Y$log2_fc = log2(Y$count_peak+1) - log2(Y$count_2nd+1)
+Y %<>% (dplyr::arrange)(peak_stage, -log2_fc)
+write.table(Y[c(1, 3, 6, 2)], file.path(results_path, "quantseq_de_genes_plus.tsv"), row.names = F, sep = "\t", quote = F)
+human_tf = get_mouse_tfs() %>% get_ortholog(from = "mouse", to = "human")
+heatmap_genes = 
+  lapply( unique( Y$peak_stage ), 
+          function( stage ) subset( Y, peak_stage == stage & gene %in% human_tf, select = "gene" )[1:50, ] )
+for( ii in seq_along( heatmap_genes ) ){
+  miniheat( mean_counts[heatmap_genes[[ii]] %>% c("SOX17", "POU5F1"), ] %>% apply(1, div_by_max) %>% t,
+            reorder = F,
+            name = paste0( "Stage-specific expression_Day", ii - 1, ".pdf" ) )
+}
+handpicked = union(TARGETS, c("T", "CER1", "SMAD3", "FOXA1", "NODAL"))
+miniheat( mean_counts[handpicked, ] %>% apply(1, div_by_max) %>% t,
+          reorder = T,
+          name = paste0( "Stage-specific expression handpicked.pdf" ) )
+# miniheat( mean_counts[TARGETS, ] %>% apply(1, div_by_max) %>% t,
+#           reorder = T,
+#           name = paste0( "Stage-specific expression of guide targets.pdf" ) )
+# 
+```
+
+#### Look at replicate correlations
+
+```{r}
+{
+  pdf(file.path(results_path, "replicate_correlations.pdf"))
+  plot(counts(de_quantseq)[, 1:2])
+  plot(counts(de_quantseq)[, 1:2 + 2])
+  plot(counts(de_quantseq)[, 1:2 + 4])
+  plot(counts(de_quantseq)[, 1:2 + 6])
+  plot(counts(de_quantseq)[, c(1, 4)])
+  pairs(counts(de_quantseq))
+  cor(counts(de_quantseq)) %>% pmax(0.98) %>% 
+    (gplots::heatmap.2)(symm = T, scale = "none", trace = "none",
+                        main = "Rep correlation capped below at 0.98", 
+                        col = colorRampPalette(c("khaki1", "red"))(9))
+  cor(counts(de_quantseq)) %>%
+    (gplots::heatmap.2)(symm = T, scale = "none", trace = "none",
+                        main = "Rep correlation", 
+                        col = colorRampPalette(c("khaki1", "red"))(9))
+  dev.off()
+}
+```
+
+#### Initial look at key genes
+
+```{r}
+pdt = file.path(proj_dir, "tables")
+marker_genes = read.csv( file.path( pdt, "markers_ryan.csv"), 
+                           stringsAsFactors = F, header = T )
+marker_genes_long = reshape2::melt(marker_genes, id.vars = c(), value.name = "gene", variable.name = "type" )
+marker_genes_long %<>% subset(gene != "")
+marker_genes_long$available = marker_genes_long$gene %in% mcols(de_quantseq)$Symbol
+marker_genes_long %<>% subset(available)
+marker_genes_long$index = sapply( marker_genes_long$gene, match, mcols(de_quantseq)$Symbol )
+assertthat::are_equal(mcols(de_quantseq)$Symbol[marker_genes_long$index], marker_genes_long$gene)
+marker_genes_long$high_enough = mcols(de_quantseq)$high_enough[marker_genes_long$index]
+assertthat::assert_that(all(marker_genes_long$high_enough))
+named_counts = counts(de_quantseq)
+rownames(named_counts) = mcols(de_quantseq)$Symbol
+colnames(named_counts)
+X = named_counts
+X %<>% apply(2, div_by_sum) %>% multiply_by(10^6)
+X %>% colSums
+X = X[ marker_genes_long$gene, ] 
+X %<>% add(1) %>% log2
+X %<>% apply(1, standardize) %>% t
+X_merged = aggregate_nice(t(X), by = de_quantseq$day, FUN = mean) %>% t
+
+
+
+             miniheat( X = X,        name = "ryan_genes_in_quantseq_reps.pdf" )
+gene_order = miniheat( X = X_merged, name = "ryan_genes_in_quantseq.pdf" )
+marker_genes_long = data.frame( gene = factor( gene_order, ordered = T, levels = gene_order ) )
+marker_genes_long$type = c( rep("ESC", 6), 
+                            rep("ME",  7),
+                            rep("DE", 16) )
+```
+
+Corresponding heatmap of CROP-seq data
+
+```{r}
+p = make_heatmap_for_table(dge,
+                           genes_in_order = gene_order,
+                           desired_cluster_order = c(0, 1, 2, 3), 
+                           ident.use = "ident",
+                           labels = "regular",
+                           norm_fun = standardize )   + 
+  scale_fill_gradientn(colors = c("blue", "white", "red"))
+
+type_colors = c("ESC" = "yellow",  "ME" = "orange", "DE" = "red")
+label_pos = aggregate_nice( marker_genes_long$gene %>% as.numeric, 
+                            marker_genes_long$type, 
+                            FUN = mean ) %>% vectorize_preserving_rownames
+p = p + 
+  annotate(geom = "tile", 
+           x = 4.75, 
+           fill = type_colors[marker_genes_long$type], 
+           y = marker_genes_long$gene, 
+           width = 0.25) +
+  annotate( geom = "text", 
+            angle = 90,
+            x = 5,  
+            y = label_pos, 
+            label = names(label_pos)) +
+  annotate( geom = "text", 
+            angle = 90,
+            x = 5.5,  
+            y = aggregate_nice( marker_genes_long %>% rownames %>% as.numeric, 
+                                marker_genes_long$type, 
+                                FUN = mean )[, 1], 
+            label = "")
+
+ggsave(file.path(results_path, "ryan_genes_in_clusters.pdf"), p, width = 5, height = 10)
+
+            
+```

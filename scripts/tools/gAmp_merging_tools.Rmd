@@ -1,0 +1,172 @@
+---
+title: ""
+author: "Eric Kernfeld"
+date: "January 18, 2017"
+output: html_document
+---
+
+
+```{r}
+
+#'  Prepare metadata tables with guide amplification results. 
+#'
+#'  @param dge_gAMP A matrix of molecular counts. Rows should be guides; columns cells. Columns should contain replicate name as well as barcode. Replicate name should match raw data exactly.
+#'  @param dge_raw A matrix of molecular counts. Rows should be genes; columns cells. Columns should contain replicate name as well as barcode. Replicate name should match gAmp data exactly.
+#'
+#' @export
+#'
+prepare_gAmp_metadata = function ( dge_gAMP, dge_raw = NULL ){
+  # Extract counts for KRAB and (non-amplified) guides
+  if( !is.null( dge_raw ) ){
+    fetch_data_or_zero = function(rowname){
+      assertthat::are_equal(1, length(rowname))
+      if( rowname %in% rownames(dge_raw)){
+        return(dge_raw[rowname, ])
+      } else {
+        return(rep(0, ncol(dge_raw)))
+      }
+    }
+    unAmp = sapply( GUIDE_NAMES, FUN = fetch_data_or_zero ) %>% as.data.frame
+    colnames(unAmp) = paste0(GUIDE_NAMES, "_umAmp")
+    unAmp$gRNA_total_unAmp = rowSums(unAmp)
+    unAmp[["dCas9_KRAB"]] = 0
+    if("dCas9_KRAB" %in% rownames(dge_raw)){
+      unAmp[["dCas9_KRAB"]] = dge_raw["dCas9_KRAB", ]
+    } else {
+      warning("No KRAB detected in this sample.\n")
+    }
+  } else {
+    unAmp = NULL
+  }
+
+    
+  # transpose guide data to get cells on rows (as in metadata)
+  dge_gAMP %<>% t
+  
+  # Figure out which guides we actually see
+  guides_detected = intersect( GUIDE_NAMES, colnames( dge_gAMP ) )
+
+  # Eliminate cells that you don't have in your full run
+  # Eliminate genes that are not guides
+  if( !is.null( dge_raw ) ){
+    cellnames_full_run = colnames(dge_raw)
+    both = intersect( cellnames_full_run, rownames(dge_gAMP) )
+    cat("The number of shared cell barcodes between full run and guide is ", length( both ), " .\n" )
+    if( length( both ) < 500 ){
+      warning( paste0("The number of shared cell barcodes between full run and gAmp is rather low. \n",
+                      "Did you match the sample ID's?\n" ) )
+    }
+    guide_expression_filtered = dge_gAMP[both, guides_detected]
+  } else {
+    cellnames_full_run = rownames( dge_gAMP )
+    guide_expression_filtered = dge_gAMP[, guides_detected]
+  }
+  
+  
+  # make an empty matrix to eventually be added to the metadata
+  # The suffix "nice" means it has one col for every guide we used 
+  # and one row for every cell in the full dataset.
+  guide_expression_nice = matrix(0, 
+                                 ncol = length(GUIDE_NAMES), 
+                                 nrow = length(cellnames_full_run))
+  colnames(guide_expression_nice) = GUIDE_NAMES
+  rownames(guide_expression_nice) = cellnames_full_run
+  # Fill it 
+  guide_expression_nice[rownames(guide_expression_filtered), 
+                        colnames(guide_expression_filtered)] = matrix(guide_expression_filtered)
+  
+
+  # Compute bonus info
+  gAmp_total = rowSums(guide_expression_nice)
+  highest_expressed_value = apply(guide_expression_nice, 1, max)
+  highest_expressed_idx   = apply(guide_expression_nice, 1, which.max)
+  highest_expressed       = GUIDE_NAMES[highest_expressed_idx]
+  highest_expressed[highest_expressed_value==0] = "(no guides detected)"
+  second       = function(x) x %>% sort  %>% rev %>% extract(2)
+  which.second = function(x) x %>% order %>% rev %>% extract(2)
+  second_expressed_value = apply(guide_expression_nice, 1, second)
+  second_expressed_idx   = apply(guide_expression_nice, 1, which.second)
+  second_expressed       = GUIDE_NAMES[second_expressed_idx]
+  second_expressed[highest_expressed_value==0] = "(no guides detected)"
+
+  # Transform guide expression into normalized counts and assignment indicators
+  div_or_zero = function( x, y ) {
+    if(y==0){ return(0) } else { return(x / y) }
+  }
+  guide_expression_norm = guide_expression_nice
+  for( i in seq_along(gAmp_total) ) {
+    guide_expression_norm[i,] = div_or_zero( guide_expression_nice[i, ], gAmp_total[i])
+  }
+  colnames(guide_expression_norm) %<>% paste0("gAmp_norm_", .)
+  colnames(guide_expression_nice) %<>% paste0("gAmp_raw_", .)
+  guide_expression_indicator = model.matrix( object =         ~ gAmp_assignment_ + 0, 
+                                             data = data.frame( gAmp_assignment_ = highest_expressed ))
+
+  # Assemble DF and return
+  finished_metadata = data.frame( guide_expression_nice,
+                                  guide_expression_norm, 
+                                  guide_expression_indicator )
+  finished_metadata$highest_expressed_guide        = highest_expressed
+  finished_metadata$highest_expressed_value        = highest_expressed_value
+  finished_metadata$second_highest_expressed_guide = second_expressed
+  finished_metadata$second_highest_expressed_value = second_expressed_value
+  finished_metadata$gAmp_total                     = gAmp_total
+  finished_metadata$purity = highest_expressed_value / gAmp_total
+
+  if( !is.null( dge_raw ) ){
+    finished_metadata %<>% cbind(unAmp)
+  }
+  return( finished_metadata )
+}
+```
+
+```{r}
+model_peak_vs_second = function( metadata ){
+  my_f = second_highest_expressed_value ~ highest_expressed_value + 0 
+  metadata$quantreg_main = quantreg::rq( my_f, data = metadata, tau = 0.50) %>% predict
+  metadata$quantreg_high = quantreg::rq( my_f, data = metadata, tau = 0.99) %>% predict
+  metadata$likelihood_main = dpois(x      = metadata[["second_highest_expressed_value"]], 
+                                   lambda = metadata[["quantreg_main"]] )
+  metadata$likelihood_high = dpois(x      = metadata[["second_highest_expressed_value"]],
+                                   lambda = metadata[["quantreg_high"]] ) 
+  metadata$log10_LR = ( metadata$likelihood_high / metadata$likelihood_main ) %>% log10
+  metadata$log10_LR_capped = metadata$log10_LR
+  metadata$log10_LR_capped %<>% pmax( ., -2 )
+  metadata$log10_LR_capped %<>% pmin( ., 2 )
+  metadata$is_double_guide = metadata$log10_LR_capped >= 1
+  return( metadata )
+}
+
+plot_peak_vs_second = function( metadata, rep ){
+  message = paste0( "Rough percentage of cells carrying multiple guides: ", 
+                    mean( metadata$log10_LR > 1 ) %>% round( 3 ) %>% multiply_by( 100 ) )
+  p = ggplot( metadata ) +
+    geom_point( aes( x = highest_expressed_value,
+                     colour = log10_LR_capped,
+                     y = second_highest_expressed_value ), 
+                alpha = 0.2) +
+    scale_color_gradient2(high = "yellow", mid = "gray", low = "blue") + 
+    geom_line( aes(x = sort( highest_expressed_value ),
+                          y = sort( quantreg_main)) ) +
+    geom_line( aes(x = sort( highest_expressed_value ),
+                          y = sort( quantreg_high )) ) +
+    ggtitle(rep, subtitle = message) 
+  dir.create.nice(file.path( results_path, "guide_peak_versus_second_no_log"))
+  ggsave(         file.path( results_path, "guide_peak_versus_second_no_log", paste0( rep, ".pdf" ) ) )
+  p = p +
+    scale_y_continuous(trans = "log2") + 
+    scale_x_continuous(trans = "log2")
+  dir.create.nice(file.path( results_path, "guide_peak_versus_second"))
+  ggsave(         file.path( results_path, "guide_peak_versus_second", paste0( rep, ".pdf" ) ),
+                  plot = p )
+  dir.create.nice(file.path( results_path, "guide_peak_level_hist"))
+  ggsave(         file.path( results_path, "guide_peak_level_hist", paste0( rep, ".pdf" ) ),
+                  ggplot( metadata ) +
+                    geom_histogram ( aes(x = highest_expressed_value ) )+ 
+                    scale_x_continuous(trans = "log2"), 
+                  height = 3)
+  
+}
+```
+
+

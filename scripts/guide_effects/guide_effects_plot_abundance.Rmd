@@ -1,0 +1,205 @@
+---
+title: ""
+author: "Eric Kernfeld"
+date: "January 18, 2017"
+output: html_document
+---
+
+Load data
+
+```{r}
+results_path = Sys.getenv()[["FREEZR_DESTINATION"]]
+dge = readRDS( inventory_get( "DE_TERA_reclustered_no_dub" ))
+TidynessChecklist( dge )
+path_effects  = inventory_get("guide_effects_various_output")
+path_effects_cluster  = inventory_get( "guide_vs_cluster_qvals" )
+path_effects_scramble = inventory_get( "scramble_effects" )
+assertthat::assert_that(dir.exists (path_effects))
+assertthat::assert_that(file.exists(path_effects_cluster))
+assertthat::assert_that(dir.exists (path_effects_scramble))
+guide_effects_assembled = "guide_effects_assembled" %>% inventory_get %>% read.csv(stringsAsFactors = F)
+guide_effects_assembled$cell_counts_DE = with( guide_effects_assembled, 
+                                               cell_counts_DE1 + cell_counts_DE2 / 2 )
+guide_effects_assembled %<>% subset( ! ( guide %in% GUIDES_BLACKLIST ) )
+```
+
+DE versus independent ESC abundance (cellcounts)
+
+```{r}
+## Plot guides by abundance effects, but aggregating by target
+guide_effects_assembled$cell_counts_ES = guide_effects_assembled$counts_ESC
+guide_effects_assembled$target = guide_effects_assembled$guide %>% get_genes_from_guides
+gene_effects_assembled = 
+   aggregate_nice( guide_effects_assembled[c( "cell_counts_ES", 
+                                              "cell_counts_DE",
+                                              "cell_counts_DE1", 
+                                              "cell_counts_DE2" )], 
+                   by = guide_effects_assembled$target, 
+                   FUN = mean ) %>% as.data.frame
+gene_effects_assembled$target = rownames(gene_effects_assembled)
+
+## Test targets for abundance effects
+x = model.matrix(  ~ sqrt(cell_counts_ES) + sqrt(cell_counts_DE) + 0 ,
+                   data = gene_effects_assembled)
+library(mclust)
+mixmod = Mclust(x, modelNames = "VVI", G = 2)
+{
+  pdf(file.path(results_path, "mixmod.pdf"))
+  plot(mixmod, "classification")
+  dev.off()
+}
+gene_effects_assembled$p = mixmod$z[, 1] 
+significant_genes = gene_effects_assembled %>% subset(p < 0.1, select = "target", drop  = T)
+write.csv( gene_effects_assembled, file.path( results_path, "abundance_vs_indep_esc.csv"))
+
+# Categorize abundance effects
+baseline_DE = gene_effects_assembled["Scramble", "cell_counts_DE"]
+baseline_ES = gene_effects_assembled["Scramble", "cell_counts_ES"]
+
+gene_effects_assembled$effect = "not significant"
+gene_effects_assembled$effect[gene_effects_assembled$cell_counts_DE > 1.2*baseline_DE] = "DE_high"
+gene_effects_assembled$effect[gene_effects_assembled$cell_counts_DE < 0.8*baseline_DE] = "DE_low"
+gene_effects_assembled$effect[gene_effects_assembled$cell_counts_ES < 0.8*baseline_ES & 
+                                gene_effects_assembled$cell_counts_DE < 0.8*baseline_DE ] = "both_low"
+nonsignif = gene_effects_assembled$target %>% setdiff(significant_genes)
+gene_effects_assembled[nonsignif,  "effect"] = "not significant"
+gene_effects_assembled["Scramble", "effect"] = "Scramble"
+gene_effects_assembled$effect %<>% 
+  factor(ordered = T, 
+         levels = c("DE_high", "not significant", "DE_low", "both_low", "Scramble"))
+abundance_effect_colors = c( "Scramble" = "black", 
+                             "not significant"    = "grey", 
+                             "DE_high"  = "#FCF09A",
+                             "DE_low"   = "#FCA286", 
+                             "ES_low" = "#9CECFF", 
+                             "both_low" = "#9CECFF" )
+
+# Add individual scrambles
+scrambles = guide_effects_assembled %>% subset(target == "Scramble")
+scrambles$p = 1
+scrambles$effect = "Scramble"
+scrambles$target = scrambles$guide
+setdiff(colnames(gene_effects_assembled), colnames(scrambles))
+gene_effects_assembled %<>% rbind(scrambles[colnames(gene_effects_assembled)])
+
+# Calculate FC over scramble
+count_cols = c("cell_counts_ES", "cell_counts_DE1", "cell_counts_DE2")
+count_fc_cols = count_cols %>% paste0("_over_scramble")
+scramble_counts = gene_effects_assembled["Scramble", count_cols]
+gene_effects_assembled[count_fc_cols] =
+  as.matrix( gene_effects_assembled[count_cols] ) %*% diag(1/scramble_counts) #rescale columns easily
+
+# Remove aggregated scramble
+gene_effects_assembled %<>% subset(target != "Scramble")
+gene_effects_assembled$which_scramble = gsub("Scramble_gRNA", "", gene_effects_assembled$target) %>% as.numeric
+gene_effects_assembled$which_scramble[!grepl( "Scramble", gene_effects_assembled$target )] = 0
+
+# Plot abundance effects
+mymap = aes( x = cell_counts_ES,
+             y = cell_counts_DE,
+             colour = category,
+             fill = category,
+             label = target )
+
+# Set up heatmap data
+id_cols = c("target", "effect")
+abundances_long = reshape::melt(gene_effects_assembled[c( count_fc_cols, id_cols)], 
+                                id.vars = id_cols, variable_name = "replicate") %>%
+  dplyr::rename(fc_over_scramble = value) 
+# Set up colorbar data
+labels_by_category = gene_effects_assembled[ c("target", "effect") ]
+# Order guides
+target = gene_effects_assembled %>% dplyr::arrange(effect, which_scramble, -cell_counts_DE) %>% extract2("target")
+abundances_long$target %<>% factor( ordered = T, levels = target)
+labels_by_category$target %<>% factor( ordered = T, levels = target) 
+abundances_long %<>% dplyr::arrange(target)
+labels_by_category %<>% dplyr::arrange(target)
+
+# dooooo iiiiiit
+p = ggplot(abundances_long) + 
+  geom_tile(aes(y = target, x = replicate, fill = log2(fc_over_scramble) )) + 
+  theme(axis.text.x = element_text(angle = 90)) + 
+  scale_x_discrete( breaks = count_fc_cols, labels = count_fc_cols %>% gsub("cell_counts_", "", .) ) +
+  scale_fill_gradient2(low = "blue", high = "red", mid = "white", na.value = "navy")
+p = gg_colourbar( p, 
+                  thickness = 0.5, 
+                  labels_by_category = labels_by_category,
+                  labelname = "guide", 
+                  category_colours = abundance_effect_colors )
+p = p + coord_flip()
+ggsave(file.path( results_path, "DE_versus_ESC_cellcounts_heatmap.pdf"), p, width = 14, height = 3)
+```
+
+Paired measurements Day 4 versus Day 0 (Genomic DNA results)
+
+```{r}
+# Remove blank, scr5, and mutants
+gDNA_counts_to_plot = guide_effects_assembled %>% subset(!(guide %in% c("blank_gRNA1", "Scramble_gRNA5", GUIDES_MUTATED)))
+# Aggregate by target 
+gDNA_counts_to_plot = 
+  with(gDNA_counts_to_plot, 
+       data.frame(
+         gene = aggregate_nice(x = gene, by = gene, FUN = unique),
+         D4rep1_gDNA = aggregate_nice(x = DE1_gDNA, by = gene, FUN = mean), 
+         D4rep2_gDNA = aggregate_nice(x = DE2_gDNA, by = gene, FUN = mean), 
+         D0rep1_gDNA = aggregate_nice(x = ES1_gDNA, by = gene, FUN = mean), 
+         D0rep2_gDNA = aggregate_nice(x = ES2_gDNA, by = gene, FUN = mean), 
+         stringsAsFactors = F
+       )
+  )
+names(gDNA_counts_to_plot) = c("gene", "D4rep1_gDNA", "D4rep2_gDNA", "D0rep1_gDNA", "D0rep2_gDNA")
+
+# Aggregate reps
+gDNA_counts_to_plot$D4_gDNA = with(gDNA_counts_to_plot, (D4rep1_gDNA + D4rep2_gDNA)/2 )
+gDNA_counts_to_plot$D0_gDNA = with(gDNA_counts_to_plot, (D0rep1_gDNA + D0rep2_gDNA)/2 )
+gDNA_counts_to_plot$D4minusD0_rep1 = with(gDNA_counts_to_plot, D4rep1_gDNA - D0rep1_gDNA )
+gDNA_counts_to_plot$D4minusD0_rep2 = with(gDNA_counts_to_plot, D4rep2_gDNA - D0rep2_gDNA ) 
+gDNA_counts_to_plot$average_change = with(gDNA_counts_to_plot, D4_gDNA - D0_gDNA )
+
+# Estimate IDR
+x = gDNA_counts_to_plot[c("D4minusD0_rep1", "D4minusD0_rep2")] %>% abs
+gDNA_counts_to_plot$idr = idr::est.IDR( x, mu = 2, rho = 0.9, sigma = 1.3, p = 0.05 )$idr
+gDNA_counts_to_plot$significant = with(gDNA_counts_to_plot, idr < 0.1 & (sign(D4minusD0_rep1) == sign(D4minusD0_rep2)) )
+
+
+# Add individual scrambles
+scrambles = guide_effects_assembled %>% subset(target == "Scramble")
+scrambles$idr = 1
+scrambles$significant = F
+scrambles$effect = "Scramble"
+scrambles$gene = scrambles$guide
+count_cols = c( "D4rep1_gDNA",    "D4rep2_gDNA",    "D0rep1_gDNA",    "D0rep2_gDNA" )
+count_fc_cols = count_cols %>% paste0("_over_scramble")
+colnames(scrambles)[2:5] = count_cols
+shared_cols = intersect(colnames(gDNA_counts_to_plot), colnames(scrambles))
+gDNA_counts_to_plot %<>% extract( shared_cols )
+gDNA_counts_to_plot %<>% rbind(scrambles[shared_cols])
+
+# Calculate FC over scramble
+scramble_counts = gDNA_counts_to_plot["Scramble", count_cols]
+gDNA_counts_to_plot[count_fc_cols] = sweep( gDNA_counts_to_plot[count_cols] %>% as.matrix, 
+                                            MARGIN = 2, STATS = unlist(scramble_counts), FUN = "-") 
+
+# Remove aggregated scramble
+gDNA_counts_to_plot %<>% subset(gene != "Scramble")
+
+# Set up heatmap data
+id_cols = c("target")
+gDNA_counts_to_plot$target =  gDNA_counts_to_plot$gene
+abundances_long = reshape::melt(gDNA_counts_to_plot[c( count_fc_cols, id_cols)], 
+                                id.vars = id_cols, variable_name = "replicate") %>%
+  dplyr::rename(log_fc_over_scramble = value) 
+
+# Order genes same as above 
+abundances_long$target %<>% factor(ordered = T, levels = levels(labels_by_category$target) )
+
+# dooooo iiiiiit
+p = ggplot(abundances_long) + 
+  geom_tile(aes(y = target, x = replicate, fill = log_fc_over_scramble )) + 
+  theme(axis.text.x = element_text(angle = 90)) + 
+  scale_x_discrete( breaks = count_fc_cols, labels = count_fc_cols %>% gsub("cell_counts_", "", .) ) +
+  scale_fill_gradient2(low = "blue", high = "red", mid = "white", na.value = "navy")
+
+p = p + coord_flip() 
+ggsave(file.path( results_path, "D0_versus_D4_abundance.pdf"), p, width = 14, height = 5)
+```

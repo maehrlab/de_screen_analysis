@@ -1,0 +1,82 @@
+---
+title: ""
+author: "Eric Kernfeld"
+date: "January 18, 2017"
+output: html_document
+---
+
+#### Collect data
+
+```{r}
+results_path = Sys.getenv( "FREEZR_DESTINATION" )
+sample_names = c("he_perturb_rep1", "he_perturb_rep2")
+dge_list_full = load_maehrlab_data( sample_names ) 
+```
+
+#### Data setup
+
+```{r}
+# dge no guides
+dge = CreateSeuratObject(dge_merge_list(dge_list_full), 
+                         min.cells = 2, 
+                         min.genes = 0,
+                         names.delim = "\\|", 
+                         names.field = 2 )
+dge@meta.data$log10_nUMI = dge@meta.data$nUMI %>% log10
+grna_foxa2 = FetchData(dge, "FOXA2_gRNA2", use.raw = T)
+grna_scram = FetchData(dge, "Scramble_gRNA1", use.raw = T)
+dge@meta.data$highest_expressed_value = pmax( grna_foxa2, grna_scram )
+dge@meta.data$second_highest_expressed_value = pmin( grna_foxa2, grna_scram )
+is_foxa2 = grna_foxa2 > grna_scram
+dge@meta.data$highest_expressed_guide = ifelse( is_foxa2, "FOXA2_gRNA2", "Scramble_gRNA1")
+dge@meta.data$highest_expressed_guide[dge@meta.data$highest_expressed_value==0] = "(no guides detected)"
+dge@meta.data %<>% model_peak_vs_second() 
+
+{
+  doublet_LR_cutoff = 0.2
+  pdf(file.path(results_path, "LR_capped.pdf"), width = 4, height = 3)
+  print(
+    dge@meta.data %>% ggplot() +
+    geom_histogram(bins = 60, aes(x=log10_LR_capped)) +
+    geom_vline(xintercept=doublet_LR_cutoff, colour = "red") +
+    ggtitle( "Doublet removal criterion" ) +
+    xlab("Log10 likelihood ratio (capped at ±2)")
+  )
+  dev.off()
+}
+dge %<>% SubsetDataFlex("log10_LR", "log10_LR < 0.2")
+
+# save & inventory
+fp = file.path(results_path, "HE_raw_data.Robj")
+saveRDS(dge, fp)
+inventory_add( tag = "HE_raw_data", force = T, 
+               filename = fp,
+               extra = "Seurat object with HE reps after doublet removal." )
+# To retrieve:
+# dge = readRDS( inventory_get( "HE_raw_data" ))
+```
+
+#### Plot sequencing depth
+
+```{r}
+X = dge %>% FetchData(c("nUMI", "nGene", "orig.ident"))
+medians = data.frame(
+  nUMI = aggregate_nice( X$nUMI, by = X$orig.ident, FUN = median)[,1],
+  nGene = aggregate_nice( X$nGene, by = X$orig.ident, FUN = median)[,1],
+  orig.ident = aggregate_nice( X$nGene, by = X$orig.ident, FUN = median) %>% rownames
+)
+p = ggplot(X) + 
+  #geom_density2d(aes(x=nUMI, y = nGene), colour = "black") + 
+  geom_point(aes(x=nUMI, y = nGene, colour = orig.ident), size = 0) + 
+  geom_vline(aes(xintercept=nUMI, colour = orig.ident), data = medians) + 
+  geom_hline(aes(yintercept=nGene, colour = orig.ident), data = medians) + 
+  scale_colour_manual(values = REPLICATE_COLORS ) + 
+  scale_x_log10(breaks = 1000*(2^(0:4))) + 
+  scale_y_log10(breaks = 1000*(1:8)) + 
+  ggtitle("HE cellwise sequencing depth") + 
+  theme(axis.text.x = element_text(angle = 45, vjust=0.5))
+ggsave(file.path(results_path, "library_depth.pdf"), p, height = 3, width = 5)
+
+```
+
+

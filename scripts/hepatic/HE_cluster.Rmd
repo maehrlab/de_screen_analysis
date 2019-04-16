@@ -1,0 +1,80 @@
+---
+title: "R Notebook"
+output: html_document
+---
+
+#### Set up data
+
+```{r}
+results_path = Sys.getenv("FREEZR_DESTINATION")
+#### Load data
+dge = inventory_get("HE_raw_data") %>% readRDS
+  
+#### Exclude cells with no guide detection
+dge %<>% SubsetDataFlex("highest_expressed_guide", "highest_expressed_guide %in% GUIDES_HE")
+
+#### Normalize
+dge %<>% NormalizeData()
+
+#### Find variable genes, excluding guides 
+dge <- FindVariableGenes(object = dge,
+                          mean.function = ExpMean,
+                          dispersion.function = LogVMR,
+                          x.low.cutoff = 0.0125,
+                          x.high.cutoff = 3,
+                          y.cutoff = 1.5)
+dge@var.genes=dge@var.genes %<>% setdiff(c(GUIDE_NAMES, "dCas9_KRAB"))
+assertthat::assert_that(!any(grepl("KRAB", dge@var.genes)))
+dge@var.genes %>% c(length(dge@var.genes), .) %>% write.table(file.path(results_path, "var_genes.txt"), 
+                                                                   quote = F, row.names = F, col.names = F)
+
+### regress out nUMI & cc phase
+dge %<>% CellCycleScoring( g2m.genes = Seurat::cc.genes$g2m.genes, s.genes = Seurat::cc.genes$s.genes )
+dge <- ScaleData(object = dge, vars.to.regress = c("nUMI"))#, "Phase") )
+dge <- RunPCA(object = dge, pcs.compute = 20)
+
+# visualise PCA
+{
+  pdf(file.path(results_path, "PCA_info.pdf"))
+  PCAPlot(object = dge, dim.1 = 1, dim.2 = 2)
+  PCElbowPlot(object = dge) %>% print
+  dev.off()
+}
+
+dge <- RunTSNE(object = dge,
+               reduction.use = "pca",
+               dims.use = 1:8,
+               do.fast = TRUE)
+
+dge <- FindClusters(object = dge, 
+                    reduction.type = "pca",
+                    dims.use = 1:8,
+                    resolution = 0.2,
+                    print.output = 0,
+                    save.SNN = TRUE)
+dge@ident = setNames( c("0" = "A", "1" = "C", "2" = "B")[dge@ident %>% as.character] %>% as.factor,
+                      names(dge@ident) )
+dge %<>% BuildClusterTree()
+
+{
+  pdf(file.path(results_path, "cluster_info.pdf"),width=10,height=10)
+  DimPlot(object = dge, group.by = "ident", do.return = T, reduction.use = "tsne") %>% print
+  VlnPlot(object = dge, features.plot = "nUMI", do.return = T) %>% print
+  PlotClusterTree(dge)
+  dev.off()
+}
+
+```
+
+
+```{r}
+
+####save seurat object
+fp = file.path( results_path, "HE_processed.Robj" )
+saveRDS( dge, fp )
+freezr::inventory_add(tag = "HE_processed", force = T,
+                      filename = fp,
+                      extra = "Initial clustering + tSNE with the HE replicates. ")
+#dge = freezr::inventory_get(tag = "HE_processed") %>% readRDS
+
+```

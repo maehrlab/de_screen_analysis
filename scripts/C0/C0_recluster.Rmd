@@ -1,0 +1,51 @@
+---
+title: "R Notebook"
+output: html_document
+---
+
+#### Set up data
+
+```{r}
+results_path = Sys.getenv()[["FREEZR_DESTINATION"]]
+dge = readRDS( inventory_get( "DE_TERA_reclustered_no_dub" ))
+TidynessChecklist( dge ) 
+dge_c0 = SubsetDataFlex(dge, "ident", "ident==0")
+rm(dge); gc()
+```
+
+```{r}
+current_params = data.frame(  latent_dimension = 10, 
+                              clust_method = "SNN",
+                              clust_granularities_as_string = "0.1,0.2,0.4,0.6,0.8,1.0",
+                              excess_var_cutoff =  0.5,
+                              log_expr_cutoff =  0.0125, stringsAsFactors = F )
+dge_c0 %<>% explore_embeddings( results_path, all_params = current_params, blacklist = GUIDE_NAMES %>% c("dCas9_KRAB") )
+dge_c0 %<>% add_rp_mt_percentage
+dge_c0 %<>% CellCycleScoring(
+  g2m.genes = Seurat::cc.genes$g2m.genes,
+  s.genes   = Seurat::cc.genes$s.genes,
+) 
+dge_c0 %>% save_feature_plots( results_path, 
+                               types = "pdf_png_split",
+                               gene_list = c("ident", paste0("res.0.", c(1, 2, 4, 6, 8)),
+                                             "orig.ident", "nUMI", "CTNNB1", "Phase",
+                                             "nUMI_pct_mt", "nUMI_pct_rp"), 
+                               axes = UMAP_AXES )
+dge_c0 %>% save_feature_plots( results_path, 
+                               gene_list = dge_c0 %>% AvailableData %>% grep("assignment", ., value = T), 
+                               axes = UMAP_AXES )
+dge_c0 %>% InstantOverview( genes.use = dge_c0@data %>% rownames,
+                            gene_list_name = "all", 
+                            results_path = results_path, axes = UMAP_AXES )
+dge_c0 %>% InstantOverview( genes.use = get_mouse_tfs() %>% get_ortholog(from = "mouse", to = "human"), 
+                            gene_list_name = "TF",
+                            results_path = results_path, axes = UMAP_AXES )
+####save seurat object
+fp = file.path( results_path, collapse_by_name(current_params[1, ]), "dge.data" )
+freezr::inventory_add(tag = "DE_c0", force = T,
+                      filename = fp,
+                      extra = "Reclustering of main cluster from DE dataset.")
+
+#dge_c0 = freezr::inventory_get(tag = "DE_c0") %>% readRDS
+
+```
