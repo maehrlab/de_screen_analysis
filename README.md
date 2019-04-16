@@ -1,10 +1,8 @@
 ## README
 
-This folder contains scripts used for analysis of single-cell RNA-seq data in our recent definitive endoderm screen.
+This folder contains scripts used for analysis of single-cell RNA-seq data in our recent definitive endoderm screen. (For atacTFAP analysis, there is a separate repo.)
 
-## Reproduction
-
-You will need a couple of key R packages: `Seurat` version 2 (from the Satija lab) and `thymusatlastools2` available [here](https://github.com/maehrlab/thymusatlastools2). We also use [`freezr`](https://github.com/ekernf01/freezr) to save code and session info and to track processed data for use in downstream scripts. 
+You can find the data at [GEO: GSE127202](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE127202). You will need a couple of key R packages: `Seurat` version 2 (from the Satija lab) and `thymusatlastools2` available [here](https://github.com/maehrlab/thymusatlastools2). We also use [`freezr`](https://github.com/ekernf01/freezr) to save code and session info and to track processed data for use in downstream scripts. 
 
 `main.Rmd` is the master script for the paper draft. To reproduce the paper, 
 
