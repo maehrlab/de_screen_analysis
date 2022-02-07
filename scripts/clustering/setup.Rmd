@@ -16,11 +16,8 @@ results_path = Sys.getenv("FREEZR_DESTINATION")
 # ========================================================================================
 # ===================  Fill this in based on where you saved the data. ===================  
 # ========================================================================================
-# Tera_rep1 <- Seurat::Read10X("PATH/TO/DIGITAL_GENE_EXPRESSION_MATRIX")
-# Tera_rep2 <- Seurat::Read10X("PATH/TO/DIGITAL_GENE_EXPRESSION_MATRIX")
-# ============== We load the data using code hardwired for our lab
-Tera_rep1 = thymusatlastools2::load_maehrlab_data("CR_perturb_2018JAN_hDE_tera_rep1")[[1]]
-Tera_rep2 = thymusatlastools2::load_maehrlab_data("CR_perturb_2018JAN_hDE_tera_rep2")[[1]]
+Tera_rep1 <- Seurat::Read10X("../../from_source/GSM3630200_DE_TERA_rep1")
+Tera_rep2 <- Seurat::Read10X("../../from_source/GSM3630201_DE_TERA_rep2")
 # ========================================================================================
 
 
@@ -41,16 +38,8 @@ dge_DE_TERA <- MergeSeurat(dge_DE_TERA1,dge_DE_TERA2, add.cell.id1 = "Terarep1",
 
 ###clear some memory
 rm( 
-  Scramble_rep1 ,
-  Scramble_rep2 ,
-  Tera_rep1 ,
-  Tera_rep2 ,
   dge_DE_TERA1 ,
-  dge_DE_TERA2 ,
-  dge_DE_TERA3 ,
-  dge_DE_TERA4 ,
-  dge_DE_TERA_temp ,
-  dge_DE_TERA_temp2 
+  dge_DE_TERA2 
 )
 gc()
 

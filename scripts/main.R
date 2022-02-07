@@ -1,19 +1,11 @@
----
-title: "Figures for Thymic Development Atlas"
-author: "Eric Kernfeld"
-date: "February 17, 2017"
-output: html_document
----
+# ========================================================================================
+# ===================  Change this path to point to this folder. =========================
+# ========================================================================================
+proj_dir = "PATH/TO/THIS/FOLDER"
+# ========================================================================================
 
-###Setup
-
-```{r "setup"}
-
-# # Load thymus atlas packages
-# install.packages("devtools")
-# devtools::install_github("ekernf01/thymusatlastools2")
-# devtools::install_github("ekernf01/freezr")
-
+setwd(proj_dir)
+renv::activate()
 library(cowplot)
 library(magrittr)
 library(freezr)
@@ -21,44 +13,29 @@ library(Seurat)
 library(thymusatlastools2)
 library(ggplot2)
 library(Matrix)
-
-# ========================================================================================
-# ===================  Change this path to point to this folder. =========================
-# ========================================================================================
-proj_dir = "/Users/erickernfeld/Dropbox (UMass Medical School)/10JAN2019_Reresubmission_Perturbseq_Paper/code/DE_screen_analysis_release_lite"
-# proj_dir = "PATH/TO/screen_analysis_release" %>% path.expand
-# ========================================================================================
-
-knitr::opts_knit$set(root.dir = proj_dir)
-setwd(proj_dir)
 flash_freeze = freezr::configure_flash_freeze( project_directory = proj_dir, 
                                               setup_scripts = 
                                                 c( "tools/guide_handling_tools.Rmd", 
                                                    "tools/gAmp_merging_tools.Rmd",
                                                    "tools/diff_expr_tools.Rmd",
                                                    "tools/heatmapping_tools.Rmd",
-                                                   "tools/guides_by_cluster_tools.Rmd" ), 
-                                               repos_to_track =
-                                                c( "~/Desktop/software_projects/thymusatlastools2",
-                                                   "~/Desktop/software_projects/freezr" ))
+                                                   "tools/guides_by_cluster_tools.Rmd" ))
 REPLICATE_COLORS = c("Terarep1" = "goldenrod3", "Terarep2" = "navy", 
                      "he_perturb_rep1" = "goldenrod3", "he_perturb_rep2" = "navy")
 HE_IDENT_COLORS = c("0" = "cadetblue4", "1" = "orange", "2" = "cadetblue2", 
                     "A" = "cadetblue4", "C" = "orange", "B" = "cadetblue2")
 DE_IDENT_COLORS = c("0" = "goldenrod", "1" = "deeppink", "2" = "cadetblue", "3" = "brown")
 UMAP_AXES = c("UMAP1", "UMAP2")
-```
 
-Jan 2018 data
 
-```{r}
-inv_check = inventory_check( inv_location = file.path(proj_dir, "results"))
+## ----------------------------------------------------------------------------------------------------------------------------------
+inventory_make( inv_location = file.path(proj_dir, "results"))
 getwd()
 print(proj_dir)
 flash_freeze()
-```
 
-```{r}
+
+## ----------------------------------------------------------------------------------------------------------------------------------
 
 # Explore raw data and then integrate guides and do data cleaning.
 flash_freeze( "clustering/setup.Rmd" )
@@ -81,20 +58,19 @@ flash_freeze( "C0/C0_cluster_markers.Rmd" )
 # mimosca_export.Rmd script sends data to mimosca/data/ .
 flash_freeze( "guide_effects/mimosca_export.Rmd" ) 
 # Here, you need to move to mimosca/ and run `python tera_de_c0.py` . You'll need numpy and pandas.
-# Then move the results you want to use into a folder 
+# Then move the results you want to use into a folder and point the import script to that.
 flash_freeze( "guide_effects/mimosca_import.Rmd" ) 
 
-# Characterize guides effects
+# Characterize guides' effects
 flash_freeze( "guide_effects/guide_effects.Rmd") 
 flash_freeze( "guide_effects/guide_effects_assemble.Rmd") 
 flash_freeze( "guide_effects/guide_effects_plot.Rmd") 
 flash_freeze( "guide_effects/guide_effects_plot_abundance.Rmd") 
 
-# Hepatic endoderm
+# Analyze follow-up: a FOXA2 knockdown in a further-along lineage, hepatic endoderm.
 flash_freeze( "hepatic/HE_set_up_data.Rmd" ) 
 flash_freeze( "hepatic/HE_cluster.Rmd" ) 
 flash_freeze( "hepatic/HE_plot.Rmd" )  
 flash_freeze( "hepatic/HE_markers.Rmd" ) 
 
-```
 

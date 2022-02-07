@@ -16,12 +16,12 @@ results_path = Sys.getenv( "FREEZR_DESTINATION" )
 # ===================  Fill this in based on where you saved the data. ===================  
 # ========================================================================================
 dge_list_full = list(
-  CR_perturb_2018JAN_hDE_tera_rep1 = Seurat::Read10X("PATH/TO/DIGITAL_GENE_EXPRESSION_MATRIX_tera_rep1"), 
-  CR_perturb_2018JAN_hDE_tera_rep2 = Seurat::Read10X("PATH/TO/DIGITAL_GENE_EXPRESSION_MATRIX_tera_rep2") 
+  CR_perturb_2018JAN_hDE_tera_rep1 = Seurat::Read10X("../../from_source/GSM3630200_DE_TERA_rep1"), 
+  CR_perturb_2018JAN_hDE_tera_rep2 = Seurat::Read10X("../../from_source/GSM3630201_DE_TERA_rep2") 
 ) 
 dge_list_gAmp = list( 
-  CR_perturb_2018JAN_hDE_tera_gAMP_rep1 = Seurat::Read10X("PATH/TO/GUIDE_AMP_MATRIX_tera_rep1"), 
-  CR_perturb_2018JAN_hDE_tera_gAMP_rep2 = Seurat::Read10X("PATH/TO/GUIDE_AMP_MATRIX_tera_rep2") 
+  CR_perturb_2018JAN_hDE_tera_gAMP_rep1 = Seurat::Read10X("../../from_source/GSM3630202_DE_TERA_rep1_gAmp"), 
+  CR_perturb_2018JAN_hDE_tera_gAMP_rep2 = Seurat::Read10X("../../from_source/GSM3630203_DE_TERA_rep2_gAmp") 
 ) 
 # ========================================================================================
 
