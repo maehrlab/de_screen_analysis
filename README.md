@@ -12,4 +12,4 @@ You can find the data at [GEO: GSE127202](https://www.ncbi.nlm.nih.gov/geo/query
 
 Then run `main.R` line by line. 
 
-We're passionate about reproducibility, but we understand that exact reproduction across environments is very difficult. If you have trouble, please file an issue on [github](www.github.com/maehrlab/de_screen_analysis).
+We're passionate about reproducibility, but we understand that exact reproduction across environments is very difficult. If you have trouble, please file an issue on [github](https://github.com/maehrlab/de_screen_analysis).
